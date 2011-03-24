@@ -62,7 +62,13 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
         fillOpacity: 0.4,
         strokeWidth: 2,
         strokeOpacity: 1,
-        strokeColor: "#666666"
+        strokeColor: "#666666",
+        label: "${Label}",
+        
+        fontColor: "#000000",
+        fontSize: "12px",
+        fontFamily: "Arial",
+        fontWeight: "bold",
     }),
 
     // the default feature styleMap
@@ -100,6 +106,7 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
             defaultFeatureStyle =  this.defaultFeatureStyle
         }
 
+        //TODO: Split this into geometry-specific styles
         this.styleMap = new OpenLayers.StyleMap(defaultFeatureStyle);
 
         // create one default layer, unless other redline widgets have created it
@@ -165,7 +172,15 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
                                                                     styleMap: this.styleMap
                                                                 }
                                                             }
-                                                        })
+                                                        }),
+            text: new OpenLayers.Control.DrawFeature(this.vectorLayers[0],
+                                                      OpenLayers.Handler.Point, {
+                                                          handlerOptions: {
+                                                              layerOptions: {
+                                                                  styleMap: this.styleMap
+                                                              }
+                                                          }
+                                                      }),
         };
 
         for(var key in this.drawControls) {
@@ -408,6 +423,7 @@ Fusion.Widget.Redline.DefaultTaskPane = OpenLayers.Class(
         doc.getElementById("RedlineWidgetLineRadio").onclick = OpenLayers.Function.bind(this.widget.activateControl, this.widget, 'line');
         doc.getElementById("RedlineWidgetRectangleRadio").onclick = OpenLayers.Function.bind(this.widget.activateControl, this.widget, 'rectangle');
         doc.getElementById("RedlineWidgetPolygonRadio").onclick = OpenLayers.Function.bind(this.widget.activateControl, this.widget, 'polygon');
+        doc.getElementById("RedlineWidgetTextRadio").onclick = OpenLayers.Function.bind(this.widget.activateControl, this.widget, 'text');
         // features
         doc.getElementById("RedlineWidgetRemoveFeatureButton").onclick = OpenLayers.Function.bind(this.removeFeature, this);
         doc.getElementById("RedlineWidgetRenameFeatureButton").onclick = OpenLayers.Function.bind(this.renameFeature, this);
@@ -483,6 +499,26 @@ Fusion.Widget.Redline.DefaultTaskPane = OpenLayers.Class(
     },
 
     featureAdded: function(eventID, feature) {
+        feature.attributes.Label = "";
+        var isPoint = this.taskPaneWin.document.getElementById("RedlineWidgetPointRadio").checked;
+        var isLine = this.taskPaneWin.document.getElementById("RedlineWidgetLineRadio").checked;
+        var isRect = this.taskPaneWin.document.getElementById("RedlineWidgetRectangleRadio").checked;
+        var isPoly = this.taskPaneWin.document.getElementById("RedlineWidgetPolygonRadio").checked;
+        var isText = this.taskPaneWin.document.getElementById("RedlineWidgetTextRadio").checked;
+        if (isText) {
+            var label = prompt("Enter the label");
+            feature.attributes.Label = label;
+            feature.attributes.RedlineType = "Text";
+        } else if (isPoint) {
+            feature.attributes.RedlineType = "Point";
+        } else if (isLine) {
+            feature.attributes.RedlineType = "Line";
+        } else if (isRect) {
+            feature.attributes.RedlineType = "Rect";
+        } else if (isPoly) { 
+            feature.attributes.RedlineType = "Polygon";
+        }
+    
         var select = this.taskPaneWin.document.getElementById('RedlineWidgetFeatureList');
         var opt = document.createElement('option');
         opt.text = feature.id;

@@ -52,6 +52,7 @@ $polygonLocal = GetLocalizedString('REDLINEPOLYGON', $locale );
 $saveLocal = GetLocalizedString('REDLINESAVE', $locale );
 $uploadLocal = GetLocalizedString('REDLINEUPLOAD', $locale );
 $featuresLocal = GetLocalizedString('REDLINEFEATURES', $locale );
+$textLocal = GetLocalizedString('REDLINETEXT', $locale );
 
 $fileUpload = false;
 
@@ -139,7 +140,9 @@ else {
           <input id="RedlineWidgetRectangleRadio" type="radio" name="RedlineWidgetDrawRadio"/>
           <label for="RedlineWidgetRectangleRadio"><?php echo $rectangleLocal ?></label><br/>
           <input id="RedlineWidgetPolygonRadio" type="radio" name="RedlineWidgetDrawRadio"/>
-          <label for="RedlineWidgetPolygonRadio"><?php echo $polygonLocal ?></label>
+          <label for="RedlineWidgetPolygonRadio"><?php echo $polygonLocal ?></label><br/>
+          <input id="RedlineWidgetTextRadio" type="radio" name="RedlineWidgetDrawRadio"/>
+          <label for="RedlineWidgetTextRadio"><?php echo $textLocal ?></label>
         </td>
       </tr>
       <tr>

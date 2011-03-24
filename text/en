@@ -225,6 +225,7 @@ REDLINEPOLYGON          = Polygon
 REDLINESAVE             = Save
 REDLINEUPLOAD           = Upload
 REDLINEFEATURES         = Features
+REDLINETEXT             = Text
 
 # HtmlViewerAbout
 HTMLABOUTTITLE          = About %s
