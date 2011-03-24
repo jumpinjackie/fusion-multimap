@@ -185,6 +185,8 @@ Fusion.Widget.Maptip = OpenLayers.Class(Fusion.Widget, {
     },
     
     _display: function(eventID,oMapTip) {
+        if (!this.mapTipFired)
+            return;
         if (typeof(oMapTip) == "undefined" || oMapTip.t == '') {
             return;
         }
