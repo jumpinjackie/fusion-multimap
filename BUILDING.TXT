@@ -1,0 +1,64 @@
+Building Fusion
+
+Fusion uses Apache Ant for building and deploying the source code to a web 
+server for developers working from the SVN repository.  End users deploying a 
+packaged distribution zip file need not worry about building fusion.  
+A target is included for building a single file, compressed version of the 
+JavaScript and CSS files for optimizing performance of your fusion application.
+
+Ant is a Java application and therefore Java must be installed on the developers
+machine.  Download and install the latest release of Ant (http://ant.apache.org/).
+To use Ant, navigate to the directory containing the build.xml file (usually
+the root directory of the project) and execute one of the ant targets, e.g.:
+
+> ant compress
+
+For some tasks, external executable files are used and must be available for 
+execution on the PATH environment variable.
+
+Targets available include:
+
+prepare - creates a "build" subdirectory with all files required to be put on 
+          the web server
+deploy  - places a copy of the build directory in the web server HTDOCS directory
+clean   - removes the temporary build directory
+clean-all - executes the clean target and also removes the deployed application
+            from the web server
+dist      - creates a packaged ZIP file for distribution
+docs      - automatically generates class documentation from the source code
+concat    - concatenates all core Fusion files into a singleFile
+singleFile - creates a single file version of the fusion library.  
+            If the appDef property points to an ApplicationDefinition.xml file,
+            it will be converted to JSON and included in the resulting package.
+compress  - creates a compressed single file version of the fusion library.  
+            If the appDef property points to an ApplicationDefinition.xml file,
+            it will be converted to JSON and included in the resulting package.
+compressCSS  - creates a compressed single file version of CSS files listed in
+            the cssFiles property.
+            
+concatWithAppDef and concatNoAppDef are internal targets not intended for end users.
+
+
+Properties that can be set (and their defaults) include:
+  <property name="YUIcompressor"  value="${basedir}/utils/yuicompressor-2.3.6.jar"/>
+  <property name="sfName"  value="fusionSF"/>
+  <property name="buildOutput"  value="${build.home}/lib/${sfName}"/>
+  <property name="cssOutput"  value="${build.home}/lib/${sfName}"/>
+  <property name="cssFiles"  value=""/>
+  <property name="PHP" value="/usr/local/php5cgi/bin/php"/>
+
+
+These properties can be assigned a value when ant is invoked by using the
+-D command line option, e.g.:
+
+C:\pathTo\fusion>ant compressCSS -DcssFiles="jx\lib\jx_combined.css,jx\css\jxskin-border.css"
+C:\pathTo\fusion>ant compress -DappDef=templates\mapguide\standard\ApplicationDefinition.xml
+
+File paths are relative to the current directory (where the build.xml file is).
+
+Don't include file suffixes with the sfName and cssOutput properties, 
+the suffix will be added automatically.
+
+
+
+$Id: BUILDING.TXT 2092 2010-03-08 20:17:06Z madair $

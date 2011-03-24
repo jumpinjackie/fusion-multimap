@@ -1,0 +1,19 @@
+<WidgetInfo>
+    <Type>QuickPlot</Type>
+    <LocalizedType>QuickPlot</LocalizedType>
+    <Description>This widget offers a quick way to print map</Description>
+    <Label>Quick Plot</Label>
+    <Tooltip>Click to create a plot quickly</Tooltip>
+    <ImageUrl>images/icons/print.png</ImageUrl>
+    <ImageClass></ImageClass>
+    <StandardUi>true</StandardUi>
+    <ContainableBy>Any</ContainableBy>
+    <Parameter>
+        <Name>Target</Name>
+        <Description>The frame, window, or TaskPane in which to display any UI for the widget. If empty, a new window is used</Description>
+        <Type>target</Type>
+        <Label>Target</Label>
+        <DefaultValue>TaskPane</DefaultValue>
+        <IsMandatory>true</IsMandatory>
+    </Parameter>
+</WidgetInfo>

@@ -1,0 +1,37 @@
+Index: lib/OpenLayers/Layer/MapGuide.js
+===================================================================
+--- lib/OpenLayers/Layer/MapGuide.js	(revision 8066)
++++ lib/OpenLayers/Layer/MapGuide.js	(working copy)
+@@ -24,6 +24,13 @@
+     isBaseLayer: true,
+     
+     /** 
++     * APIProperty: useOverlay
++     * {Boolean} flag to indicate if the layer should be retrieved using
++     * GETMAPIMAGE (default) or using GETDYNAMICOVERLAY requests.
++     **/
++    useOverlay: false,
++    
++    /** 
+      * APIProperty: singleTile
+      * {Boolean} use tile server or request single tile image. Note that using
+      *    singleTile *and* isBaseLayer false is *not recommend*: it uses synchronous
+@@ -127,6 +134,9 @@
+                            this.params,
+                            this.SINGLE_TILE_PARAMS
+                            );
++            if (options.useOverlay!=null) {
++              this.useOverlay = options.useOverlay;
++            }
+                            
+         } else {
+             //initialize for tiled layers
+@@ -202,7 +212,7 @@
+           params.setviewcentery = center.lat;
+           params.setviewscale = this.map.getScale();
+           
+-          if (!this.isBaseLayer) {
++          if (this.useOverlay) {
+             // in this case the main image operation is remapped to this
+             this.params.operation = "GETDYNAMICMAPOVERLAYIMAGE";
+             

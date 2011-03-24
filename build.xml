@@ -1,0 +1,384 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--*************************************************************************
+Filename        :   build.xml
+Project         :   fusion
+Document Type   :   XML
+Purpose         :   build file for ant tool
+
+Author     Date            Description
+M.Adair    09-July-2007  initial version copied from mapbuilder
+
+$Id: build.xml 2234 2010-09-24 18:32:16Z madair $
+***************************************************************************-->
+<!-- A "project" describes a set of targets that may be requested
+     when Ant is executed.  The "default" attribute defines the
+     target which is executed if no specific target is requested,
+     and the "basedir" attribute defines the current working directory
+     from which Ant executes the requested task.  This is normally
+     set to the current working directory.
+-->
+  <project basedir="." default="deploy" name="fusion">
+
+<!-- ===================== Property Definitions =========================== -->
+<!--
+  Each of the following properties are used in the build script.
+  Values for these properties are set by the first place they are
+  defined, from the following list:
+
+  * Definitions on the "ant" command line (ant -Dfoo=bar compile).
+
+  * Definitions from a "build.properties" file in the top level
+    source directory of this application.
+
+  * Definitions from a "build.properties" file in the developer's
+    home directory.
+
+  * Default definitions in this build.xml file.
+
+  You will note below that property values can be composed based on the
+  contents of previously defined properties.  This is a powerful technique
+  that helps you minimize the number of changes required when your development
+  environment is modified.  Note that property composition is allowed within
+  "build.properties" files as well as in the "build.xml" script.
+-->
+  <property file="build.properties"/>
+  <property file="${user.home}/build.properties"/>
+  <property file="default.properties"/>
+
+<!-- ==================== File and Directory Names ======================== -->
+<!--
+
+  These properties generally define file and directory names (or paths) that
+  affect where the build process stores its outputs.
+
+  app.name             Base name of this application, used to
+                       construct filenames and directories.
+                       Defaults to "myapp".
+
+  app.path             Context path to which this application should be
+                       deployed (defaults to "/" plus the value of the
+                       "app.name" property).
+
+  app.version          Version number of this iteration of the application.
+
+  build.home           The directory into which the "prepare" and
+                       "compile" targets will generate their output.
+                       Defaults to "build".
+
+  dist.home            The name of the base directory in which
+                       distribution files are created.
+                       Defaults to "dist".
+  <property name="deploy.home" value="C:\ms4w\apps/${app.name}"/>
+-->
+
+  <property environment="env"/>
+  <property name="app.name" value="fusion"/>
+  <property name="app.path" value="/${app.name}"/>
+  <property name="app.version" value="2.0.x"/>
+  <property name="build.home" value="${basedir}/build"/>
+  <property name="deploy.home" value="${basedir}/../${app.name}"/>
+  <property name="dist.home" value="${basedir}/dist"/>
+  <property name="docs.home" value="${build.home}/docs"/>
+
+
+<!-- ==================== External Dependencies =========================== -->
+
+<!--
+  Use property values to define the locations of external libraries on which
+  your application will depend.
+  -->
+
+  <property name="YUIcompressor"  value="${basedir}/utils/yuicompressor-2.3.6.jar"/>
+  <property name="sfName"  value="fusionSF"/>
+  <property name="buildOutput"  value="${build.home}/lib/${sfName}"/>
+  <property name="cssOutput"  value="${build.home}/lib/${sfName}"/>
+  <property name="cssFiles"  value=""/>
+  <property name="PHP" value="/usr/local/php5cgi/bin/php"/>
+
+
+<!-- ==================== Prepare Target ================================== -->
+
+<!--
+
+  The "prepare" target is used to create the "build" destination directory,
+  and copy the static contents of your web application to it.  If you need
+  to copy static files from external dependencies, you can customize the
+  contents of this task.
+
+  Normally, this task is executed indirectly when needed.
+
+-->
+
+  <target name="prepare" description="preparing core files">
+    <echo message="os name=${os.name}"/>
+    <echo message="Preparing uncompressed build"/>
+    <!-- Create build directories as needed -->
+    <mkdir dir="${build.home}"/>
+
+    <!-- first copy over the distributed version of the config file -->
+    <copy file="config_dist.json" tofile="${build.home}/config.json"/>
+    <!-- overwrite that with the customized config.json file if it exists
+         it is safe to ignore warnings issued by this step -->
+    <copy file="config.json" tofile="${build.home}/config.json" overwrite="true" failonerror="false"/>
+
+    <!-- Copy static content -->
+    <copy todir="${build.home}">
+      <fileset dir="${basedir}"
+            includes="configHeader.json
+                      layers/**
+                      common/**
+                      containerinfo/**
+                      docs/**
+                      ext/**
+                      lib/**
+                      templates/**
+                      text/**
+                      widgets/**"
+            excludes="selenium/**"
+       />
+    </copy>
+  </target>
+
+<!-- ==================== Documentation =================================== -->
+
+  <target description="Create documentation" name="docs" depends="prepare">
+
+    <delete dir="${build.home}/docs/NaturalDocs"/>
+    <mkdir dir="${build.home}/docs"/>
+    <mkdir dir="${build.home}/docs/NaturalDocs"/>
+
+    <echo message="Generating documentation"/>
+    <exec executable="cmd" os="Windows Vista, Windows XP" dir="${build.home}">
+    <!--
+        <arg value="/c"/>
+        <arg value="NaturalDocs.bat"/>
+        <arg value="-i ./"/>
+        <arg value="-o html ./docs"/>
+        <arg value="-p ./docs/NaturalDocs"/>
+         <arg value="-xi ./lib"/>
+        <arg value="-r"/>
+        -->
+        <arg line="/c perl C:\Progra~1\NaturalDocs\NaturalDocs -i ./lib -i ./widgets -o html ./docs/NaturalDocs -p ./docs/NaturalDocs -r"/>
+    </exec>
+  </target>
+
+  <target description="Create documentation" name="widgetInfo" depends="prepare">
+    <delete dir="${build.home}/docs/widgetinfo"/>
+    <mkdir dir="${build.home}/docs/widgetinfo"/>
+    <xslt basedir="${basedir}/widgets/widgetinfo"
+          destdir="${build.home}/docs/widgetinfo"
+          style="${basedir}/widgets/widgetinfo/widgetInfo.xsl"
+          excludes="WidgetInfoTemplate.xml widgetInfo.xsl"/>
+  </target>
+
+<!-- =================== prepare AppDef for single file build ================================== -->
+  <target description="convert AppDef to JSON" name="appDef2Json" if="appDef">
+    <echo message="converting ${appDef} to JSON"/>
+    <delete dir="${build.home}/appDefFileset.xml"/>
+
+    <!-- generate the list of files for this Application and load as a property -->
+    <xslt in="${appDef}"
+          out="${build.home}/appDefFileset.xml"
+          style="${basedir}/parseAppDef.xsl">
+      <param name="buildHome" expression="${build.home}"/>
+    </xslt>
+    <xmlproperty file="${build.home}/appDefFileset.xml"/>
+
+    <!-- convert the application definition file to JSON -->
+    <exec executable="${PHP}" dir="${build.home}"
+              output="${build.home}/appDef.json">
+        <arg line="${build.home}/common/php/Xml2JSON.php --file='${appDef}'"/>
+    </exec>
+
+  </target>
+
+<!-- =================== single file build ================================== -->
+  <target description="single file build" name="singleFile" depends="concat,concatWithAppDef,concatNoAppDef">
+    <echo message="preparing single file build"/>
+    <copy file="${buildOutput}.js" todir="${basedir}/lib"/>
+  </target>
+
+
+<!-- =================== concat build ================================== -->
+  <target description="concatenate core files into a single file" name="concat" depends="prepare">
+    <echo message="concatenating core files"/>
+    <delete file="${buildOutput}.js"/>
+
+    <!-- Fusion looks for it's own script name to set paths for other widgets
+        so replace the value to look for with the sfName used to create the file-->
+
+    <!-- merge everything into a single file -->
+    <concat destfile="${buildOutput}.js" encoding="UTF-8" outputencoding="UTF-8">
+        <filelist dir="${build.home}/lib"
+                  files=" SingleFile.js
+                          fusion.js
+                          proj4js-compressed.js
+                          OpenLayers/OpenLayers.js
+                          jxlib.uncompressed.js
+                          Error.js
+                          EventMgr.js
+                          ApplicationDefinition.js
+                          MGBroker.js
+                          Widget.js
+                          Search.js
+                          Map.js
+                          MapMessage.js"
+        />
+        <filelist dir="${build.home}/layers" files="Layers.js"/>
+        <fileset dir="${build.home}/text" includes="**/*.json"/>
+        <fileset dir="${build.home}/lib/OpenLayers/Lang" includes="**/*.js"/>
+        <filelist dir="${build.home}" files="configHeader.json config.json"/>
+    </concat>
+
+    <replace file="${buildOutput}.js" token="lib/fusion" value="lib/${sfName}" encoding="UTF-8"/>
+  </target>
+
+<!-- =================== concat all support files (no appdef supplied) ================================== -->
+  <target description="concatenate core files into a single file" name="concatNoAppDef" unless="appDef">
+    <echo message="concatenating all widget and map layer files"/>
+
+    <!-- merge everything into a single file -->
+    <concat destfile="${buildOutput}.js" encoding="UTF-8" outputencoding="UTF-8" append="true">
+        <fileset dir="${build.home}/widgets" includes="**/*.js"/>
+        <fileset dir="${build.home}/layers" includes="**/*.js" excludes="Layers.js MapGuide/MapGuideViewerApi.js"/>
+    </concat>
+  </target>
+
+<!-- =================== concat support files included in AppDef ================================== -->
+  <target description="concatenate core files into a single file" name="concatWithAppDef" depends="appDef2Json" if="appDef">
+    <echo message="preparing single file build for ${appDef}"/>
+
+    <!-- merge everything into a single file -->
+    <concat destfile="${buildOutput}.js" encoding="UTF-8" outputencoding="UTF-8" append="true">
+        <filelist dir="${build.home}" files="${AppDef.Maps}"/>
+        <filelist dir="${build.home}" files="${AppDef.Widgets}"/>
+        <filelist dir="${build.home}" files="appDef.json"/>
+    </concat>
+
+  </target>
+
+
+<!-- =================== Compress Target ================================== -->
+
+  <target description="Compress JS files" name="compress" depends="singleFile">
+    <echo message="compressing..."/>
+    <java jar="${YUIcompressor}" fork="true"
+          output="${buildOutput}-compressed.js">
+        <arg value="--charset"/>
+        <arg value="utf-8"/>
+        <arg value="${buildOutput}.js"/>
+    </java>
+    <copy file="${buildOutput}-compressed.js" todir="${basedir}/lib"/>
+
+  </target>
+
+<!-- =================== concat all CSS files ================================== -->
+  <target description="concatenate CSS files into a single file" name="concatCSS" depends="prepare">
+    <echo message="concatenating all CSS files"/>
+
+    <!-- merge everything into a single file -->
+    <echo message="merging with ${cssFiles}"/>
+    <concat destfile="${cssOutput}.css" encoding="UTF-8" outputencoding="UTF-8">
+        <filelist files="${cssFiles}"/>
+        <fileset dir="${build.home}/widgets" includes="**/*.css" excludes="**/*scalebar*"/>
+    </concat>
+
+    <java jar="${YUIcompressor}" fork="true"
+          output="${cssOutput}-compressed.css">
+        <arg value="--charset"/>
+        <arg value="utf-8"/>
+        <arg value="${cssOutput}.css"/>
+    </java>
+  </target>
+
+<!-- =================== concat and compress a list of CSS files ================================== -->
+  <target description="concatenate and compress CSS files into a single file" name="compressCSS" if="cssFiles">
+    <echo message="concatenating all CSS files"/>
+
+    <!-- merge everything into a single file -->
+    <echo message="merging ${cssFiles}"/>
+    <concat destfile="${cssOutput}.css" encoding="UTF-8" outputencoding="UTF-8">
+        <filelist files="${cssFiles}"/>
+    </concat>
+
+    <java jar="${YUIcompressor}" fork="true"
+          output="${cssOutput}-compressed.css">
+        <arg value="--charset"/>
+        <arg value="utf-8"/>
+        <arg value="${cssOutput}.css"/>
+    </java>
+  </target>
+
+<!-- ==================== Deploy ========================================== -->
+<!--
+  The "deploy" target synchronizes the build directory with the Java Servlet
+  container directory.  This could also be done by copying in the war file.
+-->
+  <target name="deploy" description="Copy build directory to web server" depends="prepare,compress">
+    <echo message="Deploying to web server"/>
+    <mkdir dir="${deploy.home}"/>
+    <copy todir="${deploy.home}">
+      <fileset dir="${build.home}">
+      </fileset>
+    </copy>
+  </target>
+
+
+
+<!-- ==================== Dist Target ===================================== -->
+<!--
+
+  The "dist" target creates a binary distribution of your application
+  in a directory structure ready to be archived in a tar.gz or zip file.
+  Note that this target depends on two others:
+
+  * "compile" so that the entire web application (including external
+    dependencies) will have been assembled
+-->
+
+  <target name="dist" description="Create binary distribution" depends="clean,docs,compress">
+
+    <echo message="Creating distribution archive"/>
+    <mkdir dir="${dist.home}"/>
+
+    <!-- Create source zip file -->
+    <zip destfile="${dist.home}/${app.name}-${app.version}.zip" update="true">
+      <zipfileset dir="${build.home}" prefix="${app.name}"/>
+    </zip>
+
+    <!-- create tar file -->
+    <tar destfile="${dist.home}/${app.name}-${app.version}.tar">
+      <tarfileset dir="${build.home}" prefix="${app.name}"/>
+    </tar>
+    <gzip src="${dist.home}/${app.name}-${app.version}.tar" destfile="${dist.home}/${app.name}-${app.version}.tar.gz"/>
+
+    <!--tar destfile=""/-->
+
+  </target>
+
+<!-- ==================== Clean Target ==================================== -->
+<!--
+
+  The "clean" target deletes any previous "build" and "dist" directory,
+  so that you can be ensured the application can be built from scratch.
+
+-->
+
+  <target description="Delete old build and dist directories" name="clean">
+    <echo message="Removing build directories"/>
+    <delete dir="${build.home}"/>
+    <delete dir="${dist.home}"/>
+  </target>
+
+
+
+<!-- ==================== Clean HTDOCS ==================================== -->
+
+  <target description="Delete deployment directories" name="clean-all" depends="clean">
+    <echo message="Removing deployment directory"/>
+    <delete dir="${deploy.home}"/>
+  </target>
+
+
+
+</project>

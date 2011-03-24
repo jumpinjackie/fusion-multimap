@@ -1,0 +1,52 @@
+<WidgetInfo>
+    <Type>Redline</Type>
+    <Location></Location>
+    <LocalizedType>Redline</LocalizedType>
+    <Description>This widget opens a panel in the TaskPane and allows the user to digitize features that can be downloaded as a GML file or uploaded to restore previously digitized features.</Description>
+    <Label>Redline</Label>
+    <Tooltip>Click to draw redline features</Tooltip>
+    <ImageUrl>images/icons.png</ImageUrl>
+    <ImageClass>redline</ImageClass>
+    <StandardUi>true</StandardUi>
+    <ContainableBy>Any</ContainableBy>
+    <Parameter>
+        <Name>Target</Name>
+        <Label>Target</Label>
+        <Type>target</Type>
+        <Description>The frame, window, or TaskPane in which to display any UI for the widget. If empty, a new window is used</Description>
+        <IsMandatory>true</IsMandatory>
+        <DefaultValue>TaskPane</DefaultValue>
+    </Parameter>
+    <Parameter>
+      <Name>FeatureStyle</Name>
+      <Label>Feature Style</Label>
+      <Type>string</Type>
+      <Description>A style map configuration string for features (format TBD).</Description>
+      <IsMandatory>false</IsMandatory>
+      <DefaultValue/
+    </Parameter>
+    <Parameter>
+      <Name>DefaultControl</Name>
+      <Label>Default Control</Label>
+      <Type>String</Type>
+      <Description>The drawing control that is selected by default.</Description>
+      <IsMandatory>false</IsMandatory>
+      <DefaultValue>point</DefaultValue>
+      <AllowedValue>
+        <Name>point</Name>
+        <Label>Point</Label>
+      </AllowedValue>
+      <AllowedValue>
+        <Name>line</Name>
+        <Label>Line</Label>
+      </AllowedValue>
+      <AllowedValue>
+        <Name>rectangle</Name>
+        <Label>Rectangle</Label>
+      </AllowedValue>
+      <AllowedValue>
+        <Name>polygon</Name>
+        <Label>Polygon</Label>
+      </AllowedValue>
+    </Parameter>
+</WidgetInfo>

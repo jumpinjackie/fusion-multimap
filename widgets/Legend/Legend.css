@@ -1,0 +1,48 @@
+.fusionLegendItemCheckbox span,
+.fusionLegendFolder span,
+.fusionLegendItem span,
+.fusionLegendItemCheckbox input,
+.fusionLegendFolder input,
+.fusionLegendItemCheckbox .jxTreeIcon,
+.fusionLegendFolder .jxTreeIcon,
+.fusionLegendItem .jxTreeIcon {
+  position: relative;
+  vertical-align: middle;
+}
+
+.jxTree a.fusionLegendItem,
+.jxTreeRoot a.fusionLegendItem,
+.jxTree a.fusionLegendFolder,
+.jxTreeRoot a.fusionLegendFolder,
+.jxTree a.fusionLegendItemCheckbox,
+.jxTreeRoot a.fusionLegendItemCheckbox,
+.jxTree a.fusionLegendFolder:hover, 
+.jxTreeRoot a.fusionLegendFolder:hover,
+.jxTree a.fusionLegendItemCheckbox:hover, 
+.jxTreeRoot a.fusionLegendItemCheckbox:hover {
+    padding: 0px;
+}
+
+.jxTreeBranchOpen .fusionLegendItemCheckbox .jxTreeIcon, 
+.jxTreeBranchLastOpen .fusionLegendItemCheckbox .jxTreeIcon {
+  background-position: left top;
+}
+
+.jxTreeBranchClosed .fusionLegendItemCheckbox .jxTreeIcon, 
+.jxTreeBranchLastClosed .fusionLegendItemCheckbox .jxTreeIcon {
+  background-position: left top;
+}
+
+span.fusionLegendLabel {
+  padding-left: 4px;
+}
+
+.jxTree li,
+.jxTreeRoot li {
+    zoom: 1;
+}
+
+.jxTreeIcon {
+    top: auto !important;
+    left: auto !important;
+}
