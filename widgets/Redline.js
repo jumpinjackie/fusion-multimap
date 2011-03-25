@@ -62,14 +62,10 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
         fillOpacity: 0.4,
         strokeWidth: 2,
         strokeOpacity: 1,
-        strokeColor: "#666666",
-        label: "${Label}",
-        
-        fontColor: "#000000",
-        fontSize: "12px",
-        fontFamily: "Arial",
-        fontWeight: "bold",
+        strokeColor: "#666666"
     }),
+    
+    redlineType: 'point',
 
     // the default feature styleMap
     styleMap: null,
@@ -108,7 +104,7 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
 
         //TODO: Split this into geometry-specific styles
         this.styleMap = new OpenLayers.StyleMap(defaultFeatureStyle);
-
+       
         // create one default layer, unless other redline widgets have created it
         this.vectorLayers = this.mapWidget.oMapOL.getLayersByName(this.defaultLayerName + '0');
 
@@ -136,9 +132,6 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
             point: new OpenLayers.Control.DrawFeature(this.vectorLayers[0],
                                                       OpenLayers.Handler.Point, {
                                                           handlerOptions: {
-                                                              layerOptions: {
-                                                                  styleMap: this.styleMap
-                                                              }
                                                           }
                                                       }),
             line: new OpenLayers.Control.DrawFeature(this.vectorLayers[0],
@@ -146,39 +139,24 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
                                                          handlerOptions: {
                                                              freehandToggle: null,
                                                              freehand: false,
-                                                             style: "default", // this forces default render intent
-                                                             layerOptions: {
-                                                                 styleMap: this.styleMap
-                                                             }
                                                          }
                                                      }),
             rectangle: new OpenLayers.Control.DrawFeature(this.vectorLayers[0],
                                                           OpenLayers.Handler.RegularPolygon, {
                                                               handlerOptions: {
                                                                   sides: 4,
-                                                                  irregular: true,
-                                                                  style: "default", // this forces default render intent
-                                                                  layerOptions: {
-                                                                      styleMap: this.styleMap
-                                                                  }
+                                                                  irregular: true
                                                               }
                                                           }),
             polygon: new OpenLayers.Control.DrawFeature(this.vectorLayers[0],
                                                         OpenLayers.Handler.Polygon, {
                                                             handlerOptions: {
-                                                                freehand: false,
-                                                                style: "default", // this forces default render intent
-                                                                layerOptions: {
-                                                                    styleMap: this.styleMap
-                                                                }
+                                                                freehand: false
                                                             }
                                                         }),
             text: new OpenLayers.Control.DrawFeature(this.vectorLayers[0],
                                                       OpenLayers.Handler.Point, {
                                                           handlerOptions: {
-                                                              layerOptions: {
-                                                                  styleMap: this.styleMap
-                                                              }
                                                           }
                                                       }),
         };
@@ -508,20 +486,27 @@ Fusion.Widget.Redline.DefaultTaskPane = OpenLayers.Class(
         if (isText) {
             var label = prompt("Enter the label");
             feature.attributes.Label = label;
-            feature.attributes.RedlineType = "Text";
+            feature.style = { label: label };
+            feature.attributes.RedlineType = "text";
         } else if (isPoint) {
-            feature.attributes.RedlineType = "Point";
+            feature.attributes.RedlineType = "point";
         } else if (isLine) {
-            feature.attributes.RedlineType = "Line";
+            feature.attributes.RedlineType = "line";
         } else if (isRect) {
-            feature.attributes.RedlineType = "Rect";
+            feature.attributes.RedlineType = "rectangle";
         } else if (isPoly) { 
-            feature.attributes.RedlineType = "Polygon";
+            feature.attributes.RedlineType = "polygon";
         }
     
         var select = this.taskPaneWin.document.getElementById('RedlineWidgetFeatureList');
         var opt = document.createElement('option');
-        opt.text = feature.id;
+        
+        opt.value = feature.id;
+        if (isText) {
+            opt.text = "Text: " + feature.attributes.Label;
+        } else {
+            opt.text = feature.attributes.RedlineType;
+        }
         try
         {
             select.add(opt,null); // standards compliant
