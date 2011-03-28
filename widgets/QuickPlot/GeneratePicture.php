@@ -95,7 +95,7 @@
         $center           = $captureBox->GetCentroid()->GetCoordinate();
       
         $baseUrl = "http";
-        if ($_SERVER["HTTPS"] == "on")
+        if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
         {
             $baseUrl .= "s";
         }

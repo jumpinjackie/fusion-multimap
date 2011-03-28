@@ -59,7 +59,7 @@ try {
         // Get the map agent url
         // Get the correct http protocal
         $mapAgent = "http";
-        if ($_SERVER["HTTPS"] == "on")
+        if (isset($_SERVER["HTTPS"] && $_SERVER["HTTPS"] == "on")
         {
             $mapAgent .= "s";
         }
