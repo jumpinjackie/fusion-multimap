@@ -12,7 +12,6 @@ if(InitializationErrorOccurred())
 }
 
 include ('Utilities.php');
-
 try {
     if (!isset($_REQUEST['session']) ||
         !isset($_REQUEST['mapnames']) ||
@@ -83,12 +82,18 @@ try {
                     "&FORMAT=PNG" .
                     "&SETVIEWCENTERX=" . $center->GetX() .
                     "&SETVIEWCENTERY=" . $center->GetY() .
-                    //"&SETDISPLAYDPI=$printDpi" . 
                     "&SETVIEWSCALE=$scale" . 
                     "&SETDISPLAYWIDTH=$width" . 
                     "&SETDISPLAYHEIGHT=$height" . 
                     "&CLIP=0";
-          
+        
+        if (isset($_REQUEST["dpi"]))
+        {
+            $mapAgent .= "&SETDISPLAYDPI=" . $_REQUEST["dpi"];
+        }
+        
+        //echo "$mapAgent<br/>";
+        
         $image = imagecreatefrompng($mapAgent);
         array_push($imgs, $image);
         

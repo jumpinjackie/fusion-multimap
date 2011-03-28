@@ -109,7 +109,8 @@
                "&viewy=" . $center->GetY() .
                "&viewscale=$scaleDenominator" .
                "&width=" . $toSize->width .
-               "&height=" . $toSize->height;
+               "&height=" . $toSize->height .
+               "&dpi=$printDpi";
         
         $image = imagecreatefrompng($url);
         // Rotate the picture back to be normalized
