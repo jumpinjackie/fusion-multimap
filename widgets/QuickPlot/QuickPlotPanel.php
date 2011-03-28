@@ -5,7 +5,7 @@
 
     $locale = GetDefaultLocale();
     $popup = 0;
-    $mapName = "";
+    $mapNames = "";
     $sessionId = "";
     $us = "";
     $popup = "false";
@@ -22,10 +22,10 @@
 
 function GetParameters($params)
 {
-    global $target, $cmdIndex, $clientWidth, $mapName, $sessionId, $popup, $us, $locale, $popup;
+    global $target, $cmdIndex, $clientWidth, $mapNames, $sessionId, $popup, $us, $locale, $popup;
 
     $locale    = $params['locale'];
-    $mapName   = $params['mapname'];
+    $mapNames   = $params['mapnames'];
     $sessionId = $params['session'];
     $popup     = $params['popup'];
     $us        = $params['us'];

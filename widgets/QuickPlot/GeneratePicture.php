@@ -6,7 +6,7 @@
     include $fusionMGpath . 'Common.php';
     
     $sessionID = "";
-    $mapName   = "";
+    $mapNames   = "";
     $rotation  = 0.0;
     $printDpi  = 300;
     $scaleDenominator = 0;
@@ -22,7 +22,7 @@
 <?php    
     function GetParameters()
     {
-        global $sessionID, $mapName, $printDpi, $rotation, $paperSize, $captureBox, $printSize, $scaleDenominator, $normalizedCapture;
+        global $sessionID, $mapNames, $printDpi, $rotation, $paperSize, $captureBox, $printSize, $scaleDenominator, $normalizedCapture;
         $args = $_GET;
         if ($_SERVER["REQUEST_METHOD"] == "POST")
         {
@@ -31,7 +31,7 @@
         
         // Not necessary to validate the parameters    	
         $sessionID   = $args["session_id"];
-        $mapName     = $args["map_name"];
+        $mapNames     = $args["map_names"];
         $rotation    = floatval($args["rotation"]);
         $printDpi    = intval($args["print_dpi"]);
 
@@ -70,7 +70,7 @@
 
     function GenerateMap($size)
     {
-        global $sessionID, $mapName, $captureBox, $printSize, $normalizedCapture, $rotation, $scaleDenominator, $printDpi;
+        global $sessionID, $mapNames, $captureBox, $printSize, $normalizedCapture, $rotation, $scaleDenominator, $printDpi;
         
         $userInfo         = new MgUserInformation($sessionID);
         $siteConnection   = new MgSiteConnection();
@@ -78,8 +78,10 @@
         $resourceService  = $siteConnection->CreateService(MgServiceType::ResourceService);
         $renderingService = $siteConnection->CreateService(MgServiceType::RenderingService);
         
+        $names = explode(":", $mapNames);
+        
         $map = new MgMap();
-        $map->Open($resourceService, $mapName);
+        $map->Open($resourceService, $names[count($names)-1]); //Last map is the top-most map
         
         $selection        = new MgSelection($map);
         $color            = new MgColor(255, 255, 255);
@@ -91,31 +93,25 @@
         $size2            = new Size($normalizedE->getWidth(), $normalizedE->getHeight());
         $toSize           = new Size($size1->width / $size2->width * $size->width, $size1->height / $size2->height * $size->height);
         $center           = $captureBox->GetCentroid()->GetCoordinate();
-        
-        // Get the map agent url
-        // Get the correct http protocal
-        $mapAgent = "http";
+      
+        $baseUrl = "http";
         if ($_SERVER["HTTPS"] == "on")
         {
-            $mapAgent .= "s";
+            $baseUrl .= "s";
         }
-        // Get the correct port number
-		$mapAgent .= "://127.0.0.1:" . $_SERVER["SERVER_PORT"];
-        // Get the correct virtual directory
-        $mapAgent .= substr($_SERVER["REQUEST_URI"], 0, strpos($_SERVER["REQUEST_URI"], "/", 1));
-        $mapAgent .="/mapagent/mapagent.fcgi?VERSION=1.0.0&OPERATION=GETMAPIMAGE" .
-                    "&SESSION=$sessionID" .  
-                    "&MAPNAME=" . rawurlencode($mapName) .
-                    "&FORMAT=PNG" .
-                    "&SETVIEWCENTERX=" . $center->GetX() .
-                    "&SETVIEWCENTERY=" . $center->GetY() .
-                    "&SETVIEWSCALE=$scaleDenominator" . 
-                    "&SETDISPLAYDPI=$printDpi" . 
-                    "&SETDISPLAYWIDTH=$toSize->width" . 
-                    "&SETDISPLAYHEIGHT=$toSize->height" . 
-                    "&CLIP=0";
-
-        $image = imagecreatefrompng($mapAgent);
+        $baseUrl .= "://127.0.0.1:" . $_SERVER["SERVER_PORT"];
+        $baseUrl .= substr($_SERVER["SCRIPT_NAME"], 0, strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);
+        
+        $fusionMGpath = '../../layers/MapGuide/php/';
+        $url = $baseUrl . $fusionMGpath . "CompositeMapRender.php?session=$sessionID" .
+               "&mapnames=$mapNames" .
+               "&viewx=" . $center->GetX() .
+               "&viewy=" . $center->GetY() .
+               "&viewscale=$scaleDenominator" .
+               "&width=" . $toSize->width .
+               "&height=" . $toSize->height;
+        
+        $image = imagecreatefrompng($url);
         // Rotate the picture back to be normalized
         $normalizedImg = imagerotate($image, -$rotation, 0);
         // Free the original image

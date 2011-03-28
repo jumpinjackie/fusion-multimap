@@ -160,7 +160,7 @@ PreviewDialog.prototype =
             
             // Set the picture url
             var src = "GeneratePicture.php?session_id=" + this.mapInfo.sessionID +
-                  "&map_name=" + this.mapInfo.name + 
+                  "&map_names=" + this.mapInfo.name + 
                   "&print_dpi=" + this.params.printDpi + 
                   "&paper_size=" + this.captureInfo.paperSize.w + "," + this.captureInfo.paperSize.h + 
                   "&box=" + this.captureInfo.params1 +

@@ -49,7 +49,8 @@ try {
     $renderSvc = $siteConnection->CreateService(MgServiceType::RenderingService);
     
     $center = $geomFact->CreateCoordinateXY($_REQUEST['viewx'], $_REQUEST['viewy']);
-    $scale = $topMap->GetViewScale();
+    //$scale = $topMap->GetViewScale();
+    $scale = $_REQUEST['viewscale'];
     
     //Start rendering
     $masterImg = null;
@@ -87,9 +88,7 @@ try {
                     "&SETDISPLAYWIDTH=$width" . 
                     "&SETDISPLAYHEIGHT=$height" . 
                     "&CLIP=0";
-                    
-        //echo "$mapAgent<br/>";
-
+          
         $image = imagecreatefrompng($mapAgent);
         array_push($imgs, $image);
         

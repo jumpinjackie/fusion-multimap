@@ -49,10 +49,16 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
         var taskPaneTarget = Fusion.getWidgetById(this.sTarget);
         var pageElement    = $(this.sTarget);
 
+        var mapnames = [];
+        for (var i = 0; i < mapLayers.length; i++)
+        {
+            mapnames.push(mapLayers[i].getMapName());
+        }
+
         var params = [];
         params.push('locale='+Fusion.locale);
-        params.push('session='+mapLayers[0].getSessionID());
-        params.push('mapname='+mapLayers[0].getMapName());
+        params.push('session='+map.getSessionID());
+        params.push('mapnames='+mapnames.join(":"));
         
         if (taskPaneTarget || pageElement) 
         {
@@ -114,11 +120,18 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
     preview: function(dialogConentLoadedCallback, printDpi)
     {
         var map = this.getMap();
+        var mapLayers = map.getAllMaps();
+        var mapnames = [];
+        for (var i = 0; i < mapLayers.length; i++)
+        {
+            mapnames.push(mapLayers[i].getMapName());
+        }
+        
         var capture  = this.mapCapturer.getCaptureBox();
         var normalizedCapture = this.mapCapturer.getNormalizedCapture();
         var vertices = capture.geometry.getVertices();
         this.options.printDpi = printDpi;
-        var options = {mapInfo : {sessionID : map.getSessionID(), name : map.getMapName()}, 
+        var options = {mapInfo : {sessionID : map.getSessionID(), name : mapnames.join(":") }, 
                        captureInfo : {topLeftCs : {x : vertices[3].x, y : vertices[3].y},
                                      bottomRightCs : {x : vertices[1].x, y : vertices[1].y}, 
                                      paperSize : {w : this.mapCapturer.paperSize.w, h : this.mapCapturer.paperSize.h},
