@@ -297,7 +297,7 @@ PreviewDialog.prototype =
         this.topLeftXYLabel.fade(1);
         this.bottomRightXYLabel.fade(1);
         // Enable the print button
-        this.downloadButton.disabled = true;
+        this.downloadButton.disabled = false;
         this.printButton.disabled  = false;
         this.cancelButton.disabled = false;
     },
