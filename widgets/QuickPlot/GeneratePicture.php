@@ -14,6 +14,7 @@
     $normalizedCapture;
     $printSize;
     $paperSize;
+    $download = false;
     
     GetParameters();
     GenerateMap($printSize);
@@ -22,12 +23,14 @@
 <?php    
     function GetParameters()
     {
-        global $sessionID, $mapNames, $printDpi, $rotation, $paperSize, $captureBox, $printSize, $scaleDenominator, $normalizedCapture;
+        global $sessionID, $mapNames, $printDpi, $rotation, $paperSize, $captureBox, $printSize, $scaleDenominator, $normalizedCapture, $download;
         $args = $_GET;
         if ($_SERVER["REQUEST_METHOD"] == "POST")
         {
             $args = $_POST;
         }
+        
+        $download = (isset($args["download"]) && $args["download"] == "1");
         
         // Not necessary to validate the parameters    	
         $sessionID   = $args["session_id"];
@@ -70,7 +73,7 @@
 
     function GenerateMap($size)
     {
-        global $sessionID, $mapNames, $captureBox, $printSize, $normalizedCapture, $rotation, $scaleDenominator, $printDpi;
+        global $sessionID, $mapNames, $captureBox, $printSize, $normalizedCapture, $rotation, $scaleDenominator, $printDpi, $download;
         
         $userInfo         = new MgUserInformation($sessionID);
         $siteConnection   = new MgSiteConnection();
@@ -112,6 +115,9 @@
                "&height=" . $toSize->height .
                "&dpi=$printDpi";
         
+        //TODO: Performance improvement - Save the rendered result to disk, using the unique hash of this url as the file name.
+        //On subsequent runs of the same script with same parameters, the unique hashed file name should exist, implying an identical
+        //image, so return the previously rendered image instead.
         $image = imagecreatefrompng($url);
         // Rotate the picture back to be normalized
         $normalizedImg = imagerotate($image, -$rotation, 0);
@@ -125,8 +131,17 @@
         // Draw the north arrow on the map
         DrawNorthArrow($croppedImg);
 
-        header ("Content-type: image/png"); 
-        imagepng($croppedImg);
+        header("Content-Type: image/png");
+        if ($download)
+        {   
+            header("Content-Disposition: attachment; filename=quickplot");
+            header("Content-Transfer-Encoding: binary");
+            imagepng($croppedImg);
+        }
+        else
+        {
+            imagepng($croppedImg);
+        }
         imagedestroy($croppedImg);
     }
     

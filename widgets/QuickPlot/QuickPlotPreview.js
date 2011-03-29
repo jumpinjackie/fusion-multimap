@@ -10,6 +10,14 @@ function innerLoaded()
     }
 }
 
+function downloadImage()
+{
+    var pic = document.getElementById("PrintPicture");
+    var src = pic.src;
+    src += "&download=1";
+    window.open(src);
+}
+
 function printIt()
 {
     parent.Fusion.getWidgetsByType("QuickPlot")[0].printPreview();

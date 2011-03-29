@@ -188,8 +188,10 @@ PreviewDialog.prototype =
             // Disable the print button until the image is ready
             this.printButton           = this.innerDoc.getElementById("PrintButton");
             this.cancelButton          = this.innerDoc.getElementById("CancelButton");
+            this.downloadButton        = this.innerDoc.getElementById("DownloadButton");
             this.printButton.disabled  = true;
             this.cancelButton.disabled = true;
+            this.downloadButton.disabled = true;
             
             var delta     = {x: 22, y: 43};
             var container = $("PreviewContainer");
@@ -295,6 +297,7 @@ PreviewDialog.prototype =
         this.topLeftXYLabel.fade(1);
         this.bottomRightXYLabel.fade(1);
         // Enable the print button
+        this.downloadButton.disabled = true;
         this.printButton.disabled  = false;
         this.cancelButton.disabled = false;
     },

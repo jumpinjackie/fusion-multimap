@@ -348,3 +348,4 @@ QUICKPLOT_CANCEL        = Cancel
 QUICKPLOT_PREVIEW_ERROR = The application resources required to generate the plot exceed the settings defined by the administrator
 QUICKPLOT_RESOLUTION_WARNING = The current settings exceed the map resolution. Zooming out or increasing the scaling will help create a more legible plot
 QUICKPLOT_SCALE_LABEL   = Scale
+QUICKPLOT_DOWNLOAD      = Download
