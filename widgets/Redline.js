@@ -148,7 +148,7 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
                                                      OpenLayers.Handler.Path, {
                                                          handlerOptions: {
                                                              freehandToggle: null,
-                                                             freehand: false,
+                                                             freehand: false
                                                          }
                                                      }),
             rectangle: new OpenLayers.Control.DrawFeature(this.vectorLayers[0],
@@ -168,7 +168,7 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
                                                       OpenLayers.Handler.Point, {
                                                           handlerOptions: {
                                                           }
-                                                      }),
+                                                      })
         };
 
         for(var key in this.drawControls) {
