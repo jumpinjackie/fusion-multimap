@@ -1,5 +1,5 @@
 /**
- * Fusion.Widget.Markup
+ * Fusion.Widget.Redline
  *
  * $Id: Redline.js 1736 2009-01-14 15:42:24Z madair $
  *
@@ -24,7 +24,7 @@
  */
 
 /* ********************************************************************
-* Class: Fusion.Widget.Markup
+* Class: Fusion.Widget.Redline
 *
 * Allows the user to create a temporary OpenLayers Vector layer and
 * draw POINT, LINE and POLYGON features on that layer.
@@ -35,7 +35,7 @@
 // This event could be emitted by the Redline widget
 Fusion.Event.REDLINE_FEATURE_ADDED = Fusion.Event.lastEventId++;
 
-Fusion.Widget.Markup = OpenLayers.Class(Fusion.Widget, {
+Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
     isExclusive: true,
     uiClass: Jx.Button,
 
@@ -87,7 +87,7 @@ Fusion.Widget.Markup = OpenLayers.Class(Fusion.Widget, {
 
         this.sTarget = json.Target ? json.Target[0] : "";
         if (this.sTarget)
-            this.taskPane = new Fusion.Widget.Markup.DefaultTaskPane(this, widgetTag.location);
+            this.taskPane = new Fusion.Widget.Redline.DefaultTaskPane(this, widgetTag.location);
 
         // Check in the user has defined his default feature style
         var defaultFeatureStyle;
@@ -325,7 +325,7 @@ Fusion.Widget.Markup = OpenLayers.Class(Fusion.Widget, {
 });
 
 
-Fusion.Widget.Markup.DefaultTaskPane = OpenLayers.Class(
+Fusion.Widget.Redline.DefaultTaskPane = OpenLayers.Class(
 {
     // a reference to the redline widget
     widget: null,
@@ -334,7 +334,7 @@ Fusion.Widget.Markup.DefaultTaskPane = OpenLayers.Class(
     taskPaneWin: null,
 
     // the panel url
-    panelUrl:  'widgets/Markup/markupmain.php',
+    panelUrl:  'widgets/Redline/markupmain.php',
     // the panel CSS
     panelCss: 'Redline/Redline.css',
 
