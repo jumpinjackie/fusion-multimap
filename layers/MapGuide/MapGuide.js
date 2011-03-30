@@ -306,13 +306,13 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
 
             //set projection units and code if supplied
             var wktProj;
-            if (o.epsg != 0) {
+            if (o.wkt && o.wkt.length > 0) {
+              wktProj = new OpenLayers.Projection(o.wkt);
+            } else if (o.epsg != 0) {
               this.mapTag.layerOptions.projection = "EPSG:" + o.epsg;
             } else {
               //default to the local non-projected system if not otherwise specified
-              if (!o.wkt || o.wkt.length == 0){
-                o.wkt = "LOCAL_CS[\"Non-Earth (Meter)\",LOCAL_DATUM[\"Local Datum\",0],UNIT[\"Meter\", 1],AXIS[\"X\",EAST],AXIS[\"Y\",NORTH]]";
-              }
+              o.wkt = "LOCAL_CS[\"Non-Earth (Meter)\",LOCAL_DATUM[\"Local Datum\",0],UNIT[\"Meter\", 1],AXIS[\"X\",EAST],AXIS[\"Y\",NORTH]]";
               wktProj = new OpenLayers.Projection(o.wkt);
             }
             //TODO: consider passing the metersPerUnit value into the framework
