@@ -17,6 +17,7 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
     uiClass: Jx.Button,
     sFeatures : 'menubar=no,location=no,resizable=no,status=no',
     options : {},
+    panel: null,
     
     initializeWidget: function(widgetTag) 
     {
@@ -85,16 +86,18 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
         if (taskPaneTarget) 
         {
             taskPaneTarget.setContent(url);
+            this.panel = taskPaneTarget.iframe.contentWindow;
         } 
         else 
         {
             if (pageElement) 
             {
                 pageElement.src = url;
+                this.panel = pageElement.contentWindow;
             } 
             else 
             {
-                window.open(url, this.sTarget, this.sWinFeatures);
+                this.panel = window.open(url, this.sTarget, this.sWinFeatures);
             }
         }
         
@@ -111,6 +114,12 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
                     return;
                 }
             }
+        }
+    },
+    
+    deactivate: function() {
+        if (this.mapCapturer.enabled) {
+            this.mapCapturer.disable();
         }
     },
     
