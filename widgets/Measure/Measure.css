@@ -49,3 +49,9 @@ body#MeasurementWidgetResults  {
   margin: 0px;
   padding: 10px;
 }
+
+#MeasurementWidgetResults p {
+  font-size: 11px;
+  margin: 0px;
+  padding: 10px;
+}

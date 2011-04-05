@@ -38,6 +38,7 @@
     $locale = GetDefaultLocale();
   }
 
+  $hint = GetLocalizedString('MEASUREHINT', $locale);
   $type = $_REQUEST['type'];
   switch ($type) {
       case 1:
@@ -73,6 +74,8 @@
 </head>
 <body id="MeasurementWidgetResults">
     <h1><?php echo $title ?></h1>
+    <hr/>
+    <p><?php echo $hint ?></p>
     <table id="MeasurementWidgetResultsTable" border="0" cellspacing="5" cellpadding="5">
 <?php if ($type & 1): ?>
         <thead>

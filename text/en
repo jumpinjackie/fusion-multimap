@@ -134,6 +134,7 @@ MEASURESCHEMADESCR      = Temporary measure schema
 MEASUREPARTIAL          = Partial
 MEASURETOTAL            = total
 MEASURELAYER            = Measure
+MEASUREHINT             = To measure multiple distances, continue clicking new points. To finish, double click on the last point. You can cancel and restart the measuring by pressing the ESC key.
 
 # FeatureInfoUI
 FEATUREINFOTITLE        = Feature Information
