@@ -30,6 +30,17 @@
 		var labelForeColor = "000000";
 		var labelBackColor = "FFFFFF";
 		
+        function CheckName()
+        {
+            var el = document.getElementById("markupName");
+            var mkName = el.value.replace(/^\s+|\s+$/g,"");
+            if (mkName == "") {
+                alert("Please enter a name for this new markup layer");
+                el.focus();
+                return false;
+            }
+            return true;
+        }
 		
 		function PickColor(whichColor, allowTransparency, transparent)
         {
@@ -138,11 +149,11 @@
 <input name="MARKUPCOMMAND" type="hidden" value="<?= MarkupCommand::Create ?>">
 
 <table class="RegText" border="0" cellspacing="0" width="100%%">
-	<tr><td colspan="2" class="Title">New Markup Layer<hr></td></tr>
+	<tr><td id="elTitle" colspan="2" class="Title">New Markup Layer<hr></td></tr>
 
 	<tr><td colspan="2" class="SubTitle">Markup Layer Settings</td></tr>
 	<tr><td colspan="2">Markup name:</td></tr>
-	<tr><td colspan="2"><input class="Ctrl" name="MARKUPNAME" type="text" maxlength="255" style="width:100%"><br><br></td></tr>
+	<tr><td colspan="2"><input class="Ctrl" id="markupName" name="MARKUPNAME" type="text" maxlength="255" style="width:100%"><br><br></td></tr>
 
 	<tr><td colspan="2" class="SubTitle">Point Style</td></tr>
 	<tr>
@@ -360,7 +371,7 @@
 	<tr>
 		<td colspan="2" align="right">
 			<hr>
-			<input class="Ctrl" name="" type="submit" value="OK" style="width:60px">
+			<input class="Ctrl" name="" type="submit" value="OK" onclick="return CheckName()" style="width:60px">
 			<input class="Ctrl" type="button" value="Cancel" style="width:60px">
 		</td>
 	</tr>
