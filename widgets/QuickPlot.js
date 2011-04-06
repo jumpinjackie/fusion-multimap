@@ -15,7 +15,7 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
 {
     isExclusive: true,
     uiClass: Jx.Button,
-    sFeatures : 'menubar=no,location=no,resizable=no,status=no',
+    sFeatures : 'width=400,height=450,menubar=no,location=no,resizable=no,status=no',
     options : {},
     panel: null,
     
@@ -97,7 +97,7 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
             } 
             else 
             {
-                this.panel = window.open(url, this.sTarget, this.sWinFeatures);
+                this.panel = window.open(url, this.sTarget, this.sFeatures);
             }
         }
         
