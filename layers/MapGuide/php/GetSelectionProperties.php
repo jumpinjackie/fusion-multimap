@@ -65,79 +65,82 @@ include('Utilities.php');
         header('Content-type: application/json');
         header('X-JSON: true');
         $layers = $selection->GetLayers();
-        $nLayers = $layers->GetCount();
-        // echo "/* nLayers:".$nLayers."*/";
-        for ($i=0; $i<$nLayers; $i++) {
-            $oLayer = $layers->GetItem($i);
-            $featureResId = new MgResourceIdentifier($oLayer->GetFeatureSourceId());
-            /* the class that is used for this layer will be used to select  features */
-            $class = $oLayer->GetFeatureClassName();
+        if (null != $layers)
+        {
+            $nLayers = $layers->GetCount();
+            // echo "/* nLayers:".$nLayers."*/";
+            for ($i=0; $i<$nLayers; $i++) {
+                $oLayer = $layers->GetItem($i);
+                $featureResId = new MgResourceIdentifier($oLayer->GetFeatureSourceId());
+                /* the class that is used for this layer will be used to select  features */
+                $class = $oLayer->GetFeatureClassName();
 
-            /* select the features */
-            $queryOptions = new MgFeatureQueryOptions();
+                /* select the features */
+                $queryOptions = new MgFeatureQueryOptions();
 
-            //TODO : seems that property mapping breaks the selection ????
-            //could it be that $selection->AddFeatures($layerObj, $featureReader, 0) is
-            //the one causing a problem when the properies are limited ?
-            if (isset($_SESSION['property_mappings']) && isset($_SESSION['property_mappings'][$oLayer->GetObjectId()])) {
-                $mappings = $_SESSION['property_mappings'][$oLayer->GetObjectId()];
-                if (0 && count($mappings) > 0) {
-                    foreach($mappings as $name => $value) {
-                        $queryOptions->AddFeatureProperty($name);
-                        //echo "$name $value <br>\n";
+                //TODO : seems that property mapping breaks the selection ????
+                //could it be that $selection->AddFeatures($layerObj, $featureReader, 0) is
+                //the one causing a problem when the properies are limited ?
+                if (isset($_SESSION['property_mappings']) && isset($_SESSION['property_mappings'][$oLayer->GetObjectId()])) {
+                    $mappings = $_SESSION['property_mappings'][$oLayer->GetObjectId()];
+                    if (0 && count($mappings) > 0) {
+                        foreach($mappings as $name => $value) {
+                            $queryOptions->AddFeatureProperty($name);
+                            //echo "$name $value <br>\n";
+                        }
+                        $geomName = $oLayer->GetFeatureGeometryName();
+                        $queryOptions->AddFeatureProperty($geomName);
                     }
-                    $geomName = $oLayer->GetFeatureGeometryName();
-                    $queryOptions->AddFeatureProperty($geomName);
                 }
+
+                $filter = $selection->GenerateFilter($oLayer, $class);
+                $queryOptions->SetFilter($filter);
+                $featureReader = $featureService->SelectFeatures($featureResId, $class, $queryOptions);
+                //$featureReader = $selection->GetSelectedFeatures($oLayer, $class, true );//this doesn't seem to work but would replace much of the above code
+
+                $layerName = $oLayer->GetName();
+                array_push($properties->layers, $layerName);
+
+                // TODO: Check if computed properties are needed?
+                $bComputedProperties = false;
+                $bNeedsTransform = false;
+                $srsLayer = NULL;
+                if ($bComputedProperties)
+                {
+                    $spatialContext = $featureService->GetSpatialContexts($featureResId, true);
+                    $srsLayerWkt = false;
+                    if($spatialContext != null && $spatialContext->ReadNext() != null) {
+                        $srsLayerWkt = $spatialContext->GetCoordinateSystemWkt();
+                        /* skip this layer if the srs is empty */
+                    }
+                    if ($srsLayerWkt == null) {
+                        $srsLayerWkt = $srsDefMap;
+                    }
+                    /* create a coordinate system from the layer's SRS wkt */
+                    $srsLayer = $srsFactory->Create($srsLayerWkt);
+
+                    // exclude layer if:
+                    //  the map is non-arbitrary and the layer is arbitrary or vice-versa
+                    //     or
+                    //  layer and map are both arbitrary but have different units
+                    //
+                    $bLayerSrsIsArbitrary = ($srsLayer->GetType() == MgCoordinateSystemType::Arbitrary);
+                    $bMapSrsIsArbitrary = ($srsMap->GetType() == MgCoordinateSystemType::Arbitrary);
+                    if (($bLayerSrsIsArbitrary != $bMapSrsIsArbitrary) ||
+                        ($bLayerSrsIsArbitrary && ($srsLayer->GetUnits() != $srsMap->GetUnits()))) {
+                        $bComputedProperties = false;
+                    } else {
+                        $srsTarget = null;
+                        $srsXform = null;
+                        $bNeedsTransform = ($srsLayer->GetUnitScale() != 1.0);
+                    }
+                }
+
+                $properties = BuildSelectionArray($featureReader, $layerName, $properties,
+                                                  $bComputedProperties,
+                                                  $srsLayer, $bNeedsTransform, $oLayer);
+                $featureReader->Close();
             }
-
-            $filter = $selection->GenerateFilter($oLayer, $class);
-            $queryOptions->SetFilter($filter);
-            $featureReader = $featureService->SelectFeatures($featureResId, $class, $queryOptions);
-            //$featureReader = $selection->GetSelectedFeatures($oLayer, $class, true );//this doesn't seem to work but would replace much of the above code
-
-            $layerName = $oLayer->GetName();
-            array_push($properties->layers, $layerName);
-
-        // TODO: Check if computed properties are needed?
-            $bComputedProperties = false;
-            $bNeedsTransform = false;
-            $srsLayer = NULL;
-            if ($bComputedProperties)
-            {
-        $spatialContext = $featureService->GetSpatialContexts($featureResId, true);
-        $srsLayerWkt = false;
-        if($spatialContext != null && $spatialContext->ReadNext() != null) {
-            $srsLayerWkt = $spatialContext->GetCoordinateSystemWkt();
-            /* skip this layer if the srs is empty */
-        }
-        if ($srsLayerWkt == null) {
-            $srsLayerWkt = $srsDefMap;
-        }
-        /* create a coordinate system from the layer's SRS wkt */
-        $srsLayer = $srsFactory->Create($srsLayerWkt);
-
-        // exclude layer if:
-        //  the map is non-arbitrary and the layer is arbitrary or vice-versa
-        //     or
-        //  layer and map are both arbitrary but have different units
-        //
-        $bLayerSrsIsArbitrary = ($srsLayer->GetType() == MgCoordinateSystemType::Arbitrary);
-        $bMapSrsIsArbitrary = ($srsMap->GetType() == MgCoordinateSystemType::Arbitrary);
-        if (($bLayerSrsIsArbitrary != $bMapSrsIsArbitrary) ||
-            ($bLayerSrsIsArbitrary && ($srsLayer->GetUnits() != $srsMap->GetUnits()))) {
-            $bComputedProperties = false;
-        } else {
-            $srsTarget = null;
-            $srsXform = null;
-            $bNeedsTransform = ($srsLayer->GetUnitScale() != 1.0);
-        }
-            }
-
-            $properties = BuildSelectionArray($featureReader, $layerName, $properties,
-                                              $bComputedProperties,
-                                              $srsLayer, $bNeedsTransform, $oLayer);
-            $featureReader->Close();
         }
 
         $result = NULL;
