@@ -714,12 +714,13 @@ Fusion.Widget.Legend.LegendRendererDefault = OpenLayers.Class(Fusion.Widget.Lege
         //set the label
         if (style && style.legendLabel) {
             opt.label = style.legendLabel == '' ? '&nbsp;' : style.legendLabel;
-        } else {
-            opt.label = layer.legendLabel == '' ? '&nbsp;' : layer.legendLabel;
         }
 
         //set the checkbox rendererer
         if (bCheckBox ) {
+            if (!opt.label) {
+                opt.label = layer.legendLabel == '' ? '&nbsp;' : layer.legendLabel; 
+            }
             opt.draw = this.renderItemCheckBox;
         } else {
             opt.draw = this.renderItem;
