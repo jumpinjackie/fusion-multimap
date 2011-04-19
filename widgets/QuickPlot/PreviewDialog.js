@@ -214,6 +214,39 @@ PreviewDialog.prototype =
     
     previewInnerLoaded: function()
     {
+        //HACK: There is some state within these labels that gets invalidated in subsequent 
+        //previews (ie. You click "Generate" on the Quick Plot panel multiple times without cancelling out the dialog). 
+        //So detect this invalid state and remove these labels, forcing a rebuild
+        if (this.topLeftXYLabel)
+        {
+            var tlDoc = this.topLeftXYLabel.getDocument();
+            if (tlDoc.defaultView == null)
+            {
+                this.topLeftXYLabel.parentNode.removeChild(this.topLeftXYLabel);
+                this.topLeftXYLabel = null;
+            }
+        }
+        
+        if (this.bottomRightXYLabel)
+        {
+            var brDoc = this.bottomRightXYLabel.getDocument();
+            if (brDoc.defaultView == null)
+            {
+                this.bottomRightXYLabel.parentNode.removeChild(this.bottomRightXYLabel);
+                this.bottomRightXYLabel = null;
+            }
+        }
+        
+        if (this.printLabel)
+        {
+            var prDoc = this.printLabel.getDocument();
+            if (prDoc.defaultView == null)
+            {
+                this.printLabel.parentNode.removeChild(this.printLabel);
+                this.printLabel = null;
+            }
+        }
+    
         this.previewInnerIsLoaded = true;
         if (this.resizeIsPending)
         {
