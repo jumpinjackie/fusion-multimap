@@ -98,6 +98,8 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
             else 
             {
                 this.panel = window.open(url, this.sTarget, this.sFeatures);
+                if (typeof(this.panel.focus) != 'undefined')
+                    this.panel.focus();
             }
         }
         
