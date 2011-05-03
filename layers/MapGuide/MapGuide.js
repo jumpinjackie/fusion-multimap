@@ -308,6 +308,9 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
             var wktProj;
             if (o.wkt && o.wkt.length > 0) {
               wktProj = new OpenLayers.Projection(o.wkt);
+              if (o.epsg != 0) {
+                this.mapTag.layerOptions.projection = "EPSG:" + o.epsg;
+              }
             } else if (o.epsg != 0) {
               this.mapTag.layerOptions.projection = "EPSG:" + o.epsg;
             } else {
