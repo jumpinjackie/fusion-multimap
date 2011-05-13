@@ -134,7 +134,7 @@
         header("Content-Type: image/png");
         if ($download)
         {   
-            header("Content-Disposition: attachment; filename=quickplot");
+            header("Content-Disposition: attachment; filename=quickplot.png");
             header("Content-Transfer-Encoding: binary");
             imagepng($croppedImg);
         }
