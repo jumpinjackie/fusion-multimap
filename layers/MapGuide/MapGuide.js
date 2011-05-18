@@ -1240,6 +1240,9 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
         }
         else
         {
+            if (style.iconOpt && style.iconOpt.url)
+                return style.iconOpt.url;
+        
             var url = Fusion.getConfigurationItem('mapguide', 'mapAgentUrl');
             url += "?OPERATION=GETLEGENDIMAGE&SESSION=" + layer.oMap.getSessionID();
             url += "&VERSION=1.0.0&SCALE=" + fScale;
