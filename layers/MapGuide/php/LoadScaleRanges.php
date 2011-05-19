@@ -40,24 +40,77 @@ if(InitializationErrorOccurred())
 include('../../../common/php/Utilities.php');
 include('Utilities.php');
 
+//This flag indicates whether to pre-cache the legend icons (in the form of data URIs that will be written back as part of the JSON response)
+//This won't pre-cache all of them, it will pre-cache up to a certain number. Similar to how the AJAX viewer shows a compressed theme if the theme
+//goes beyond a certain number of style rules.
+$preCacheIcons = false;
+
+//This is used by pre-caching to determine how many legend icons to pre-cache up-front (if $preCacheIcons = true)
+$maxIconsPerScaleRange = 25;    //The maximum number of icons to pre-cache per scale range
+//$maxLegendHeight = 800;         //The maximum screen space available to pre-cache icons
+//$legendPos = 0;                 //Indicates how much screen space has already been allocated by pre-cached icons. Pre-caching stops after this value exceeds $maxLegendHeight
+//$advanceHeight = 20;            //16px with 4px padding. This is just a logical guess of how much actual space one legend icon occupies in the legend widget
+//$maxGroupIndex = 5;             //An initial guess of how many groups whose layer icons we can pre-cache.
+
+// Determine if we should pre-cache legend icons
+if (isset($_REQUEST['preCacheIcons']) && ($_REQUEST['preCacheIcons'] == "1" || strtolower($_REQUEST['preCacheIcons']) == "true")) {
+    $preCacheIcons = true;
+}
+
+$mappingService = $siteConnection->CreateService(MgServiceType::MappingService);
 
 $map = new MgMap();
 $map->Open($resourceService, $mapName);
-$layers=$map->GetLayers();
+$layers = $map->GetLayers();
+$groups = $map->GetLayerGroups();
 
 $scaleObj = NULL;
 $scaleObj->layers = array();
 
-for($i=0;$i<$layers->GetCount();$i++)
+for ($i = 0; $i < $layers->GetCount(); $i++)
 {
-    $layer=$layers->GetItem($i);
+    $layer = $layers->GetItem($i);
+    
     if (isset($_SESSION['scale_ranges']) &&
         isset($_SESSION['scale_ranges'][$layer->GetObjectId()]))
     {
         $scaleranges = $_SESSION['scale_ranges'][$layer->GetObjectId()];
         $layerObj = NULL;
         $layerObj->uniqueId = $layer->GetObjectId();
+        
+        if ($preCacheIcons)
+        {
+            $ldfId = $layer->GetLayerDefinition();
+            foreach ($scaleranges as $sr) 
+            {
+                $scaleVal = 42;
+                if (strcmp($sr->maxScale, "infinity") == 0)
+                    $scaleVal = intval($sr->minScale);
+                else
+                    $scaleVal = (intval($sr->minScale) + intval($sr->maxScale)) / 2.0;
+                
+                $cached = 0;
+                foreach ($sr->styles as $style) 
+                {
+                    if ($cached == $maxIconsPerScaleRange)
+                        break;
+                
+                    $style->imageData = GetLegendImageInline($mappingService, $ldfId, $scaleVal, $style->geometryType, $style->categoryIndex);
+                    //$style->imageData = "GetLegendImageInline(mappingService, ".$ldfId->ToString().", $scaleVal, ".$style->geometryType.", ".$style->categoryIndex.")";
+                    $cached++;
+                }
+            }
+        }
         $layerObj->scaleRanges = $scaleranges;
+        
+        /*
+        $parentGroup = $layer->GetGroup();
+        //Pre-caching is on and the legend still has available space.
+        if ($layer->GetDisplayInLegend() && $preCacheIcons && $legendPos < $maxLegendHeight) {
+            
+            $legendPos += $advanceHeight;
+        }*/
+        
         array_push($scaleObj->layers, $layerObj);
     }
  }

@@ -37,7 +37,6 @@ if(InitializationErrorOccurred())
 }
 include('Utilities.php');
 
-
 $mapObj = NULL;
 try
 {
@@ -286,7 +285,6 @@ function buildScaleRanges($layer)
 {
     $aScaleRanges = array();
     global $resourceService;
-    global $mappingService;
     global $sessionID;
     $resID = $layer->GetLayerDefinition();
     $layerContent = $resourceService->GetResourceContent($resID);
@@ -359,27 +357,6 @@ function buildScaleRanges($layer)
                     $styleObj->filter = trim($filterText);
                     $styleObj->geometryType = ($ts+1);
                     $styleObj->categoryIndex = $catIndex++;
-                    
-                    $scaleVal = 42;
-                    if (strcmp($maxScale, "infinity") == 0) {
-                        $scaleVal = intval($minScale);
-                    } else {
-                        $scaleVal = (intval($minScale) + intval($maxScale)) / 2.0;
-                    }
-                    
-                    $icon = $mappingService->GenerateLegendImage($resID, $scaleVal, 16, 16, "PNG", $styleObj->geometryType, $styleObj->categoryIndex);
-                    if ($icon != null)
-                    {
-                        $str = "";
-                        $buffer = '';
-                        while ($icon->Read($buffer, 50000) != 0)
-                        {
-                            $str .= base64_encode($buffer);
-                        }
-                        
-                        $styleObj->imageData = "data:image/png;base64,". $str;
-                    }
-                    //$styleObj->imageData = "http://localhost/mapguide/mapagent/mapagent.fcgi?OPERATION=GETLEGENDIMAGE&VERSION=1.0.0&SESSION=$sessionID&SCALE=$scaleVal&LAYERDEFINITION=".$resID->ToString()."&TYPE=".$styleObj->geometryType."&THEMECATEGORY=".$styleObj->categoryIndex;
                     
                     array_push($scaleRangeObj->styles, $styleObj);
                 }

@@ -407,7 +407,7 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
      * Function: loadScaleRanges
      *
      * This function should be called after the map has loaded. It
-     * loads the scsle ranges for each layer. I tis for now only
+     * loads the scale ranges for each layer. It is for now only
      * used by the legend widget.
      */
 
@@ -415,9 +415,11 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
         var sl = Fusion.getScriptLanguage();
         var loadmapScript = 'layers/' + this.arch + '/' + sl  + '/LoadScaleRanges.' + sl;
 
+        //var preCacheIcons = !(msie7plus || msie6plus); //IE6 or IE7? No pre-caching for you!'
+        var preCacheIcons = true;
         var sessionid = this.getSessionID();
 
-        var params = {'mapname': this._sMapname, "session": sessionid};
+        var params = {'mapname': this._sMapname, "session": sessionid, "preCacheIcons": preCacheIcons};
         var options = {onSuccess: OpenLayers.Function.bind(this.scaleRangesLoaded,this, userFunc),
                        parameters:params};
         Fusion.ajaxRequest(loadmapScript, options);

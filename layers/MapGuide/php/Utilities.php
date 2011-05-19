@@ -903,4 +903,29 @@ function GetSiteVersion() {
     $serverVersion = $serverAdmin->GetSiteVersion();
     return $serverVersion;
 }
+
+// GetLegendImageInline
+//
+// Returns a data URI containing the base64 encoded content of the specified legend icon
+//
+// Due to the fixed size (16x16 px), the generated data URI will easily fall under the data URI limit of most (if not all) web browsers that support it.
+//
+function GetLegendImageInline($mappingService, $layerDefinitionId, $scale, $geomType, $themeCategory)
+{
+    $icon = $mappingService->GenerateLegendImage($layerDefinitionId, $scale, 16, 16, "PNG", $geomType, $themeCategory);
+    if ($icon != null)
+    {
+        $str = "";
+        $buffer = '';
+        while ($icon->Read($buffer, 50000) != 0)
+        {
+            $str .= base64_encode($buffer);
+        }
+        
+        $str = "data:image/png;base64,". $str;
+        return $str;
+    }
+    //$styleObj->imageData = "http://localhost/mapguide/mapagent/mapagent.fcgi?OPERATION=GETLEGENDIMAGE&VERSION=1.0.0&SESSION=$sessionID&SCALE=$scaleVal&LAYERDEFINITION=".$resID->ToString()."&TYPE=".$styleObj->geometryType."&THEMECATEGORY=".$styleObj->categoryIndex;                    
+    return null;
+}
 ?>
