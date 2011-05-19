@@ -125,34 +125,44 @@ try
 
     //layers
     $mapObj->layers = array();
+    $layerDefinitionIds = new MgStringCollection();
 
+    for ($i = 0; $i < $layers->GetCount(); $i++)
+    {
+        $layer = $layers->GetItem($i);
+        $lid = $layer->GetLayerDefinition();
+        $layerDefinitionIds->Add($lid->ToString());
+    }
+    
+    //Get the layer contents in a single batch
+    $layerDefinitionContents = $resourceService->GetResourceContents($layerDefinitionIds, null);
 
-    $mapObj->layers = array();
-    for($i=0;$i<$layers->GetCount();$i++)
+    for ($i = 0; $i < $layers->GetCount(); $i++)
     {
         //only output layers that are part of the 'Normal Group' and
         //not the base map group used for tile maps.  (Where is the test for that Y.A.???)
 
         $layer=$layers->GetItem($i);
-        $layerDefinition = $layer->GetLayerDefinition();
+        $content = $layerDefinitionContents->GetItem($i);
+        
         $layerObj = NULL;
-        $mappings = GetLayerPropertyMappings($resourceService, $layer);
+        $mappings = GetLayerPropertyMappings($resourceService, $layer, $content);
         $_SESSION['property_mappings'][$layer->GetObjectId()] = $mappings;
 
         $layerObj->uniqueId = $layer->GetObjectId();
         $layerObj->layerName = addslashes($layer->GetName());
 
         //$aLayerTypes = GetLayerTypes($featureService, $layer);
-        $aLayerTypes = GetLayerTypesFromResourceContent($layer);
+        $aLayerTypes = GetLayerTypesFromResourceContent($layer, $content);
         $layerObj->layerTypes = $aLayerTypes;
 
-        $layerObj->resourceId = $layerDefinition->ToString();
+        $layerObj->resourceId = $layerDefinitionIds->GetItem($i);
         $layerObj->parentGroup = $layer->GetGroup() ? $layer->GetGroup()->GetObjectId() : '';
 
         $layerObj->selectable = $layer->GetSelectable();
         $layerObj->visible = $layer->GetVisible();
         $layerObj->actuallyVisible = $layer->isVisible();
-        $layerObj->editable = IsLayerEditable($resourceService, $layer);
+        $layerObj->editable = IsLayerEditable($resourceService, $layer, $content);
 
         $isBaseMapLayer = ($layer->GetLayerType() == MgLayerType::BaseMap);
         $layerObj->isBaseMapLayer = $isBaseMapLayer;
@@ -169,7 +179,7 @@ try
         $layerObj->displayInLegend = $layer->GetDisplayInLegend();
         $layerObj->expandInLegend = $layer->GetExpandInLegend();
 
-        $oScaleRanges = buildScaleRanges($layer);
+        $oScaleRanges = buildScaleRanges($layer, $content);
         $_SESSION['scale_ranges'][$layer->GetObjectId()] = $oScaleRanges;
         //$layerObj->scaleRanges = $oScaleRanges;
         /*get the min/max scale for the layer*/
@@ -222,7 +232,7 @@ exit;
 /*      Extract the layer types based on the styling available.         */
 /*      GetLayerTypes was costly in time when dealing in DB.            */
 /************************************************************************/
-function GetLayerTypesFromResourceContent($layer)
+function GetLayerTypesFromResourceContent($layer, $content)
 {
     $aLayerTypes = array();
     global $resourceService;
@@ -235,8 +245,7 @@ function GetLayerTypesFromResourceContent($layer)
         else
         {
             $resID = $layer->GetLayerDefinition();
-            $layerContent = $resourceService->GetResourceContent($resID);
-            $xmldoc = DOMDocument::loadXML(ByteReaderToString($layerContent));
+            $xmldoc = DOMDocument::loadXML($content);
 
             $gridlayers = $xmldoc->getElementsByTagName('GridLayerDefinition');
             if ($gridlayers->length > 0)
@@ -281,15 +290,14 @@ function getMapBackgroundColor($map) {
     }
 }
 
-function buildScaleRanges($layer)
+function buildScaleRanges($layer, $content)
 {
     $aScaleRanges = array();
     global $resourceService;
     global $sessionID;
     $resID = $layer->GetLayerDefinition();
-    $layerContent = $resourceService->GetResourceContent($resID);
-
-    $xmldoc = DOMDocument::loadXML(ByteReaderToString($layerContent));
+    
+    $xmldoc = DOMDocument::loadXML($content);
     $type = 0;
     $scaleRanges = $xmldoc->getElementsByTagName('VectorScaleRange');
     if($scaleRanges->length == 0) {
