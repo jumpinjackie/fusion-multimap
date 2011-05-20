@@ -46,7 +46,8 @@ include('Utilities.php');
 $preCacheIcons = false;
 
 //This is used by pre-caching to determine how many legend icons to pre-cache up-front (if $preCacheIcons = true)
-$maxIconsPerScaleRange = 25;    //The maximum number of icons to pre-cache per scale range
+$maxScaleRangeDepth = 3;		//The maximum number of scale ranges to go through (topmost to bottom)
+$maxIconsPerScaleRange = 50;    //The maximum number of icons to pre-cache per scale range
 //$maxLegendHeight = 800;         //The maximum screen space available to pre-cache icons
 //$legendPos = 0;                 //Indicates how much screen space has already been allocated by pre-cached icons. Pre-caching stops after this value exceeds $maxLegendHeight
 //$advanceHeight = 20;            //16px with 4px padding. This is just a logical guess of how much actual space one legend icon occupies in the legend widget
@@ -81,8 +82,12 @@ for ($i = 0; $i < $layers->GetCount(); $i++)
         if ($preCacheIcons)
         {
             $ldfId = $layer->GetLayerDefinition();
+			$scaleRangeDepth = 0;
             foreach ($scaleranges as $sr) 
             {
+				if ($scaleRangeDepth == $maxScaleRangeDepth)
+					break;
+			
                 $scaleVal = 42;
                 if (strcmp($sr->maxScale, "infinity") == 0)
                     $scaleVal = intval($sr->minScale);
@@ -99,6 +104,8 @@ for ($i = 0; $i < $layers->GetCount(); $i++)
                     //$style->imageData = "GetLegendImageInline(mappingService, ".$ldfId->ToString().", $scaleVal, ".$style->geometryType.", ".$style->categoryIndex.")";
                     $cached++;
                 }
+				
+				$scaleRangeDepth++;
             }
         }
         $layerObj->scaleRanges = $scaleranges;

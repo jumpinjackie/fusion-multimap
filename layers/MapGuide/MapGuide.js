@@ -415,8 +415,21 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
         var sl = Fusion.getScriptLanguage();
         var loadmapScript = 'layers/' + this.arch + '/' + sl  + '/LoadScaleRanges.' + sl;
 
-        //var preCacheIcons = !(msie7plus || msie6plus); //IE6 or IE7? No pre-caching for you!'
         var preCacheIcons = true;
+        
+        //Logic snipped from browserdetect.js since it doesn't seem to be used by Fusion in split or single-file mode.
+        var agent = navigator.userAgent.toLowerCase();
+        var msieIndex = agent.indexOf("msie");
+        if(msieIndex != -1)
+        {
+            msie = true;
+            var msieVersion = agent.substr(msieIndex + 5, 1);
+            if(parseFloat(msieVersion) <= 7) 
+            {
+                preCacheIcons = false; //IE <= 7: No pre-caching for you because you don't support data URIs
+            }
+        }
+
         var sessionid = this.getSessionID();
 
         var params = {'mapname': this._sMapname, "session": sessionid, "preCacheIcons": preCacheIcons};
