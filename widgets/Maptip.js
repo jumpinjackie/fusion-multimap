@@ -56,7 +56,7 @@ Fusion.Widget.Maptip = OpenLayers.Class(Fusion.Widget, {
     aLayers: null,
     bOverTip: false,
     sWinFeatures: 'menubar=no,location=no,resizable=no,status=no,scrollbars=yes',
-    offset: new OpenLayers.Pixel(2,20),
+    offset: new OpenLayers.Pixel(30, 30), //Give IE some "breathing space" to hide the tooltip if drag operation is detected
     szTip: '',
     szHref:'',
     szLabel:'',
@@ -142,7 +142,7 @@ Fusion.Widget.Maptip = OpenLayers.Class(Fusion.Widget, {
     isZoomRect: function() {
         var zoomWidgets = Fusion.getWidgetsByType("Zoom");
         for (var i = 0; i < zoomWidgets.length; i++) {
-            if (zoomWidgets[i].handler.active && zoomWidgets[i].handler.zoomBox != null) //The box handler is active and a zoom rectangle operation is in progress
+            if (zoomWidgets[i].handler.dragHandler.dragging) //A drag operation is in progress
                 return true;
         }
         return false;
@@ -150,7 +150,8 @@ Fusion.Widget.Maptip = OpenLayers.Class(Fusion.Widget, {
     
     mouseMove: function(e) {
         if (this.isZoomRect()) {
-            this.hideMaptip();
+            this.bIsVisible = false;
+            this._hide();
             return;
         }
     
