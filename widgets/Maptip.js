@@ -139,7 +139,21 @@ Fusion.Widget.Maptip = OpenLayers.Class(Fusion.Widget, {
         this.bStartMapTips = true;
     },
     
+    isZoomRect: function() {
+        var zoomWidgets = Fusion.getWidgetsByType("Zoom");
+        for (var i = 0; i < zoomWidgets.length; i++) {
+            if (zoomWidgets[i].handler.active && zoomWidgets[i].handler.zoomBox != null) //The box handler is active and a zoom rectangle operation is in progress
+                return true;
+        }
+        return false;
+    },
+    
     mouseMove: function(e) {
+        if (this.isZoomRect()) {
+            this.hideMaptip();
+            return;
+        }
+    
         if( this.bStartMapTips == true){
             if(!this.eventListener){
                 this.eventListener = true;
@@ -148,7 +162,7 @@ Fusion.Widget.Maptip = OpenLayers.Class(Fusion.Widget, {
             if (this.bOverTip || this.mouseIsDown) {
                 return;
             }
-
+            
             var map = this.getMap();
             this.mapSize = map.getSize();
             this.mapOffset = map._oDomObj.getOffsets();
