@@ -314,9 +314,6 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
             var wktProj;
             if (o.wkt && o.wkt.length > 0) {
               wktProj = new OpenLayers.Projection(o.wkt);
-              if (o.epsg != 0) {
-                this.mapTag.layerOptions.projection = "EPSG:" + o.epsg;
-              }
             } else if (o.epsg != 0) {
               this.mapTag.layerOptions.projection = "EPSG:" + o.epsg;
             } else {
@@ -1285,7 +1282,15 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
             if (style.iconOpt && style.iconOpt.url)
                 return style.iconOpt.url;
         
-            var url = Fusion.getConfigurationItem('mapguide', 'mapAgentUrl');
+            var origUrl = Fusion.getConfigurationItem('mapguide', 'mapAgentUrl');
+            var altUrl = null;
+            
+            if (this.oLayerOL && this.oLayerOL.alternateUrls && this.oLayerOL.alternateUrls.length > 0) {
+                altUrl = this.oLayerOL.getNextAltURL();
+            }
+            
+            var url = (altUrl == null) ? origUrl : altUrl;
+            
             url += "?OPERATION=GETLEGENDIMAGE&SESSION=" + layer.oMap.getSessionID();
             url += "&VERSION=1.0.0&SCALE=" + fScale;
             op = /\(/g; cp = /\)/g; 
