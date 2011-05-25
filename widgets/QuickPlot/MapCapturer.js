@@ -336,13 +336,13 @@ OpenLayers.Control.MapCapturer = OpenLayers.Class(OpenLayers.Control, {
      */
     setCursor: function() 
     {
-        if (this.dragging)
-        {
-            this.wMap.setCursor(this.cursorMove);
-        }
-        else if (this.rotating)
+        if (this.rotating)
         {
             this.wMap.setCursor(this.cursorRotate);
+        }
+        else if (this.dragging)
+        {
+            this.wMap.setCursor(this.cursorMove);
         }
     },
     /**
@@ -352,13 +352,13 @@ OpenLayers.Control.MapCapturer = OpenLayers.Class(OpenLayers.Control, {
      */
     mouseMove: function(evt) 
     {
-        if (this.dragging) 
-        {
-            this.moveFeature(evt);
-        }
-        else if (this.rotating) 
+        if (this.rotating) 
         {
             this.rotateFeature(evt);
+        }
+        else if (this.dragging) 
+        {
+            this.moveFeature(evt);
         }
     },
     
