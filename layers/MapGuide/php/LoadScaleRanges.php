@@ -87,11 +87,32 @@ for ($i = 0; $i < $layers->GetCount(); $i++)
                 $scaleVal = intval($sr->minScale);
             else
                 $scaleVal = (intval($sr->minScale) + intval($sr->maxScale)) / 2.0;
-            
-            foreach ($sr->styles as $style) 
+         
+            //Set compression flag
+            $styleCount = count($sr->styles);
+            $sr->isCompressed = ($styleCount > $maxIconsPerScaleRange);
+            if ($sr->isCompressed)
             {
-                if (!$style->skipRendering)
+                //First
+                $style = $sr->styles[0];
+                $style->imageData = GetLegendImageInline($mappingService, $ldfId, $scaleVal, $style->geometryType, $style->categoryIndex);
+                
+                //Ones in between
+                for ($j = 1; $j < $styleCount - 1; $j++) {
+                    $sr->styles[$j]->skipRendering = true;
+                }
+                
+                //Last
+                $style = $sr->styles[$styleCount - 1];
+                $style->imageData = GetLegendImageInline($mappingService, $ldfId, $scaleVal, $style->geometryType, $style->categoryIndex);
+            }
+            else 
+            {
+                foreach ($sr->styles as $style) 
+                {
+                    $style->skipRendering = false;
                     $style->imageData = GetLegendImageInline($mappingService, $ldfId, $scaleVal, $style->geometryType, $style->categoryIndex);
+                }
             }
         }        
         $layerObj->scaleRanges = $scaleranges;

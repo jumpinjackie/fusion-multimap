@@ -37,7 +37,6 @@ if(InitializationErrorOccurred())
 }
 include('Utilities.php');
 
-$maxIconsPerScaleRange = 25;
 $mapObj = NULL;
 try
 {
@@ -366,30 +365,6 @@ function buildScaleRanges($layer, $content)
                     $styleObj->categoryIndex = $catIndex++;
                     
                     array_push($scaleRangeObj->styles, $styleObj);
-                }
-                $totalRulesForRange += $rules->length;
-            }
-            
-            $styleCount = count($scaleRangeObj->styles);
-            //Now determine if this requires compression
-            if ($totalRulesForRange > $maxIconsPerScaleRange)
-            {
-                $scaleRangeObj->isCompressed = true;
-                
-                for ($i = 0; $i < $styleCount; $i++) {
-                    if ($i == 0 || ($i == $styleCount - 1)) {
-                        $scaleRangeObj->styles[$i]->skipRendering = false;
-                    } else {
-                        $scaleRangeObj->styles[$i]->skipRendering = true;
-                    }
-                }
-            }
-            else
-            {
-                $scaleRangeObj->isCompressed = false;
-                
-                for ($i = 0; $i < $styleCount; $i++) {
-                    $scaleRangeObj->styles[$i]->skipRendering = false;
                 }
             }
         }
