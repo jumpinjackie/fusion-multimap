@@ -37,6 +37,7 @@ if(InitializationErrorOccurred())
 }
 include('Utilities.php');
 
+$maxIconsPerScaleRange = 25;
 $mapObj = NULL;
 try
 {
@@ -191,10 +192,7 @@ try
             $layerObj->minScale = min($layerObj->minScale, $oScaleRanges[$j]->minScale);
             $layerObj->maxScale = max($layerObj->maxScale, $oScaleRanges[$j]->maxScale);
         }
-
-
         array_push($mapObj->layers, $layerObj);
-
     }
 
     //Get layer groups as xml
@@ -331,18 +329,18 @@ function buildScaleRanges($layer, $content)
         $scaleRangeObj->minScale = $minScale;
         $scaleRangeObj->maxScale = $maxScale;
 
-
         if($type != 0) {
             array_push($aScaleRanges, $scaleRangeObj);
             break;
         }
-
 
         $styleIndex = 0;
         for($ts=0, $count = count($typeStyles); $ts < $count; $ts++)
         {
             $typeStyle = $scaleRange->getElementsByTagName($typeStyles[$ts]);
             $catIndex = 0;
+            $totalRulesForRange = 0;
+            
             for($st = 0; $st < $typeStyle->length; $st++) {
 
                 $styleObj = NULL;
@@ -353,6 +351,7 @@ function buildScaleRanges($layer, $content)
                         continue;   // This typestyle does not need to be shown in the legend
 
                 $rules = $typeStyle->item($st)->getElementsByTagName($ruleNames[$ts]);
+                
                 for($r = 0; $r < $rules->length; $r++) {
                     $rule = $rules->item($r);
                     $label = $rule->getElementsByTagName("LegendLabel");
@@ -367,6 +366,30 @@ function buildScaleRanges($layer, $content)
                     $styleObj->categoryIndex = $catIndex++;
                     
                     array_push($scaleRangeObj->styles, $styleObj);
+                }
+                $totalRulesForRange += $rules->length;
+            }
+            
+            $styleCount = count($scaleRangeObj->styles);
+            //Now determine if this requires compression
+            if ($totalRulesForRange > $maxIconsPerScaleRange)
+            {
+                $scaleRangeObj->isCompressed = true;
+                
+                for ($i = 0; $i < $styleCount; $i++) {
+                    if ($i == 0 || ($i == $styleCount - 1)) {
+                        $scaleRangeObj->styles[$i]->skipRendering = false;
+                    } else {
+                        $scaleRangeObj->styles[$i]->skipRendering = true;
+                    }
+                }
+            }
+            else
+            {
+                $scaleRangeObj->isCompressed = false;
+                
+                for ($i = 0; $i < $styleCount; $i++) {
+                    $scaleRangeObj->styles[$i]->skipRendering = false;
                 }
             }
         }

@@ -73,6 +73,12 @@ Fusion.Widget.Legend = OpenLayers.Class(Fusion.Widget,  {
      * {String} The default image for groupd info
      */
     defaultGroupInfoIcon: 'images/icons/tree_group_info.png',
+    
+    /**
+     * Constant: blankIcon
+     * {String} The default placeholder image
+     */
+    blankIcon: 'images/icons/a_pixel.png',
 
     initializeWidget: function(widgetTag) {
         // TODO: maybe it's a good idea to do a function like Fusion.Widget.BindRenderer.. for limit the code
@@ -234,6 +240,7 @@ Fusion.Widget.Legend.LegendRendererDefault = OpenLayers.Class(Fusion.Widget.Lege
         this.imgDisabledLayerIcon = json.DisabledLayerIcon ? json.DisabledLayerIcon[0] : this.oLegend.defaultDisabledLayerIcon;
         this.imgLayerInfoIcon = json.LayerInfoIcon ? json.LayerInfoIcon[0] : this.oLegend.defaultLayerInfoIcon;
         this.imgGroupInfoIcon = json.GroupInfoIcon ? json.GroupInfoIcon[0] : this.oLegend.defaultGroupInfoIcon;
+        this.imgBlankIcon = this.oLegend.blankIcon;
 
         //not used?
         //this.layerInfoURL = json.LayerInfoURL ? json.LayerInfoURL[0] : '';
@@ -598,9 +605,23 @@ Fusion.Widget.Legend.LegendRendererDefault = OpenLayers.Class(Fusion.Widget.Lege
                         layer.legend.treeItem.remove(layer.legend.treeItem.nodes[0]);
                     }
                 }
-                for (var i=0; i<range.styles.length; i++) {
-                    var item = this.createTreeItem(layer, range.styles[i], fScale, false);
-                    layer.legend.treeItem.append(item);
+                
+                if (range.isCompressed)
+                {
+                    //console.assert(range.styles.length > 2);
+                    layer.legend.treeItem.append(this.createTreeItem(layer, range.styles[0], fScale, false));
+                    layer.legend.treeItem.append(this.createThemeCompressionItem(range.styles.length - 2));
+                    layer.legend.treeItem.append(this.createTreeItem(layer, range.styles[range.styles.length-1], fScale, false));
+                }
+                else
+                {
+                    for (var i=0; i<range.styles.length; i++) {
+                        if (range.styles[i].skipRendering)
+                            continue;
+                            
+                        var item = this.createTreeItem(layer, range.styles[i], fScale, false);
+                        layer.legend.treeItem.append(item);
+                    }
                 }
             } else {
 
@@ -666,7 +687,17 @@ Fusion.Widget.Legend.LegendRendererDefault = OpenLayers.Class(Fusion.Widget.Lege
             layer.legend.treeItem.domObj.store('data', layer);
         }
     },
-
+    createThemeCompressionItem: function(number) {
+        var opt = {
+            label: '... (' + number + ' other styles)',
+            draw: this.renderItem,
+            contextMenu: this.getContextMenu(),
+            image: this.imgBlankIcon,
+            //TODO: A context menu option for expanding this theme.
+        };
+        var item = new Jx.TreeItem(opt);
+        return item;
+    },
     createFolderItem: function(layer, hasCheckbox) {
         var opt = {
             label: layer.legendLabel == '' ? '&nbsp;' : layer.legendLabel,

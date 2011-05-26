@@ -544,6 +544,7 @@ Fusion.Layers.ScaleRange = OpenLayers.Class({
     initialize: function(o, layerType, iconOpt) {
         this.minScale = o.minScale;
         this.maxScale = o.maxScale;
+        this.isCompressed = o.isCompressed;
         if (this.maxScale == 'infinity' || this.maxScale == 'auto') {
           this.maxScale = Infinity;
         }
@@ -588,6 +589,7 @@ Fusion.Layers.StyleItem = OpenLayers.Class({
         this.legendLabel = o.legendLabel;
         this.filter = o.filter;
         this.geometryType = o.geometryType;
+        this.skipRendering = o.skipRendering;
         if (this.geometryType == '') {
             this.geometryType = -1;
         }

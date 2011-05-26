@@ -46,8 +46,8 @@ include('Utilities.php');
 $preCacheIcons = false;
 
 //This is used by pre-caching to determine how many legend icons to pre-cache up-front (if $preCacheIcons = true)
-$maxScaleRangeDepth = 3;		//The maximum number of scale ranges to go through (topmost to bottom)
-$maxIconsPerScaleRange = 50;    //The maximum number of icons to pre-cache per scale range
+//$maxScaleRangeDepth = 3;		//The maximum number of scale ranges to go through (topmost to bottom)
+$maxIconsPerScaleRange = 25;    //The maximum number of icons to pre-cache per scale range. If the number of rules exceeds this value, the themed result will be compressed.
 //$maxLegendHeight = 800;         //The maximum screen space available to pre-cache icons
 //$legendPos = 0;                 //Indicates how much screen space has already been allocated by pre-cached icons. Pre-caching stops after this value exceeds $maxLegendHeight
 //$advanceHeight = 20;            //16px with 4px padding. This is just a logical guess of how much actual space one legend icon occupies in the legend widget
@@ -79,35 +79,21 @@ for ($i = 0; $i < $layers->GetCount(); $i++)
         $layerObj = NULL;
         $layerObj->uniqueId = $layer->GetObjectId();
         
-        if ($preCacheIcons)
+        $ldfId = $layer->GetLayerDefinition();
+        foreach ($scaleranges as $sr) 
         {
-            $ldfId = $layer->GetLayerDefinition();
-			$scaleRangeDepth = 0;
-            foreach ($scaleranges as $sr) 
+            $scaleVal = 42;
+            if (strcmp($sr->maxScale, "infinity") == 0)
+                $scaleVal = intval($sr->minScale);
+            else
+                $scaleVal = (intval($sr->minScale) + intval($sr->maxScale)) / 2.0;
+            
+            foreach ($sr->styles as $style) 
             {
-				if ($scaleRangeDepth == $maxScaleRangeDepth)
-					break;
-			
-                $scaleVal = 42;
-                if (strcmp($sr->maxScale, "infinity") == 0)
-                    $scaleVal = intval($sr->minScale);
-                else
-                    $scaleVal = (intval($sr->minScale) + intval($sr->maxScale)) / 2.0;
-                
-                $cached = 0;
-                foreach ($sr->styles as $style) 
-                {
-                    if ($cached == $maxIconsPerScaleRange)
-                        break;
-                
+                if (!$style->skipRendering)
                     $style->imageData = GetLegendImageInline($mappingService, $ldfId, $scaleVal, $style->geometryType, $style->categoryIndex);
-                    //$style->imageData = "GetLegendImageInline(mappingService, ".$ldfId->ToString().", $scaleVal, ".$style->geometryType.", ".$style->categoryIndex.")";
-                    $cached++;
-                }
-				
-				$scaleRangeDepth++;
             }
-        }
+        }        
         $layerObj->scaleRanges = $scaleranges;
         
         /*
