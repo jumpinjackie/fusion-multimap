@@ -136,6 +136,13 @@ try
     
     //Get the layer contents in a single batch
     $layerDefinitionContents = $resourceService->GetResourceContents($layerDefinitionIds, null);
+    $layerDocs = array();
+    for ($i = 0; $i < $layers->GetCount(); $i++)
+    {
+        $content = $layerDefinitionContents->GetItem($i);
+        $doc = DOMDocument::LoadXML($content);
+        array_push($layerDocs, $doc);
+    }
 
     for ($i = 0; $i < $layers->GetCount(); $i++)
     {
@@ -143,7 +150,7 @@ try
         //not the base map group used for tile maps.  (Where is the test for that Y.A.???)
 
         $layer=$layers->GetItem($i);
-        $content = $layerDefinitionContents->GetItem($i);
+        $content = $layerDocs[$i];
         
         $layerObj = NULL;
         $mappings = GetLayerPropertyMappings($resourceService, $layer, $content);
@@ -229,7 +236,7 @@ exit;
 /*      Extract the layer types based on the styling available.         */
 /*      GetLayerTypes was costly in time when dealing in DB.            */
 /************************************************************************/
-function GetLayerTypesFromResourceContent($layer, $content)
+function GetLayerTypesFromResourceContent($layer, $xmldoc)
 {
     $aLayerTypes = array();
     global $resourceService;
@@ -242,7 +249,6 @@ function GetLayerTypesFromResourceContent($layer, $content)
         else
         {
             $resID = $layer->GetLayerDefinition();
-            $xmldoc = DOMDocument::loadXML($content);
 
             $gridlayers = $xmldoc->getElementsByTagName('GridLayerDefinition');
             if ($gridlayers->length > 0)
@@ -287,14 +293,13 @@ function getMapBackgroundColor($map) {
     }
 }
 
-function buildScaleRanges($layer, $content)
+function buildScaleRanges($layer, $xmldoc)
 {
     $aScaleRanges = array();
     global $resourceService;
     global $sessionID;
     $resID = $layer->GetLayerDefinition();
     
-    $xmldoc = DOMDocument::loadXML($content);
     $type = 0;
     $scaleRanges = $xmldoc->getElementsByTagName('VectorScaleRange');
     if($scaleRanges->length == 0) {

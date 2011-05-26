@@ -608,10 +608,12 @@ function GetLayerTypes($featureService, $layer) {
 
 
 /* retrieve the property mappings for a layer */
-function GetLayerPropertyMappings($resourceService, $layer) {
+function GetLayerPropertyMappings($resourceService, $layer, $xmldoc = NULL) {
     $mappings = array();
-    $byteReader = $resourceService->GetResourceContent($layer->GetLayerDefinition());
-    $xmldoc = DOMDocument::loadXML(ByteReaderToString($byteReader));
+    if ($xmldoc == NULL) {
+        $byteReader = $resourceService->GetResourceContent($layer->GetLayerDefinition());
+        $xmldoc = DOMDocument::loadXML(ByteReaderToString($byteReader));
+    }
     $mappingNodeList = $xmldoc->getElementsByTagName('PropertyMapping');
     for ($i=0; $i<$mappingNodeList->length; $i++) {
         $mapping = $mappingNodeList->item($i);
@@ -625,11 +627,13 @@ function GetLayerPropertyMappings($resourceService, $layer) {
 }
 
 /* retrieve the property mappings for a layer */
-function IsLayerEditable($resourceService, $layer) {
+function IsLayerEditable($resourceService, $layer, $xmldoc = NULL) {
     $result = true;
     $dataSourceId = new MgResourceIdentifier($layer->GetFeatureSourceId());
-    $byteReader = $resourceService->GetResourceContent($dataSourceId);
-    $xmldoc = DOMDocument::loadXML(ByteReaderToString($byteReader));
+    if ($xmldoc == NULL) {
+        $byteReader = $resourceService->GetResourceContent($dataSourceId);
+        $xmldoc = DOMDocument::loadXML(ByteReaderToString($byteReader));
+    }
     $parameterList = $xmldoc->getElementsByTagName('Parameter');
     for ($i=0; $i<$parameterList->length; $i++) {
         $parameter = $parameterList->item($i);
