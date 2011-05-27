@@ -121,6 +121,7 @@ function getScale()
     else
     {
         var map        = getParent().Fusion.getWidgetById("Map");
+        /*
         var paperSize  = getPaperSize();
         var viewerSize = map.getCurrentExtents().getSize();
         var factor     = map.getMetersPerUnit();
@@ -132,7 +133,8 @@ function getScale()
         else
         {
             scale = viewerSize.w * factor * 1000 / paperSize.w;
-        }
+        }*/
+        scale = map.getScale();
     }
 
     scale = parseInt(scale);

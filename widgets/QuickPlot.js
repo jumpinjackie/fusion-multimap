@@ -153,6 +153,13 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
                                      params2 : normalizedCapture.params},
                        params : this.options};
         
+        //Only use the Map Capturer's scale if it's actually active because if this is a tiled map,
+        //what get's plotted may not be what we're after because it's being rounded to the nearest
+        //finite scale from the Map Capturer's scale denominator.
+        if (!this.mapCapturer.enabled) {
+            options.captureInfo.scaleDenominator = this.getMap().getScale();
+        }
+        
         if (!this.previewDialog)
         {
             this.previewDialog = new PreviewDialog(options);
