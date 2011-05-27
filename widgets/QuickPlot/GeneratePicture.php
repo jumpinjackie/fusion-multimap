@@ -107,7 +107,7 @@
         
         $fusionMGpath = '../../layers/MapGuide/php/';
         $url = $baseUrl . $fusionMGpath . "CompositeMapRender.php?session=$sessionID" .
-               "&mapnames=$mapNames" .
+               "&mapnames=" . urlencode($mapNames) .
                "&viewx=" . $center->GetX() .
                "&viewy=" . $center->GetY() .
                "&viewscale=$scaleDenominator" .
