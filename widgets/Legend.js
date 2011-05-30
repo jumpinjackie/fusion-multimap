@@ -692,7 +692,7 @@ Fusion.Widget.Legend.LegendRendererDefault = OpenLayers.Class(Fusion.Widget.Lege
             label: '... (' + number + ' other styles)',
             draw: this.renderItem,
             contextMenu: this.getContextMenu(),
-            image: this.imgBlankIcon,
+            image: this.imgBlankIcon
             //TODO: A context menu option for expanding this theme.
         };
         var item = new Jx.TreeItem(opt);
