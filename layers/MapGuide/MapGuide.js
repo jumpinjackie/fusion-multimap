@@ -989,6 +989,7 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
               if (this.selectionAsOverlay) {
                 if (!this.queryLayer) {
                   this.queryLayer = this.createOLLayer("query layer", true, 5, true);
+                  this.queryLayer.alwaysInRange = true;
                   this.mapWidget.oMapOL.addLayer(this.queryLayer);
                   this.mapWidget.registerForEvent(Fusion.Event.MAP_LOADING,
                         OpenLayers.Function.bind(this.removeQueryLayer, this));
