@@ -37,6 +37,7 @@ Fusion.Widget.SelectRadius = OpenLayers.Class(Fusion.Widget, {
     selectionType: 'INTERSECTS',
     nTolerance: 3, //default pixel tolernace for a point click
     defaultRadius: 20, //this is now in pixels
+    activateDefaultWidgetOnCompletion: false, //If true, will activate the default widget upon completion
     
     initializeWidget: function(widgetTag) {
         this.asCursor = ['auto'];
@@ -53,6 +54,9 @@ Fusion.Widget.SelectRadius = OpenLayers.Class(Fusion.Widget, {
                            (json.ComputeMetadata[0] == 'true' ||
                             json.ComputeMetadata[0] == '1')) ? true : false;
         
+        this.activateDefaultWidgetOnCompletion = (json.ActivateDefaultWidgetOnCompletion &&
+                           (json.ActivateDefaultWidgetOnCompletion[0] == 'true' ||
+                            json.ActivateDefaultWidgetOnCompletion[0] == '1')) ? true : false;
         
         var container = json.RadiusTooltipContainer ? json.RadiusTooltipContainer[0] : '';
         if (container != '') {
@@ -113,7 +117,7 @@ Fusion.Widget.SelectRadius = OpenLayers.Class(Fusion.Widget, {
         this.getMap().setCursor(this.asCursor);
         /*map units for tool tip*/
         this.units = this.getMap().getAllMaps()[0].units;
-        this.getMap().supressContextMenu(true);
+        //this.getMap().supressContextMenu(true);
         this.triggerEvent(Fusion.Event.RADIUS_WIDGET_ACTIVATED, true);
     },
 
@@ -125,7 +129,7 @@ Fusion.Widget.SelectRadius = OpenLayers.Class(Fusion.Widget, {
     deactivate: function() {
         this.handler.deactivate();
         this.getMap().setCursor('auto');
-        this.getMap().supressContextMenu(false);
+        //this.getMap().supressContextMenu(false);
         /*icon button*/
         this.triggerEvent(Fusion.Event.RADIUS_WIDGET_ACTIVATED, false);
     },
@@ -228,6 +232,8 @@ Fusion.Widget.SelectRadius = OpenLayers.Class(Fusion.Widget, {
         }
         
         this.getMap().query(options);
+        if (this.activateDefaultWidgetOnCompletion && this.getMap().activateDefaultWidget())
+            this.deactivate();
     },
     
     setParameter : function(param, value) {
