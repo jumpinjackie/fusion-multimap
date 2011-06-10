@@ -1054,7 +1054,24 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
                                                                 options.selectionType || this.selectionType,
                                                                 options.layers,
                                                                 layerAttributeFilter);
-        var callback = (options.extendSelection == true) ? OpenLayers.Function.bind(this.processAndMergeFeatureInfo, this) : OpenLayers.Function.bind(this.processFeatureInfo, this);
+        
+        //If user callback specified, add it to the tail end of the query completed callback
+        var callback = null;
+        if (typeof(options.callback) == 'function') {
+            if (options.extendSelection == true) {
+                callback = OpenLayers.Function.bind(function() { 
+                    this.processAndMergeFeatureInfo.apply(this, arguments);
+                    options.callback.apply(this, arguments);
+                }, this);
+            } else {
+                callback = OpenLayers.Function.bind(function() { 
+                    this.processFeatureInfo.apply(this, arguments);
+                    options.callback.apply(this, arguments);
+                }, this);
+            }
+        } else {
+            callback = (options.extendSelection == true) ? OpenLayers.Function.bind(this.processAndMergeFeatureInfo, this) : OpenLayers.Function.bind(this.processFeatureInfo, this);
+        }
         Fusion.oBroker.dispatchRequest(r, OpenLayers.Function.bind(Fusion.xml2json, this, callback));
     },
 

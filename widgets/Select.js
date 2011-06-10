@@ -143,6 +143,7 @@ Fusion.Widget.Select = OpenLayers.Class(Fusion.Widget, {
         var nLeft = position.left;
         var nBottom = position.bottom;
         var maxFeaturesToSelect = this.maxFeatures;
+        var isPixel = false;
 
         if (position instanceof OpenLayers.Bounds) {
           nRight = position.right;
@@ -150,6 +151,7 @@ Fusion.Widget.Select = OpenLayers.Class(Fusion.Widget, {
         } else { // it's a pixel
           nRight = nLeft = position.x;
           nTop = nBottom = position.y;
+          isPixel = true;
           if(this.pointClickSingleSelect) {
               maxFeaturesToSelect = 1;
           }
@@ -187,7 +189,7 @@ Fusion.Widget.Select = OpenLayers.Class(Fusion.Widget, {
             options.extendSelection = true;
         }
 
-        this.getMap().query(options);
+        this.getMap().query(options, isPixel);
     },
 
     /**
