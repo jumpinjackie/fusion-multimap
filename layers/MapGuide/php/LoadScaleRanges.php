@@ -41,8 +41,7 @@ include('../../../common/php/Utilities.php');
 include('Utilities.php');
 
 //This flag indicates whether to pre-cache the legend icons (in the form of data URIs that will be written back as part of the JSON response)
-//This won't pre-cache all of them, it will pre-cache up to a certain number. Similar to how the AJAX viewer shows a compressed theme if the theme
-//goes beyond a certain number of style rules.
+//Browsers that do not support data URIs will not pass "true" and thus no pre-caching is performed.
 $preCacheIcons = false;
 
 //This is used by pre-caching to determine how many legend icons to pre-cache up-front (if $preCacheIcons = true)
@@ -116,14 +115,6 @@ for ($i = 0; $i < $layers->GetCount(); $i++)
             }
         }        
         $layerObj->scaleRanges = $scaleranges;
-        
-        /*
-        $parentGroup = $layer->GetGroup();
-        //Pre-caching is on and the legend still has available space.
-        if ($layer->GetDisplayInLegend() && $preCacheIcons && $legendPos < $maxLegendHeight) {
-            
-            $legendPos += $advanceHeight;
-        }*/
         
         array_push($scaleObj->layers, $layerObj);
     }
