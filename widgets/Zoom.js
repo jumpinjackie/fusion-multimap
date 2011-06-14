@@ -81,6 +81,9 @@ Fusion.Widget.Zoom = OpenLayers.Class(Fusion.Widget, {
         //console.log('Zoom.activate');
         this.handler.activate();
         this.shiftHandler.activate();
+        //Turn off maptip because it can interfere with the box tracing
+        var w = Fusion.getWidgetsByType("Maptip")[0];
+        w.stopMapTips();
         /*cursor*/
         if (this.zoomIn) {
             this.getMap().setCursor(this.zoomInCursor);
@@ -100,6 +103,9 @@ Fusion.Widget.Zoom = OpenLayers.Class(Fusion.Widget, {
         this.handler.deactivate();
         this.shiftHandler.deactivate();
         this.getMap().setCursor('auto');
+        //Restore maptip functionality
+        var w = Fusion.getWidgetsByType("Maptip")[0];
+        w.startMapTips();
         OpenLayers.Event.stopObserving(document, 'keypress', this.keypressWatcher);
     },
 

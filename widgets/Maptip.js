@@ -139,6 +139,11 @@ Fusion.Widget.Maptip = OpenLayers.Class(Fusion.Widget, {
         this.bStartMapTips = true;
     },
     
+    stopMapTips: function() {
+        this.hideMaptip();
+        this.bStartMapTips = false;
+    },
+    
     isZoomRect: function() {
         var zoomWidgets = Fusion.getWidgetsByType("Zoom");
         for (var i = 0; i < zoomWidgets.length; i++) {
