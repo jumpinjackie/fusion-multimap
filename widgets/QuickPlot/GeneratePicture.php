@@ -16,8 +16,21 @@
     $paperSize;
     $download = false;
     
-    GetParameters();
-    GenerateMap($printSize);
+    try {
+        GetParameters();
+        GenerateMap($printSize);
+    }
+    catch (MgException $e) {
+        $msg = "last error";
+        $msg .= "\nERROR: " . $e->GetExceptionMessage() . "\n";
+        $msg .= $e->GetDetails() . "\n";
+        $msg .= $e->GetStackTrace() . "\n";
+        RenderTextToImage($msg);
+    }
+    catch (Exception $ex) {
+        $msg = $e->GetMessage();
+        RenderTextToImage($msg);
+    }
 ?>
 
 <?php    

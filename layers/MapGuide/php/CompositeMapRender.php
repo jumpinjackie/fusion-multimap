@@ -2,16 +2,30 @@
 
 /*****************************************************************************
  * Purpose: Render multiple maps into a composite image
+ *
+ * NOTE: This script can run out of allocated memory if used with a high number
+ * of runtime maps and/or used with a ridiculously high DPI value. Ensuring this
+ * doesn't happen, is an exercise left for the calling code/widget.
  *****************************************************************************/
 
 include ('Common.php');
 include ('Utilities.php');
+
 if(InitializationErrorOccurred())
 {
     ob_get_clean(); //Flush out the JSON output which is useless for us
     RenderTextToImage(GetInitializationErrorFullText());
     exit;
 }
+/*
+function MemoryTrace($msg = "")
+{
+    $size = memory_get_usage();
+    $msg2 = "$msg (memory usage: $size)\n";
+    error_log($msg2, 3, "CompositeMapRender_Trace.log");
+}
+*/
+
 try {
     if (!isset($_REQUEST['session']) ||
         !isset($_REQUEST['mapnames']) ||
@@ -20,9 +34,12 @@ try {
         !isset($_REQUEST['viewscale']) ||
         !isset($_REQUEST['width']) ||
         !isset($_REQUEST['height'])) {
-        echo "<Error>Arguments missing </Error>";
+        //echo "<Error>Arguments missing </Error>";
+        RenderTextToImage("ERROR: Missing script arguments!");
         exit;
     }
+    
+    //MemoryTrace("*** SCRIPT BEGIN ***");
     
     $session = $_REQUEST['session'];
     $mapnames = explode(":", $_REQUEST['mapnames']);
@@ -41,6 +58,8 @@ try {
         $map->Open($mn);
         array_push($maps, $map);
     }
+    
+    //MemoryTrace(count($maps) . " maps opened");
     
     $geomFact = new MgGeometryFactory();
     
@@ -93,18 +112,30 @@ try {
         }
         
         //echo "$mapAgent<br/>";
-        
+        //MemoryTrace("Preparing to call imagefrompng($mapAgent)");
         $image = imagecreatefrompng($mapAgent);
-        array_push($imgs, $image);
+        //MemoryTrace("imagecreatefrompng($mapAgent) called");
+        //array_push($imgs, $image);
         
+        $num = $i + 1;
         if ($i == 0)
         {
             $masterImg = $image;
             // Turn on alpha blending 
             imagealphablending($masterImg, true); 
+            
+            //MemoryTrace("Set base image #$num for composition");
+        }
+        else
+        {
+            imagecopy($masterImg, $image, 0, 0, 0, 0, $width, $height);
+            //MemoryTrace("image #$num composited to master");
+            imagedestroy($image);
+            //MemoryTrace("image #$num destroyed");
         }
     }
     
+    /*
     for ($i = 1; $i < count($imgs); $i++)
     {
         //Copy to master
@@ -115,9 +146,11 @@ try {
     {
         imagedestroy($imgs[$i]);
     }
+    */
     
     // Output header and final image 
-    header("Content-type: image/png"); 
+    header("Content-type: image/png");
+    //header("Content-length: " . imagesize($masterImg));
     imagepng($masterImg); 
   
     imagedestroy($masterImg);

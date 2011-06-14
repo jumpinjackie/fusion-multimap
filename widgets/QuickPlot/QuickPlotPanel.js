@@ -1,29 +1,95 @@
 /**
  * Copyright (C) 2010 Autodesk, Inc. All rights reserved.
  */
+ 
+function panelLoaded()
+{
+    var widget = getParent().Fusion.getWidgetsByType("QuickPlot")[0];
+    if (widget.paperList.length > 0)
+    {
+        var list = document.getElementById("PaperList");
+        list.options.length = 0;
+        
+        for (var i = 0; i < widget.paperList.length; i++) {
+            var elOpt = document.createElement("option");
+            elOpt.text = widget.paperList[i].name;
+            elOpt.value = widget.paperList[i].size;
+            try {
+                list.add(elOpt, null);
+            }
+            catch (ex) {
+                list.add(elOpt); //IE
+            }
+        }
+    }
+    if (widget.scaleList.length > 0) 
+    {
+        var list = document.getElementById("ScalingList");
+        list.options.length = 0;
+        
+        for (var i = 0; i < widget.scaleList.length; i++) {
+            var elOpt = document.createElement("option");
+            elOpt.text = widget.scaleList[i].name;
+            elOpt.value = widget.scaleList[i].scale;
+            try {
+                list.add(elOpt, null);
+            }
+            catch (ex) {
+                list.add(elOpt); //IE
+            }
+        }
+    }
+    restoreUI();
+}
 
 function restoreUI()
 {
     setAdvancedOptionsUI(false);
     
-    // Read the last used options
-    lastPaperSize = getParent().Cookie.read("QuickPlotLastUsedPaperSize");
-    lastScale     = getParent().Cookie.read("QuickPlotLastUsedScaling");
-    lastDPI       = getParent().Cookie.read("QuickPlotLastUsedDPI");
-    
-    if (lastPaperSize != null)
+    var widget = getParent().Fusion.getWidgetsByType("QuickPlot")[0];
+    if (widget.persistPlotOptions)
     {
-        document.getElementById("PaperList").value   = lastPaperSize;
+        // Read the last used options
+        lastPaperSize = getParent().Cookie.read("QuickPlotLastUsedPaperSize");
+        lastScale     = getParent().Cookie.read("QuickPlotLastUsedScaling");
+        lastDPI       = getParent().Cookie.read("QuickPlotLastUsedDPI");
+        
+        if (lastPaperSize != null)
+        {
+            document.getElementById("PaperList").value   = lastPaperSize;
+        }
+        
+        if (lastScale != null)
+        {
+            document.getElementById("ScalingList").value = lastScale;
+        }
+        
+        if (lastDPI != null)
+        {
+            document.getElementById("DPIList").value     = lastDPI;
+        }
     }
     
-    if (lastScale != null)
+    if (widget.defaultDpi)
     {
-        document.getElementById("ScalingList").value = lastScale;
+        document.getElementById("DPICtrl").style.display = "none";
+        document.getElementById("DPILabel").style.display = "none";
+    }
+    else
+    {
+        document.getElementById("DPICtrl").style.display = "block";
+        document.getElementById("DPILabel").style.display = "block";
     }
     
-    if (lastDPI != null)
+    if (widget.showSubTitle)
     {
-        document.getElementById("DPIList").value     = lastDPI;
+        document.getElementById("SubTitleCtrl").style.display = "block";
+        document.getElementById("SubTitleLabel").style.display = "block";
+    }
+    else
+    {
+        document.getElementById("SubTitleCtrl").style.display = "none";
+        document.getElementById("SubTitleLabel").style.display = "none";
     }
 }
 
@@ -63,13 +129,16 @@ function generatePlot()
 
 function submitForm(windowName)
 {
+    var widget = getParent().Fusion.getWidgetsByType("QuickPlot")[0];
     var form = document.getElementById("Form1");
     form.target = windowName;
-    // Save the advanced options to a cookie
-    var cookieDuration = 365;
-    getParent().Cookie.write("QuickPlotLastUsedPaperSize", document.getElementById("PaperList").value, {duration:cookieDuration});
-    getParent().Cookie.write("QuickPlotLastUsedScaling", document.getElementById("ScalingList").value, {duration:cookieDuration});
-    getParent().Cookie.write("QuickPlotLastUsedDPI", document.getElementById("DPIList").value, {duration:cookieDuration});
+    if (widget.persistPlotOptions) {
+        // Save the advanced options to a cookie
+        var cookieDuration = 365;
+        getParent().Cookie.write("QuickPlotLastUsedPaperSize", document.getElementById("PaperList").value, {duration:cookieDuration});
+        getParent().Cookie.write("QuickPlotLastUsedScaling", document.getElementById("ScalingList").value, {duration:cookieDuration});
+        getParent().Cookie.write("QuickPlotLastUsedDPI", document.getElementById("DPIList").value, {duration:cookieDuration});
+    }
     form.submit();
 }
 
@@ -147,7 +216,11 @@ function getScale()
 
 function getPrintDpi()
 {
-    return document.getElementById("DPIList").value;
+    var widget = getParent().Fusion.getWidgetsByType("QuickPlot")[0];
+    if (widget.defaultDpi)
+        return widget.defaultDpi;
+    else
+        return document.getElementById("DPIList").value;
 }
 
 function drawCaptureBox()

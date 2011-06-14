@@ -87,10 +87,16 @@ PreviewDialog.prototype =
         // Hide the picture but don't set the 'display' style property to avoid messing the print layout up
         this.printPicture.style.height   = "0px";
         
-        if (this.printLabel)
+        if (this.topLeftXYLabel && this.bottomRightXYLabel)
         {
+            this.topLeftXYLabel.setOpacity(0);
+            this.bottomRightXYLabel.setOpacity(0);
             this.printLabel.setOpacity(0);
             // Remove the labels
+            this.topLeftXYLabel.parentNode.removeChild(this.topLeftXYLabel);
+            this.topLeftXYLabel     = null;
+            this.bottomRightXYLabel.parentNode.removeChild(this.bottomRightXYLabel);
+            this.bottomRightXYLabel = null;
             this.printLabel.parentNode.removeChild(this.printLabel);
             this.printLabel         = null;
         }
@@ -211,6 +217,26 @@ PreviewDialog.prototype =
         //HACK: There is some state within these labels that gets invalidated in subsequent 
         //previews (ie. You click "Generate" on the Quick Plot panel multiple times without cancelling out the dialog). 
         //So detect this invalid state and remove these labels, forcing a rebuild
+        if (this.topLeftXYLabel)
+        {
+            var tlDoc = this.topLeftXYLabel.getDocument();
+            if (tlDoc.defaultView == null)
+            {
+                this.topLeftXYLabel.parentNode.removeChild(this.topLeftXYLabel);
+                this.topLeftXYLabel = null;
+            }
+        }
+        
+        if (this.bottomRightXYLabel)
+        {
+            var brDoc = this.bottomRightXYLabel.getDocument();
+            if (brDoc.defaultView == null)
+            {
+                this.bottomRightXYLabel.parentNode.removeChild(this.bottomRightXYLabel);
+                this.bottomRightXYLabel = null;
+            }
+        }
+        
         if (this.printLabel)
         {
             var prDoc = this.printLabel.getDocument();
@@ -269,6 +295,23 @@ PreviewDialog.prototype =
         this.printStyle.style.width  = realWidth + "px";
         this.printStyle.style.height = realHeight + "px";
         
+        var showLabels = (this.params.showCoordinateLabels == true);
+        if (showLabels)
+        {
+            // Create the coordinates labels
+            if (!this.topLeftXYLabel)
+            {
+                this.topLeftXYLabel = this.createCoordinateLabel(this.pictureContainer, this.captureInfo.topLeftCs.x, this.captureInfo.topLeftCs.y, "TopLeftXYLabel");
+                this.topLeftXYLabel.setOpacity(0);
+            }
+            
+            if (!this.bottomRightXYLabel)
+            {
+                this.bottomRightXYLabel = this.createCoordinateLabel(this.pictureContainer, this.captureInfo.bottomRightCs.x, this.captureInfo.bottomRightCs.y, "BottomRightXYLabel");
+                this.bottomRightXYLabel.setOpacity(0);
+            }
+        }
+        
         if (!this.printLabel)
         {
             this.printLabel = this.createCoordinateLabel(this.pictureContainer, this.captureInfo.bottomRightCs.x, this.captureInfo.bottomRightCs.y, "PrintLabel");
@@ -277,6 +320,21 @@ PreviewDialog.prototype =
         // Set the correct positions for the labels
         var pos    = this.getContentPosition(this.pictureContainer);
         var picDim = this.pictureContainer.getContentBoxSize();
+        
+        var labelDim = null;
+        if (showLabels) {
+            this.topLeftXYLabel.style.left     = pos.left + this.csLabelOffset + "px";
+            this.topLeftXYLabel.style.top      = pos.top + this.csLabelOffset + "px"; 
+            labelDim = this.bottomRightXYLabel.getMarginBoxSize();
+            
+            this.bottomRightXYLabel.className  = "ScreenOnly";
+            this.bottomRightXYLabel.style.left = pos.left + picDim.width - this.csLabelOffset - labelDim.width + "px";
+            this.bottomRightXYLabel.style.top  = pos.top + picDim.height - this.csLabelOffset - labelDim.height + "px";
+            
+            this.topLeftXYLabel.fade(1);
+            this.bottomRightXYLabel.fade(1);
+        }
+        
         labelDim = this.printLabel.getMarginBoxSize();
         this.printLabel.className          = "PrintOnly";
         this.printLabel.style.left         = pos.left + realWidth - this.csLabelOffset - labelDim.width + "px";

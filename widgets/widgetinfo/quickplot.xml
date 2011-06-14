@@ -16,4 +16,52 @@
         <DefaultValue>TaskPane</DefaultValue>
         <IsMandatory>true</IsMandatory>
     </Parameter>
+    <Parameter>
+        <Name>RememberPlotOptions</Name>
+        <Description>Indicates whether to persist the current QuickPlot UI settings to a cookie. If empty or false, these settings will not be saved</Description>
+        <Type>boolean</Type>
+        <Label>RememberPlotOptions</Label>
+        <DefaultValue>false</DefaultValue>
+        <IsMandatory>false</IsMandatory>
+    </Parameter>
+    <Parameter>
+        <Name>ShowCoordinateLabels</Name>
+        <Description>Indicates whether to show the coordinate labels in the QuickPlot preview dialog. If empty, will default to true</Description>
+        <Type>boolean</Type>
+        <Label>ShowCoordinateLabels</Label>
+        <DefaultValue>true</DefaultValue>
+        <IsMandatory>false</IsMandatory>
+    </Parameter>
+    <Parameter>
+        <Name>ShowSubTitle</Name>
+        <Description>Indicates whether to show the sub title in the QuickPlot UI and preview dialog. If empty, will default to true</Description>
+        <Type>boolean</Type>
+        <Label>ShowSubTitle</Label>
+        <DefaultValue>true</DefaultValue>
+        <IsMandatory>false</IsMandatory>
+    </Parameter>
+    <Parameter>
+        <Name>DefaultDpi</Name>
+        <Description>Indicates the default DPI to use for plotting. If specified, this will hide the DPI field in the QuickPlot UI and will override whatever DPI is used.</Description>
+        <Type>integer</Type>
+        <Label>DefaultDpi</Label>
+        <DefaultValue>96</DefaultValue>
+        <IsMandatory>false</IsMandatory>
+    </Parameter>
+    <Parameter>
+        <Name>PaperListEntry</Name>
+        <Description>Indicates a list of name/value pairs that will override the paper size list in the QuickPlot UI if specified.</Description>
+        <Type>xml</Type>
+        <Label>PaperListEntry</Label>
+        <DefaultValue></DefaultValue>
+        <IsMandatory>false</IsMandatory>
+    </Parameter>
+    <Parameter>
+        <Name>ScaleListEntry</Name>
+        <Description>Indicates a list of name/value pairs that will override the scale list in the QuickPlot UI if specified.</Description>
+        <Type>xml</Type>
+        <Label>ScaleListEntry</Label>
+        <DefaultValue></DefaultValue>
+        <IsMandatory>false</IsMandatory>
+    </Parameter>
 </WidgetInfo>

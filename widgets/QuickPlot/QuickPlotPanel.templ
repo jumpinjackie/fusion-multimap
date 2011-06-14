@@ -75,20 +75,18 @@ function getParent()
 <script language="javascript" type="text/javascript" src="%sQuickPlotPanel.js"></script>
 
 </head>
-<body onload="restoreUI()">
+<body onload="panelLoaded()">
     <form id="Form1" name="Form1" method="post" action="QuickPlotPreviewInner.php">
         <div class="Title FixWidth">__#QUICKPLOT_HEADER#__</div>
         <div class="Label ">__#QUICKPLOT_TITLE#__</div>
         <div class="Ctrl">
             <input type="text" class="FixWidth" name="{field:title}" maxLength=100"/>
         </div>
-        <!--
         <div class="HPlaceholder5px"></div>
         <div class="HPlaceholder5px"></div>
-        <div class="Label">__#QUICKPLOT_SUBTITLE#__</div>
-        -->
-        <div class="Ctrl">
-            <input type="text" class="FixWidth" style="display: none" name="{field:sub_title}" maxLength=100"/>
+        <div class="Label" id="SubTitleLabel">__#QUICKPLOT_SUBTITLE#__</div>
+        <div class="Ctrl" id="SubTitleCtrl">
+            <input type="text" class="FixWidth" name="{field:sub_title}" maxLength=100"/>
         </div>
         <div class="HPlaceholder5px"></div>
         <div class="HPlaceholder5px"></div>
@@ -130,8 +128,8 @@ function getParent()
                 <option value="5000">1 : 5000</option>
             </select>
         </div>
-        <div class="Label">__#QUICKPLOT_DPI#__</div>
-        <div class="Ctrl">
+        <div class="Label" id="DPILabel">__#QUICKPLOT_DPI#__</div>
+        <div class="Ctrl" id="DPICtrl">
             <!--
                 The pre-defined print DPI. 
                 We can change the html code to extend the pre-defined values
