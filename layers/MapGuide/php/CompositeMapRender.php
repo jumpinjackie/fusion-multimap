@@ -5,13 +5,13 @@
  *****************************************************************************/
 
 include ('Common.php');
+include ('Utilities.php');
 if(InitializationErrorOccurred())
 {
-    DisplayInitializationErrorText();
+    ob_get_clean(); //Flush out the JSON output which is useless for us
+    RenderTextToImage(GetInitializationErrorFullText());
     exit;
 }
-
-include ('Utilities.php');
 try {
     if (!isset($_REQUEST['session']) ||
         !isset($_REQUEST['mapnames']) ||

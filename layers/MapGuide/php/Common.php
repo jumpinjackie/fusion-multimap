@@ -182,6 +182,15 @@ function DisplayInitializationErrorText()
     echo $initializationErrorStackTrace . "\n";
 }
 
+function GetInitializationErrorFullText()
+{
+    global $initializationErrorMessage, $initializationErrorDetail, $initializationErrorStackTrace;
+    $msg = "ERROR: " . $initializationErrorMessage . "\n";
+    $msg .= $initializationErrorDetail . "\n";
+    $msg .= $initializationErrorStackTrace . "\n";
+    return $msg;
+}
+
 function GetDefaultLocale()
 {
     return "en"; // localizable string
