@@ -932,4 +932,52 @@ function GetLegendImageInline($mappingService, $layerDefinitionId, $scale, $geom
     //$styleObj->imageData = "http://localhost/mapguide/mapagent/mapagent.fcgi?OPERATION=GETLEGENDIMAGE&VERSION=1.0.0&SESSION=$sessionID&SCALE=$scaleVal&LAYERDEFINITION=".$resID->ToString()."&TYPE=".$styleObj->geometryType."&THEMECATEGORY=".$styleObj->categoryIndex;                    
     return null;
 }
+
+// Helper function to render out error messages for any PHP script that outputs images
+function RenderTextToImage($text) {
+    // Set font size
+    $font_size = 4;
+
+    $ts = explode("\n",$text);
+    $width = 0;
+    foreach ($ts as $k => $string) { //compute width
+        $width = max($width,strlen($string));
+    }
+
+    // Create image width dependant on width of the string
+    $width  = imagefontwidth($font_size)*$width;
+    // Set height to that of the font
+    $height = imagefontheight($font_size)*count($ts);
+    $el = imagefontheight($font_size);
+    $em = imagefontwidth($font_size);
+    // Create the image pallette
+    $img = imagecreatetruecolor($width,$height);
+    // Dark red background
+    $bg = imagecolorallocate($img, 0xAA, 0x00, 0x00);
+    imagefilledrectangle($img, 0, 0,$width ,$height , $bg);
+    // White font color
+    $color = imagecolorallocate($img, 255, 255, 255);
+
+    foreach ($ts as $k=>$string) {
+        // Length of the string
+        $len = strlen($string);
+        // Y-coordinate of character, X changes, Y is static
+        $ypos = 0;
+        // Loop through the string
+        for($i=0;$i<$len;$i++){
+            // Position of the character horizontally
+            $xpos = $i * $em;
+            $ypos = $k * $el;
+            // Draw character
+            imagechar($img, $font_size, $xpos, $ypos, $string, $color);
+            // Remove character from string
+            $string = substr($string, 1);      
+        }
+    }
+    // Return the image
+    header("Content-Type: image/png");
+    imagepng($img);
+    // Remove image
+    imagedestroy($img);
+}
 ?>

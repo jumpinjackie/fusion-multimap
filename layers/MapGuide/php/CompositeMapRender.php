@@ -123,10 +123,16 @@ try {
     imagedestroy($masterImg);
 }
 catch (MgException $e) {
-    echo "last error";
-    echo "ERROR: " . $e->GetExceptionMessage() . "\n";
-    echo $e->GetDetails() . "\n";
-    echo $e->GetStackTrace() . "\n";
+    $msg = "last error";
+    $msg .= "\nERROR: " . $e->GetExceptionMessage() . "\n";
+    $msg .= $e->GetDetails() . "\n";
+    $msg .= $e->GetStackTrace() . "\n";
+    
+    RenderTextToImage($msg);
 }
-
+catch (Exception $ex) {
+    $msg = $e->GetMessage();
+    
+    RenderTextToImage($msg);
+}
 ?>
