@@ -634,6 +634,7 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
       }
 
       layerOptions.singleTile = bSingleTile;
+	  	  
       OpenLayers.Util.extend(layerOptions, this.mapTag.layerOptions);
 
       var params = {};
@@ -662,6 +663,7 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
         }
 
       } else {
+	  	//layerOptions.buffer=0;
         params = {      //tiled version
           mapdefinition: this._sResourceId,
           basemaplayergroupname: this.groupName,  //assumes only one group for now
@@ -912,10 +914,11 @@ Fusion.Layers.MapGuide = OpenLayers.Class(Fusion.Layers, {
 
         this.bSelectionOn = false;
         if (this.queryLayer) {
+          this.queryLayer.redraw();
           this.queryLayer.setVisibility(false);
         }
         this.triggerEvent(Fusion.Event.MAP_SELECTION_OFF);
-        this.drawMap();
+        //this.drawMap();
         this.oSelection = null;
     },
 
