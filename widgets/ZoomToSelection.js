@@ -60,17 +60,23 @@ Fusion.Widget.ZoomToSelection = OpenLayers.Class(Fusion.Widget, {
      * @param selection the active selection, or null if there is none
      */
     zoomToSelection : function(selection) {
-        var map = this.oMap.aMaps[0]; //TODO: allow selection on multple maps
-        var ll = selection[map.getMapName()].getLowerLeftCoord();
-        var ur = selection[map.getMapName()].getUpperRightCoord();
-        var zoom_size = this.zoomFactor * Math.max( Math.abs(ur.x - ll.x), Math.abs(ur.y - ll.y)) / 2;
-        var cX = (ur.x + ll.x)/2;
-        var cY = (ur.y + ll.y)/2;
-        ll.x = cX - zoom_size;
-        ur.x = cX + zoom_size;
-        ll.y = cY - zoom_size;
-        ur.y = cY + zoom_size;
-        this.getMap().setExtents(new OpenLayers.Bounds(ll.x,ll.y,ur.x,ur.y));
+        var bounds = new OpenLayers.Bounds();
+        for (var i=0; i<this.oMap.aMaps.length; ++i) {
+          var mapName = this.oMap.aMaps[i].getMapName()
+          if (selection[mapName]) {
+            var ll = selection[mapName].getLowerLeftCoord();//make this an OL Pixel
+            bounds.extend(new OpenLayers.LonLat(ll.x,ll.y));
+            var ur = selection[mapName].getUpperRightCoord();
+            bounds.extend(new OpenLayers.LonLat(ur.x,ur.y));
+          }
+        }
+        var zoom_size = this.zoomFactor * Math.max( Math.abs(bounds.getWidth()), Math.abs(bounds.getHeight())) / 2;
+        var center = bounds.getCenterLonLat();
+        llx = center.lon - zoom_size;
+        urx = center.lon + zoom_size;
+        lly = center.lat - zoom_size;
+        ury = center.lat + zoom_size;
+        this.getMap().setExtents(new OpenLayers.Bounds(llx,lly,urx,ury));
     },
     
     enable: function() {
