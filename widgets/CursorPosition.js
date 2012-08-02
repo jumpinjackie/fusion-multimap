@@ -77,12 +77,21 @@ Fusion.Widget.CursorPosition = OpenLayers.Class(Fusion.Widget, {
             this.domObj.innerHTML = '';
             this.domObj.appendChild(this.domSpan);
         } 
-
-        this.enable = Fusion.Widget.CursorPosition.prototype.enable;
-        this.disable = Fusion.Widget.CursorPosition.prototype.enable;
+        this.displayProjection = json.DisplayProjection ? new OpenLayers.Projection(json.DisplayProjection[0]) : null;
         
+        this.control = new OpenLayers.Control.MousePosition({
+        		div: this.domSpan,
+        		formatOutput: OpenLayers.Function.bind(this.formatHTML, this),
+        		emptyString: this.emptyText,
+        		displayProjection: this.displayProjection
+        });
+        this.getMap().oMapOL.addControl(this.control);
+
         this.getMap().registerForEvent(Fusion.Event.MAP_LOADED, OpenLayers.Function.bind(this.setUnits, this));
         this.registerParameter('Units');
+        
+        Fusion.addWidgetStyleSheet(widgetTag.location + '/CursorPosition/CursorPosition.css');
+        
     },
     
     setUiObject: function(uiObj) {
@@ -94,56 +103,55 @@ Fusion.Widget.CursorPosition = OpenLayers.Class(Fusion.Widget, {
         }
     },
     
-    enable: function() {
-        this.mouseMoveWatcher = OpenLayers.Function.bind(this.mouseMove, this);
-        this.mouseOutWatcher = OpenLayers.Function.bind(this.mouseOut, this);
+    formatHTML: function(p) {
+        if (!this.displayProjection) {
+            var mapProj = this.getMap().projection;
+            var mapUnit = mapProj.getUnits();
 
-        this.getMap().observeEvent('mousemove', this.mouseMoveWatcher);
-        this.getMap().observeEvent('mouseout', this.mouseOutWatcher);
-    },
-    
-    disable: function() {
-        this.getMap().stopObserveEvent('mousemove', this.mouseMoveWatcher);
-        this.getMap().stopObserveEvent('mouseout', this.mouseOutWatcher);
-    },
-    
-    mouseOut: function(e) {
-        this.domSpan.innerHTML = this.emptyText;
-    },
-    
-    mouseMove: function(e) {
-        var map = this.getMap();
-        var p = map.getEventPosition(e);
-        if (this.units != Fusion.PIXELS) {
-            p = map.pixToGeo(p.x, p.y);
-            if (p) {
-                if (this.units != Fusion.UNKNOWN) {
-                    var convFactor = map.getMetersPerUnit();
-                    p.x = Fusion.fromMeter(this.units, p.x * convFactor);
-                    p.y = Fusion.fromMeter(this.units, p.y * convFactor);
-                }
-                if (this.precision >= 0) {
-                    var factor = Math.pow(10,this.precision);
-                    p.x = Math.round(p.x * factor)/factor;
-                    p.y = Math.round(p.y * factor)/factor;
-                }
+            // convertion from linear units to degree unit.
+            if(this.units == Fusion.DEGREES && mapUnit != 'dd' && mapUnit != 'degrees' ) {
+                // coordinate transformation from map CS to EPSG:4326.
+                var dest = new OpenLayers.Projection("GEOGCS[\"LL84\",DATUM[\"WGS84\",SPHEROID[\"WGS84\",6378137.000,298.25722293]],PRIMEM[\"Greenwich\",0],UNIT[\"Degree\",0.01745329251994]]");
+                p = p.transform(this.getMap().projection, dest);
+            }
+            //else
+            //{
+                // TODO: convertion from degree unit to linear units
+            //}
+            
+            /* old code for converting between units */
+            else if (this.units != Fusion.UNKNOWN) {
+                var convFactor = this.getMap().getMetersPerUnit();
+                p.lon = Fusion.fromMeter(this.units, p.lon * convFactor);
+                p.lat = Fusion.fromMeter(this.units, p.lat * convFactor);
+            }
+            
+            if (this.precision >= 0) {
+                var factor = Math.pow(10,this.precision);
+                p.lon = Math.round(p.lon * factor)/factor;
+                p.lat = Math.round(p.lat * factor)/factor;
             }
         }
-        if (p) {
-            var unitAbbr = Fusion.unitAbbr(this.units);
-            this.domSpan.innerHTML = this.template.replace('{x}',p.x).replace('{y}',p.y).replace('{units}', unitAbbr).replace('{units}', unitAbbr);
-        }
+        var unitAbbr = Fusion.unitAbbr(this.units);
+        var innerHTML = this.template.replace('{x}',p.lon.toFixed(this.precision));
+        innerHTML = innerHTML.replace('{y}',p.lat.toFixed(this.precision));
+        innerHTML = innerHTML.replace('{units}', unitAbbr).replace('{units}', unitAbbr);
+        return innerHTML;
     },
 
     setUnits: function() {
-      if (this.units == Fusion.UNKNOWN) {
-        this.setParameter('Units',this.getMap().getUnits());
-      }
+                if (this.units == Fusion.UNKNOWN) {
+                    this.setParameter('Units',this.getMap().getUnits());
+                }
     },
 
     setParameter: function(param, value) {
         if (param == 'Units') {
-            this.units = Fusion.unitFromName(value);
+            var unitName = value;
+            if (this.displayProjection) {
+                unitName = this.displayProjection.getUnits();
+            }
+          this.units = Fusion.unitFromName(unitName);
         }
     }
 });
