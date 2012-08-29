@@ -2,8 +2,8 @@ Fusion.Strings.ms = {
 'scriptFailed': 'gagal untuk memuatkan skrip: ${script}',
 'configParseError': 'Ralat menghuraikan gabungan fail konfigurasi, pengawalan digugurkan',
 'configLoadError': 'Ralat memuatkan gabungan fail konfigurasi, pengawalan digugurkan.' +
-                  'Pastikan bahawa anda telah disalin config_dist.json config.json' +
-                  'dan telah mengkonfigurasi tetapan untuk sistem anda',
+               'Pastikan bahawa anda telah disalin config_dist.json config.json' +
+               'dan telah mengkonfigurasi tetapan untuk sistem anda',
 'ajaxError': 'Pengecualian berlaku di panggil balik AJAX.\nMesej: ${exception}\nLocation: ${filename} (${line})\nResponse: ${response}',
 'importFailed': 'gagal untuk mengimport stylesheet: ${url}',
 'serverNotAvailable': '<h2>Pelayan tidak tersedia. Cuba muatkan permohonan. Jika masalah ini berterusan, sila hubungi pentadbir</h2>',

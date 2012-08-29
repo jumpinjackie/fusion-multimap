@@ -426,7 +426,7 @@ Fusion.Widget.SelectionPanel.SelectionRendererHorizontal = OpenLayers.Class(Fusi
         
         var d = document.createElement('div');
         this.featureDiv = document.createElement('div');
-        this.featureDiv.innerHTML = 'No Selection';
+        this.featureDiv.innerHTML = OpenLayers.i18n('noSelection');
         this.featureDiv.className = 'selectionPanelContent noSelection';
         d.appendChild(this.featureDiv);
 
