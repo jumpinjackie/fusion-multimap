@@ -103,7 +103,8 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
         var mapnames = [];
         for (var i = 0; i < mapLayers.length; i++)
         {
-            mapnames.push(mapLayers[i].getMapName());
+            if (mapLayers[i].arch == "MapGuide")
+                mapnames.push(mapLayers[i].getMapName());
         }
 
         var params = [];
@@ -185,7 +186,8 @@ Fusion.Widget.QuickPlot = OpenLayers.Class(Fusion.Widget,
         var mapnames = [];
         for (var i = 0; i < mapLayers.length; i++)
         {
-            mapnames.push(mapLayers[i].getMapName());
+            if (mapLayers[i].arch == "MapGuide")
+                mapnames.push(mapLayers[i].getMapName());
         }
         
         var capture  = this.mapCapturer.getCaptureBox();
