@@ -1,4 +1,4 @@
-# Web surround localized strings
+ï»¿# Web surround localized strings
 # English language
 #
 # Important: This file must be saved with UTF-8 encoding
@@ -7,439 +7,439 @@
 # General
 
 # Fonts - the 6 following entries are mandatory
-@fontWindows        = Arial
-@fontsizeWindows    = 8pt
-@fontLinux          = Arial
-@fontsizeLinux      = 8pt
-@fontMacintosh      = Arial
-@fontsizeMacintosh  = 8pt
+@fontWindowsÂ  Â  Â  Â  = Arial
+@fontsizeWindowsÂ  Â  = 8pt
+@fontLinuxÂ  Â  Â  Â  Â  = Arial
+@fontsizeLinuxÂ  Â  Â  = 8pt
+@fontMacintoshÂ  Â  Â  = Arial
+@fontsizeMacintoshÂ  = 8pt
 
 # Distances
-DISTANCEMILES       = Miles
-DISTANCEKILOMETERS  = Kilometers
-DISTANCEFEET        = Feet
-DISTANCEMETERS      = Meters
+DISTANCEMILESÂ  Â  Â  Â = Miles
+DISTANCEKILOMETERSÂ  = Kilometers
+DISTANCEFEETÂ  Â  Â  Â  = Feet
+DISTANCEMETERSÂ  Â  Â  = Meters
 
 # Fill Patterns/Values
-FILLSOLID           = Solid
-FILLNET             = Net
-FILLLINE            = Line
-FILLLINE45          = Line_45
-FILLLINE90          = Line_90
-FILLLINE135         = Line_135
-FILLSQUARE          = Square
-FILLBOX             = Box
-FILLCROSS           = Cross
-FILLDASH            = Dash
-FILLDOLMIT          = Dolmit
-FILLHEX             = Hex
-FILLSACNCR          = Sacncr
-FILLSTEEL           = Steel
+FILLSOLIDÂ  Â  Â  Â  Â  Â = Solid
+FILLNETÂ  Â  Â  Â  Â  Â  Â = Net
+FILLLINEÂ  Â  Â  Â  Â  Â  = Line
+FILLLINE45Â  Â  Â  Â  Â  = Line_45
+FILLLINE90Â  Â  Â  Â  Â  = Line_90
+FILLLINE135Â  Â  Â  Â  Â = Line_135
+FILLSQUAREÂ  Â  Â  Â  Â  = Square
+FILLBOXÂ  Â  Â  Â  Â  Â  Â = Box
+FILLCROSSÂ  Â  Â  Â  Â  Â = Cross
+FILLDASHÂ  Â  Â  Â  Â  Â  = Dash
+FILLDOLMITÂ  Â  Â  Â  Â  = Dolmit
+FILLHEXÂ  Â  Â  Â  Â  Â  Â = Hex
+FILLSACNCRÂ  Â  Â  Â  Â  = Sacncr
+FILLSTEELÂ  Â  Â  Â  Â  Â = Steel
 
 # Transparency
-TRANSPARENT         = transparent
+TRANSPARENTÂ  Â  Â  Â  Â = transparent
 
 # Line Styles/Values
-LINESOLID           = Solid
-LINEDASH            = Dash
-LINEDOT             = Dot
-LINEDASHDOT         = DashDot
-LINEDASHDOTDOT      = DashDotDot
-LINERAIL            = Rail
-LINEBORDER          = Border
-LINEDIVIDE          = Divide
-LINEFENCELINE       = FenceLine
+LINESOLIDÂ  Â  Â  Â  Â  Â = Solid
+LINEDASHÂ  Â  Â  Â  Â  Â  = Dash
+LINEDOTÂ  Â  Â  Â  Â  Â  Â = Dot
+LINEDASHDOTÂ  Â  Â  Â  Â = DashDot
+LINEDASHDOTDOTÂ  Â  Â  = DashDotDot
+LINERAILÂ  Â  Â  Â  Â  Â  = Rail
+LINEBORDERÂ  Â  Â  Â  Â  = Border
+LINEDIVIDEÂ  Â  Â  Â  Â  = Divide
+LINEFENCELINEÂ  Â  Â  Â = FenceLine
 
 # Buttons
-BUTTONOK            = OK
-BUTTONDONE          = Done
-BUTTONCANCEL        = Cancel
-BUTTONREFRESH       = Refresh
-BUTTONCLOSE         = Close
-BUTTONCLEAR         = Clear
-BUTTONSAVE          = Save
+BUTTONOKÂ  Â  Â  Â  Â  Â  = OK
+BUTTONDONEÂ  Â  Â  Â  Â  = Done
+BUTTONCANCELÂ  Â  Â  Â  = Cancel
+BUTTONREFRESHÂ  Â  Â  Â = Refresh
+BUTTONCLOSEÂ  Â  Â  Â  Â = Close
+BUTTONCLEARÂ  Â  Â  Â  Â = Clear
+BUTTONSAVEÂ  Â  Â  Â  Â  = Save
 
 # Colors
-COLORRED            = Red
-COLORGREEN          = Green
-COLORBLUE           = Blue
+COLORREDÂ  Â  Â  Â  Â  Â  = Red
+COLORGREENÂ  Â  Â  Â  Â  = Green
+COLORBLUEÂ  Â  Â  Â  Â  Â = Blue
 
 # BufferReport
-BUFFERREPORTTITLE               =Buat Penimbal
-BUFFERREPORTCREATED             =%s  telah diwujudkan.
-BUFFERREPORTUPDATED             =%s telah dikemas kini.
-BUFFERREPORTFEATURESSINGULAR    =ciri penampan %s telah dicipta.
-BUFFERREPORTFEATURESPLURAL      =ciri-ciri penampan %s telah diwujudkan.
-BUFFERREPORTWARNINGSINGULAR     =<b> Amaran: </ b> lapisan %s telah dikecualikan daripada pengiraan penampan kerana sistem koordinat adalah serasi dengan sistem koordinat peta, atau kerana ia tidak mempunyai sistem koordinat pada semua
-BUFFERREPORTWARNINGPLURAL       =<b> Amaran: </ b> lapisan %s telah dikecualikan daripada pengiraan penampan kerana sistem koordinat mereka adalah serasi dengan sistem koordinat peta, atau kerana mereka tidak mempunyai menyelaras sistem di semua
-BUFFERREPORTERRORTITLE          =Ralat penimbal
+BUFFERREPORTTITLEÂ  Â  Â  Â  Â  Â  Â  Â =Buat Penimbal
+BUFFERREPORTCREATEDÂ  Â  Â  Â  Â  Â  Â =%s  telah diwujudkan.
+BUFFERREPORTUPDATEDÂ  Â  Â  Â  Â  Â  Â =%s telah dikemas kini.
+BUFFERREPORTFEATURESSINGULARÂ  Â  =ciri penampan %s telah dicipta.
+BUFFERREPORTFEATURESPLURALÂ  Â  Â  =ciri-ciri penampan %s telah diwujudkan.
+BUFFERREPORTWARNINGSINGULARÂ  Â  Â =<b> Amaran: </ b> lapisan %s telah dikecualikan daripada pengiraan penampan kerana sistem koordinat adalah serasi dengan sistem koordinat peta, atau kerana ia tidak mempunyai sistem koordinat pada semua
+BUFFERREPORTWARNINGPLURALÂ  Â  Â  Â =<b> Amaran: </ b> lapisan %s telah dikecualikan daripada pengiraan penampan kerana sistem koordinat mereka adalah serasi dengan sistem koordinat peta, atau kerana mereka tidak mempunyai menyelaras sistem di semua
+BUFFERREPORTERRORTITLEÂ  Â  Â  Â  Â  =Ralat penimbal
 
 # Buffer
-BUFFERCLASSDESCR                =Kelas ciri untuk lapisan penampan
-BUFFERSCHEMADESCR               =Penampan skema Sementara
-BUFFERDIFFARBXY                 =Tidak boleh mengira penampan unik sekitar ciri-ciri dengan sistem koordinat Sewenang-wenang berbeza 'XY'. Sila nyahpilih pilihan 'Gabung kawasan penampan' atau pilih hanya satu lapisan
+BUFFERCLASSDESCRÂ  Â  Â  Â  Â  Â  Â  Â  =Kelas ciri untuk lapisan penampan
+BUFFERSCHEMADESCRÂ  Â  Â  Â  Â  Â  Â  Â =Penampan skema Sementara
+BUFFERDIFFARBXYÂ  Â  Â  Â  Â  Â  Â  Â  Â =Tidak boleh mengira penampan unik sekitar ciri-ciri dengan sistem koordinat Sewenang-wenang berbeza 'XY'. Sila nyahpilih pilihan 'Gabung kawasan penampan' atau pilih hanya satu lapisan
 
 # BufferUI
-BUFFERTITLE                     =Buat Penimbal
-BUFFERSUBTITLE                  =&nbsp;Penimbal tetapan
-BUFFERINFOTEXT                  =Pilih ciri-ciri pada imej.
-BUFFERDISTANCE                  =Jarak seluruh ciri-ciri:
-BUFFERLAYERS                    =Layers untuk termasuk dalam buffer:
-BUFFERNOLAYER                   =<Tiada Lapisan dipilih>
-BUFFERNAME                      =Namakan lapisan penampan yang terhasil:
-BUFFERNAMETEXT                  =Penimbal 1
-BUFFERMERGE                     =Gabung kawasan penampan
-BUFFERFILLSTYLE                 =&nbsp;Isikan gaya
-BUFFERFILLPATTERN               =Isikan corak:
-BUFFERFOREGROUNDCOLOR           =Warna latar depan:
-BUFFERTRANSPARENCY              =Ketelusan:
-BUFFERBACKGROUNDCOLOR           =Warna latar belakang:
-BUFFERBORDERSTYLE               = &nbsp;Gaya sempadan
-BUFFERBORDERLINEPATTERN         =Corak Talian:
-BUFFERBORDERLINECOLOR           =Warna Talian:
-BUFFERBORDERLINETHICKNESS       =Ketebalan Talian:
-BUFFERHELP                      =<li><p align="left"> Keputusan buffer dimasukkan ke dalam lapisan baru di atas lapisan ciri atas. Ini lapisan penampan mempunyai nama yang anda masukkan di sini. </ li> <li> <p align="left"> Untuk membuat lapisan penampan berganda, menggunakan nama penampan yang berbeza. </ li> <li> <p align = "left" > Untuk menyembunyikan lapisan penampan, menjadikan mereka dimatikan. </ li> <li> <p align="left"> lapisan penampan adalah sementara dan dikeluarkan apabila anda menutup penonton. </ li>
-BUFFERERRORZERODISTANCE         =Sila masukkan jarak bukan sifar.
-BUFFERERRORNOLAYERNAME          =Sila masukkan nama lapisan.
-BUFFERERRORNEGATIVETHICKNESS    =Sila masukkan ketebalan positif atau batal.
-BUFFERERRORNOSELECTION          =Sila pilih ciri (s) untuk mengira penampan di sekeliling.
+BUFFERTITLEÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â =Buat Penimbal
+BUFFERSUBTITLEÂ  Â  Â  Â  Â  Â  Â  Â  Â  =&nbsp;Penimbal tetapan
+BUFFERINFOTEXTÂ  Â  Â  Â  Â  Â  Â  Â  Â  =Pilih ciri-ciri pada imej.
+BUFFERDISTANCEÂ  Â  Â  Â  Â  Â  Â  Â  Â  =Jarak seluruh ciri-ciri:
+BUFFERLAYERSÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  =Layers untuk termasuk dalam buffer:
+BUFFERNOLAYERÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â =<Tiada Lapisan dipilih>
+BUFFERNAMEÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  =Namakan lapisan penampan yang terhasil:
+BUFFERNAMETEXTÂ  Â  Â  Â  Â  Â  Â  Â  Â  =Penimbal 1
+BUFFERMERGEÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â =Gabung kawasan penampan
+BUFFERFILLSTYLEÂ  Â  Â  Â  Â  Â  Â  Â  Â =&nbsp;Isikan gaya
+BUFFERFILLPATTERNÂ  Â  Â  Â  Â  Â  Â  Â =Isikan corak:
+BUFFERFOREGROUNDCOLORÂ  Â  Â  Â  Â  Â =Warna latar depan:
+BUFFERTRANSPARENCYÂ  Â  Â  Â  Â  Â  Â  =Ketelusan:
+BUFFERBACKGROUNDCOLORÂ  Â  Â  Â  Â  Â =Warna latar belakang:
+BUFFERBORDERSTYLEÂ  Â  Â  Â  Â  Â  Â  Â = &nbsp;Gaya sempadan
+BUFFERBORDERLINEPATTERNÂ  Â  Â  Â  Â =Corak Talian:
+BUFFERBORDERLINECOLORÂ  Â  Â  Â  Â  Â =Warna Talian:
+BUFFERBORDERLINETHICKNESSÂ  Â  Â  Â =Ketebalan Talian:
+BUFFERHELPÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  =<li><p align="left"> Keputusan buffer dimasukkan ke dalam lapisan baru di atas lapisan ciri atas. Ini lapisan penampan mempunyai nama yang anda masukkan di sini. </ li> <li> <p align="left"> Untuk membuat lapisan penampan berganda, menggunakan nama penampan yang berbeza. </ li> <li> <p align = "left" > Untuk menyembunyikan lapisan penampan, menjadikan mereka dimatikan. </ li> <li> <p align="left"> lapisan penampan adalah sementara dan dikeluarkan apabila anda menutup penonton. </ li>
+BUFFERERRORZERODISTANCEÂ  Â  Â  Â  Â =Sila masukkan jarak bukan sifar.
+BUFFERERRORNOLAYERNAMEÂ  Â  Â  Â  Â  =Sila masukkan nama lapisan.
+BUFFERERRORNEGATIVETHICKNESSÂ  Â  =Sila masukkan ketebalan positif atau batal.
+BUFFERERRORNOSELECTIONÂ  Â  Â  Â  Â  =Sila pilih ciri (s) untuk mengira penampan di sekeliling.
 
 # ColorPicker
-COLORPICKERDLGTITLE             =Pilih warna
-COLORPICKERTITLE                =Palet warna
-COLORPICKERSUBTITLE             =Nyatakan warna
-COLORPICKER100TRANSPARENCY      =100% ketelusan
-COLORPICKERHEXFORMAT            =format Hex
+COLORPICKERDLGTITLEÂ  Â  Â  Â  Â  Â  Â =Pilih warna
+COLORPICKERTITLEÂ  Â  Â  Â  Â  Â  Â  Â  =Palet warna
+COLORPICKERSUBTITLEÂ  Â  Â  Â  Â  Â  Â =Nyatakan warna
+COLORPICKER100TRANSPARENCYÂ  Â  Â  =100% ketelusan
+COLORPICKERHEXFORMATÂ  Â  Â  Â  Â  Â  =format Hex
 
 # MeasureUI
-MEASUREDISTANCETITLE    =Jarak ukuran
-MEASUREAREATITLE        =Kawasan ukuran
-MEASUREBOTHTITLE        =Jarak ukuran Dan Kawasan
-MEASUREINFO             =Klik titik mula dan akhir.
-RESUME                  =Resume
-STOP                    =Berhenti
-CLEAR                   =Padam
-MILES                   =Batu
-KILOMETERS              =Kilometer
-MEASUREHELP             =<li> Untuk mengukur jarak berganda, terus mengklik mata baru </ li> <li> Untuk selesai, klik &quot;Stop&quot;.</li><li>Anda boleh menyorot atau mengezum dan terus mengukur dengan mengklik &quot;Resume&quot;.</li><li>Untuk memulakan, klik &quot;Clear&quot;.</li>
-SEGMENT                 =Segmen
-LENGTH                  =Panjang
-TOTALLENGTH             =Length Jumlah
-TOTALAREA               =Jumlah Kawasan
-MEASUREERROR            =Ralat ukuran
+MEASUREDISTANCETITLEÂ  Â  =Jarak ukuran
+MEASUREAREATITLEÂ  Â  Â  Â  =Kawasan ukuran
+MEASUREBOTHTITLEÂ  Â  Â  Â  =Jarak ukuran Dan Kawasan
+MEASUREINFOÂ  Â  Â  Â  Â  Â  Â =Klik titik mula dan akhir.
+RESUMEÂ  Â  Â  Â  Â  Â  Â  Â  Â  =Resume
+STOPÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  =Berhenti
+CLEARÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â =Padam
+MILESÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â =Batu
+KILOMETERSÂ  Â  Â  Â  Â  Â  Â  =Kilometer
+MEASUREHELPÂ  Â  Â  Â  Â  Â  Â =<li> Untuk mengukur jarak berganda, terus mengklik mata baru </ li> <li> Untuk selesai, klik &quot;Stop&quot;.</li><li>Anda boleh menyorot atau mengezum dan terus mengukur dengan mengklik &quot;Resume&quot;.</li><li>Untuk memulakan, klik &quot;Clear&quot;.</li>
+SEGMENTÂ  Â  Â  Â  Â  Â  Â  Â  Â =Segmen
+LENGTHÂ  Â  Â  Â  Â  Â  Â  Â  Â  =Panjang
+TOTALLENGTHÂ  Â  Â  Â  Â  Â  Â =Length Jumlah
+TOTALAREAÂ  Â  Â  Â  Â  Â  Â  Â =Jumlah Kawasan
+MEASUREERRORÂ  Â  Â  Â  Â  Â  =Ralat ukuran
 
 # Measure
-MEASUREFEATURECLASS     =Kelas ciri untuk mengukur lapisan
-MEASURESCHEMADESCR      =Langkah skema Sementara
-MEASUREPARTIAL          =Separa
-MEASURETOTAL            =Jumlah
-MEASURELAYER            =Mengukur
-MEASUREHINT             =Untuk mengukur jarak berganda, terus mengklik mata baru. Hingga selesai, klik dua kali pada titik terakhir. Anda boleh membatalkan dan restart mengukur dengan menekan kekunci ESC.
+MEASUREFEATURECLASSÂ  Â  Â =Kelas ciri untuk mengukur lapisan
+MEASURESCHEMADESCRÂ  Â  Â  =Langkah skema Sementara
+MEASUREPARTIALÂ  Â  Â  Â  Â  =Separa
+MEASURETOTALÂ  Â  Â  Â  Â  Â  =Jumlah
+MEASURELAYERÂ  Â  Â  Â  Â  Â  =Mengukur
+MEASUREHINTÂ  Â  Â  Â  Â  Â  Â =Untuk mengukur jarak berganda, terus mengklik mata baru. Hingga selesai, klik dua kali pada titik terakhir. Anda boleh membatalkan dan restart mengukur dengan menekan kekunci ESC.
 
 # FeatureInfoUI
-FEATUREINFOTITLE        =Maklumat ciri-ciri
-FEATUREINFOSUBTITLE     =Pilih Lapisan
-FEATUREINFOLAYER        =lapisan:
+FEATUREINFOTITLEÂ  Â  Â  Â  =Maklumat ciri-ciri
+FEATUREINFOSUBTITLEÂ  Â  Â =Pilih Lapisan
+FEATUREINFOLAYERÂ  Â  Â  Â  =lapisan:
 FEATUREINFOSELECTFEATURE=Pilih Ciri-ciri:
-FEATUREINFODIGITIZE     =Mendigitalkan:
-FEATUREINFOPOINT        =Point
-FEATUREINFORECTANGLE    =Rectangle
-FEATUREINFOPOLYGON      =Polygon
-FEATUREINFOTOTAL        =Jumlah:
-FEATUREINFONOSELECTED   =Tiada ciri yang dipilih.
-FEATUREINFOERROR        =Ralat
-FEATUREINFOFETCHINFO    =Menjemput info ciri ...
-FEATUREINFOFEATURESEL   =Ciri-ciri yang dipilih
-FEATUREINFOAREA         =Kawasan:
+FEATUREINFODIGITIZEÂ  Â  Â =Mendigitalkan:
+FEATUREINFOPOINTÂ  Â  Â  Â  =Point
+FEATUREINFORECTANGLEÂ  Â  =Rectangle
+FEATUREINFOPOLYGONÂ  Â  Â  =Polygon
+FEATUREINFOTOTALÂ  Â  Â  Â  =Jumlah:
+FEATUREINFONOSELECTEDÂ  Â =Tiada ciri yang dipilih.
+FEATUREINFOERRORÂ  Â  Â  Â  =Ralat
+FEATUREINFOFETCHINFOÂ  Â  =Menjemput info ciri ...
+FEATUREINFOFEATURESELÂ  Â =Ciri-ciri yang dipilih
+FEATUREINFOAREAÂ  Â  Â  Â  Â =Kawasan:
 FEATUREINFOAREAUNDEFINE =AreaIdx undefined
-FEATUREINFONOINFO       =Tiada maklumat lapisan
-FEATUREINFONOFEATUREIN  =Tiada ciri-ciri dalam lapisan yang dipilih.
+FEATUREINFONOINFOÂ  Â  Â  Â =Tiada maklumat lapisan
+FEATUREINFONOFEATUREINÂ  =Tiada ciri-ciri dalam lapisan yang dipilih.
 
 # QueryUI
-QUERYTITLE              =Ciri-ciri pertanyaan
-QUERYSELECTLAYER        =Pilih Lapisan
-QUERYLAYER              =Lapisan:
-QUERYPROPERTYFILTER     =Hartanah Penapis
-QUERYPROPERTY           =Hartanah:
-QUERYOPERATOR           =Operator:
-QUERYVALUE              =Nilai:
-QUERYSPATIALFILTER      =Spatial Filter
-QUERYDIGITIZE           =Mendigitalkan:
-QUERYRECTANGLE          =Rectangle
-QUERYPOLYGON            =Polygon
-QUERYCLEAR              =Padam
-QUERYOUTPUT             =Output
-QUERYOUTPUTPROPERTY     =Harta Output:
-QUERYEXECUTE            =Melaksanakan
-QUERYMAXRESULT          =Max results:
-QUERYRESULTS            =Keputusan
-QUERYSCALE              =Skala:
-QUERYZOOM               =Zoom
-QUERYSELECT             =Pilih
-QUERYERROR              =Ralat
-QUERYEQUALTO            =Bersamaan dengan
-QUERYNOTEQUALTO         =Tidak sama dengan
-QUERYGREATTHAN          =Lebih daripada
-QUERYGREATTHANEQUAL     =Lebih besar daripada atau sama dengan
-QUERYLESSTHAN           =Kurang daripada
-QUERYLESSTHANEQUAL      =Kurang daripada atau sama dengan
-QUERYBEGIN              =Bermula dengan
-QUERYCONTAINS           =Mengandungi
+QUERYTITLEÂ  Â  Â  Â  Â  Â  Â  =Ciri-ciri pertanyaan
+QUERYSELECTLAYERÂ  Â  Â  Â  =Pilih Lapisan
+QUERYLAYERÂ  Â  Â  Â  Â  Â  Â  =Lapisan:
+QUERYPROPERTYFILTERÂ  Â  Â =Hartanah Penapis
+QUERYPROPERTYÂ  Â  Â  Â  Â  Â =Hartanah:
+QUERYOPERATORÂ  Â  Â  Â  Â  Â =Operator:
+QUERYVALUEÂ  Â  Â  Â  Â  Â  Â  =Nilai:
+QUERYSPATIALFILTERÂ  Â  Â  =Spatial Filter
+QUERYDIGITIZEÂ  Â  Â  Â  Â  Â =Mendigitalkan:
+QUERYRECTANGLEÂ  Â  Â  Â  Â  =Rectangle
+QUERYPOLYGONÂ  Â  Â  Â  Â  Â  =Polygon
+QUERYCLEARÂ  Â  Â  Â  Â  Â  Â  =Padam
+QUERYOUTPUTÂ  Â  Â  Â  Â  Â  Â =Output
+QUERYOUTPUTPROPERTYÂ  Â  Â =Harta Output:
+QUERYEXECUTEÂ  Â  Â  Â  Â  Â  =Melaksanakan
+QUERYMAXRESULTÂ  Â  Â  Â  Â  =Max results:
+QUERYRESULTSÂ  Â  Â  Â  Â  Â  =Keputusan
+QUERYSCALEÂ  Â  Â  Â  Â  Â  Â  =Skala:
+QUERYZOOMÂ  Â  Â  Â  Â  Â  Â  Â =Zoom
+QUERYSELECTÂ  Â  Â  Â  Â  Â  Â =Pilih
+QUERYERRORÂ  Â  Â  Â  Â  Â  Â  =Ralat
+QUERYEQUALTOÂ  Â  Â  Â  Â  Â  =Bersamaan dengan
+QUERYNOTEQUALTOÂ  Â  Â  Â  Â =Tidak sama dengan
+QUERYGREATTHANÂ  Â  Â  Â  Â  =Lebih daripada
+QUERYGREATTHANEQUALÂ  Â  Â =Lebih besar daripada atau sama dengan
+QUERYLESSTHANÂ  Â  Â  Â  Â  Â =Kurang daripada
+QUERYLESSTHANEQUALÂ  Â  Â  =Kurang daripada atau sama dengan
+QUERYBEGINÂ  Â  Â  Â  Â  Â  Â  =Bermula dengan
+QUERYCONTAINSÂ  Â  Â  Â  Â  Â =Mengandungi
 
 # Theme UI
-THEMETITLE              = Lapisan tema
-THEMESELECTLAYER        = Pilih Lapisan
-THEMELAYER              = Lapisan:
-THEMENAME               = Nama Tema:
-THEMECONDITIONS         = Tentukan Syarat
-THEMEPROPERTY           = Hartanah:
-THEMEMIN                = Min:
-THEMEMAX                = Max:
-THEMEDISTRIBUTION       = Pengagihan:
-THEMERULE               = # Peraturan:
-THEMESCALERANGE         = Pertengahan skala
-THEMESTYLERAMP          = Amuk gaya
-THEMEFILLTRANS          = Isikan Ketelusan:
-THEMEFILLCOLOR          = Isi Warna:
-THEMEFROM               = Daripada:
-THEMETO                 = Kepada:
-THEMEBORDERCOLOR        = Warna Sempadan:
-THEMEAPPLY              = Memohon
-THEMEERROR              = Ralat
-THEMEINDIVIDUAL         = Individu
-THEMEEQUAL              = Sama
-THEMESTANDARD           = Sisihan Piawai
-THEMEQUANTILE           = Quantile
-THEMEJENKS              = Jenks (Asli Breaks)
+THEMETITLEÂ  Â  Â  Â  Â  Â  Â  = Lapisan tema
+THEMESELECTLAYERÂ  Â  Â  Â  =Â Pilih Lapisan
+THEMELAYERÂ  Â  Â  Â  Â  Â  Â  =Â Lapisan:
+THEMENAMEÂ  Â  Â  Â  Â  Â  Â  Â =Â Nama Tema:
+THEMECONDITIONSÂ  Â  Â  Â  Â =Â Tentukan Syarat
+THEMEPROPERTYÂ  Â  Â  Â  Â  Â =Â Hartanah:
+THEMEMINÂ  Â  Â  Â  Â  Â  Â  Â  =Â Min:
+THEMEMAXÂ  Â  Â  Â  Â  Â  Â  Â  =Â Max:
+THEMEDISTRIBUTIONÂ  Â  Â  Â =Â Pengagihan:
+THEMERULEÂ  Â  Â  Â  Â  Â  Â  Â =Â # Peraturan:
+THEMESCALERANGEÂ  Â  Â  Â  Â =Â Pertengahan skala
+THEMESTYLERAMPÂ  Â  Â  Â  Â  =Â Amuk gaya
+THEMEFILLTRANSÂ  Â  Â  Â  Â  =Â Isikan Ketelusan:
+THEMEFILLCOLORÂ  Â  Â  Â  Â  =Â Isi Warna:
+THEMEFROMÂ  Â  Â  Â  Â  Â  Â  Â =Â Daripada:
+THEMETOÂ  Â  Â  Â  Â  Â  Â  Â  Â =Â Kepada:
+THEMEBORDERCOLORÂ  Â  Â  Â  =Â Warna Sempadan:
+THEMEAPPLYÂ  Â  Â  Â  Â  Â  Â  =Â Memohon
+THEMEERRORÂ  Â  Â  Â  Â  Â  Â  =Â Ralat
+THEMEINDIVIDUALÂ  Â  Â  Â  Â = Individu
+THEMEEQUALÂ  Â  Â  Â  Â  Â  Â  =Â Sama
+THEMESTANDARDÂ  Â  Â  Â  Â  Â =Â Sisihan Piawai
+THEMEQUANTILEÂ  Â  Â  Â  Â  Â =Â Quantile
+THEMEJENKSÂ  Â  Â  Â  Â  Â  Â  =Â Jenks (Asli Breaks)
 
 # Redline Management
-REDLINEMANAGE           = Mengurus Redline
-REDLINEAVAILABLELAYERS  = Available Redline Lapisan
-REDLINELOADEDLAYERS     = Lapisan Redline pada Peta
-REDLINENEW              = New
-REDLINEADDTOMAP         = Add To Peta
-REDLINEDELETE           = Padam
-REDLINEREFRESH          = Refresh
-REDLINEEDIT             = Tambah / Edit Redlines
-REDLINEREMOVEFROMMAP    = Buang Dari Peta
-REDLINEDOWNLOADSDF      = Download Data
-REDLINEUPLOADSDF        = Upload
-REDLINEEDITSTYLE        = Edit Gaya
-REDLINECREATEFAILURE    = Gagal untuk mencipta redline
+REDLINEMANAGEÂ  Â  Â  Â  Â  Â = Mengurus Redline
+REDLINEAVAILABLELAYERSÂ  =Â Available Redline Lapisan
+REDLINELOADEDLAYERSÂ  Â  Â =Â Lapisan Redline pada Peta
+REDLINENEWÂ  Â  Â  Â  Â  Â  Â  =Â New
+REDLINEADDTOMAPÂ  Â  Â  Â  Â =Â Add To Peta
+REDLINEDELETEÂ  Â  Â  Â  Â  Â =Â Padam
+REDLINEREFRESHÂ  Â  Â  Â  Â  =Â Refresh
+REDLINEEDITÂ  Â  Â  Â  Â  Â  Â =Â Tambah / Edit Redlines
+REDLINEREMOVEFROMMAPÂ  Â  =Â Buang Dari Peta
+REDLINEDOWNLOADSDFÂ  Â  Â  =Â Download Data
+REDLINEUPLOADSDFÂ  Â  Â  Â  =Â Upload
+REDLINEEDITSTYLEÂ  Â  Â  Â  =Â Edit Gaya
+REDLINECREATEFAILUREÂ  Â  =Â Gagal untuk mencipta redline
 
 # Edit Redline Style UI
-REDLINEEDITLAYERSTYLE   = Edit Gaya Redline
-REDLINELAYERSETTINGS    = Redline Lapisan Tetapan
-REDLINENAME             = Nama Redline:
-REDLINEPOINTSTYLE       = Gaya Point
-REDLINEMARKERTYPE       = Jenis Marker
-REDLINEMARKERSQUARE     = Square
-REDLINEMARKERCIRCLE     = Circle
-REDLINEMARKERTRIANGLE   = Triangle
-REDLINEMARKERSTAR       = Bintang
-REDLINEMARKERCROSS      = Cross
-REDLINEMARKERX          = X
-REDLINEUNITSPT          = Tempat
-REDLINEUNITSIN          = Inci
-REDLINEUNITSMM          = Milimeter
-REDLINEUNITSCM          = Sentimeter
-REDLINEUNITSM           = Meter
-REDLINEMARKERSIZE       = Saiz Marker:
-REDLINEMARKERCOLOR      = Warna Marker:
-REDLINELINESTYLE        = Gaya Talian
-REDLINELINEPATTERN      = Corak Talian:
-REDLINEPATTERNSOLID     = Pepejal
-REDLINEPATTERNDASH      = Dash
-REDLINEPATTERNDOT       = Dot
-REDLINEPATTERNDASHDOT   = DashDot
-REDLINEPATTERNDASHDOTDOT = DashDotDot
-REDLINEPATTERNRAIL      = Rail
-REDLINEPATTERNBORDER    = Sempadan
-REDLINEPATTERNDIVIDE    = Bahagikan
-REDLINEPATTERNFENCELINE = FenceLine
-REDLINEPATTERNNET       = Bersih
-REDLINEPATTERNLINE      = Talian
-REDLINEPATTERNLINE45    = Line_45
-REDLINEPATTERNLINE90    = Line_90
-REDLINEPATTERNLINE135   = Line_135
-REDLINEPATTERNSQUARE    = Square
-REDLINEPATTERNBOX       = Keselamatan
-REDLINEPATTERNCROSS     = Cross
-REDLINEPATTERNDOLMIT    = Dolmit
-REDLINEPATTERNHEX       = Hex
-REDLINEPATTERNSACNCR    = Sacncr
-REDLINEPATTERNSTEEL     = Steel
-REDLINESIZEUNITS        = Saiz unit:
-REDLINELINETHICKNESS    = Ketebalan Talian:
-REDLINELINECOLOR        = Warna Talian:
-REDLINETRANSPARENT      = Telus
-REDLINEPOLYGONSTYLE     = Gaya Polygon
-REDLINEFILLPATTERN      = Isikan corak:
-REDLINEFILLTRANSPARENCY = Ketelusan:
-REDLINEFOREGROUND   = Warna latar depan:
-REDLINEBACKGROUND   = Warna latar belakang:
-REDLINEBORDERPATTERN    = Corak Sempadan:
-REDLINEBORDERCOLOR      = Warna sempadan:
-REDLINELABELSTYLE       = Gaya label
-REDLINEBORDERTHICKNESS  = Ketebalan Sempadan:
-REDLINELABELFONTSIZE    = Label font size:
-REDLINEFONTBOLD         = Bold
-REDLINEFONTITALIC       = Italic
-REDLINEFONTUNDERLINE    = Gariskan
-REDLINELABELCOLOR       = Warna Label:
-REDLINELABELBACKGROUNDSTYLE = Gaya latar belakang Label:
-REDLINELABELGHOSTED     = Ghosted
-REDLINELABELOPAQUE      = Legap
+REDLINEEDITLAYERSTYLEÂ  Â = Edit Gaya Redline
+REDLINELAYERSETTINGSÂ  Â  =Â Redline Lapisan Tetapan
+REDLINENAMEÂ  Â  Â  Â  Â  Â  Â =Â Nama Redline:
+REDLINEPOINTSTYLEÂ  Â  Â  Â =Â Gaya Point
+REDLINEMARKERTYPEÂ  Â  Â  Â =Â Jenis Marker
+REDLINEMARKERSQUAREÂ  Â  Â =Â Square
+REDLINEMARKERCIRCLEÂ  Â  Â =Â Circle
+REDLINEMARKERTRIANGLEÂ  Â =Â Triangle
+REDLINEMARKERSTARÂ  Â  Â  Â =Â Bintang
+REDLINEMARKERCROSSÂ  Â  Â  =Â Cross
+REDLINEMARKERXÂ  Â  Â  Â  Â  =Â X
+REDLINEUNITSPTÂ  Â  Â  Â  Â  =Â Tempat
+REDLINEUNITSINÂ  Â  Â  Â  Â  =Â Inci
+REDLINEUNITSMMÂ  Â  Â  Â  Â  =Â Milimeter
+REDLINEUNITSCMÂ  Â  Â  Â  Â  =Â Sentimeter
+REDLINEUNITSMÂ  Â  Â  Â  Â  Â =Â Meter
+REDLINEMARKERSIZEÂ  Â  Â  Â =Â Saiz Marker:
+REDLINEMARKERCOLORÂ  Â  Â  =Â Warna Marker:
+REDLINELINESTYLEÂ  Â  Â  Â  =Â Gaya Talian
+REDLINELINEPATTERNÂ  Â  Â  =Â Corak Talian:
+REDLINEPATTERNSOLIDÂ  Â  Â =Â Pepejal
+REDLINEPATTERNDASHÂ  Â  Â  =Â Dash
+REDLINEPATTERNDOTÂ  Â  Â  Â =Â Dot
+REDLINEPATTERNDASHDOTÂ  Â =Â DashDot
+REDLINEPATTERNDASHDOTDOT =Â DashDotDot
+REDLINEPATTERNRAILÂ  Â  Â  =Â Rail
+REDLINEPATTERNBORDERÂ  Â  =Â Sempadan
+REDLINEPATTERNDIVIDEÂ  Â  =Â Bahagikan
+REDLINEPATTERNFENCELINE =Â FenceLine
+REDLINEPATTERNNETÂ  Â  Â  Â =Â Bersih
+REDLINEPATTERNLINEÂ  Â  Â  =Â Talian
+REDLINEPATTERNLINE45Â  Â  =Â Line_45
+REDLINEPATTERNLINE90Â  Â  =Â Line_90
+REDLINEPATTERNLINE135Â  Â =Â Line_135
+REDLINEPATTERNSQUAREÂ  Â  =Â Square
+REDLINEPATTERNBOXÂ  Â  Â  Â =Â Keselamatan
+REDLINEPATTERNCROSSÂ  Â  Â =Â Cross
+REDLINEPATTERNDOLMITÂ  Â  =Â Dolmit
+REDLINEPATTERNHEXÂ  Â  Â  Â =Â Hex
+REDLINEPATTERNSACNCRÂ  Â  =Â Sacncr
+REDLINEPATTERNSTEELÂ  Â  Â =Â Steel
+REDLINESIZEUNITSÂ  Â  Â  Â  =Â Saiz unit:
+REDLINELINETHICKNESSÂ  Â  =Â Ketebalan Talian:
+REDLINELINECOLORÂ  Â  Â  Â  =Â Warna Talian:
+REDLINETRANSPARENTÂ  Â  Â  =Â Telus
+REDLINEPOLYGONSTYLEÂ  Â  Â =Â Gaya Polygon
+REDLINEFILLPATTERNÂ  Â  Â  =Â Isikan corak:
+REDLINEFILLTRANSPARENCY =Â Ketelusan:
+REDLINEFOREGROUNDÂ  Â =Â Warna latar depan:
+REDLINEBACKGROUNDÂ  Â =Â Warna latar belakang:
+REDLINEBORDERPATTERNÂ  Â  =Â Corak Sempadan:
+REDLINEBORDERCOLORÂ  Â  Â  =Â Warna sempadan:
+REDLINELABELSTYLEÂ  Â  Â  Â =Â Gaya label
+REDLINEBORDERTHICKNESSÂ  =Â Ketebalan Sempadan:
+REDLINELABELFONTSIZEÂ  Â  =Â Label font size:
+REDLINEFONTBOLDÂ  Â  Â  Â  Â =Â Bold
+REDLINEFONTITALICÂ  Â  Â  Â =Â Italic
+REDLINEFONTUNDERLINEÂ  Â  =Â Gariskan
+REDLINELABELCOLORÂ  Â  Â  Â =Â Warna Label:
+REDLINELABELBACKGROUNDSTYLE =Â Gaya latar belakang Label:
+REDLINELABELGHOSTEDÂ  Â  Â =Â Ghosted
+REDLINELABELOPAQUEÂ  Â  Â  =Â Legap
 
 # Redline Editing
-REDLINEEDIT             = Edit Redline
-REDLINEEDITDEFAULTHELP  = Untuk mula pilih jenis redline untuk mendigitalkan.
-REDLINEEDITPOINTHELP    = Klik peta untuk menentukan lokasi titik.
-REDLINEEDITLINEHELP     = Klik dan seret pada peta untuk menentukan titik mula dan akhir baris.
-REDLINEEDITLINESTRINGHELP = Klik peta untuk menentukan setiap titik garisan, Double Klik pada titik akhir hingga akhir.
-REDLINEEDITRECTANGLEHELP = Klik pada peta untuk menentukan sudut pertama dan seret tetikus untuk menentukan segi empat tepat.
-REDLINEEDITPOLYGONHELP  = Klik peta untuk menentukan setiap titik poligon, Double Klik pada titik akhir hingga akhir.
-REDLINEPROMPTLABEL      = Masukkan label untuk item redline
-REDLINEADD              = Tambah Redline
-REDLINEDIGITIZE         = Mendigitalkan Redline
-REDLINEOBJECTPOINT      = Point
-REDLINEOBJECTLINE       = Talian
-REDLINEOBJECTLINESTRING = Rentetan Talian
-REDLINEOBJECTRECTANGLE  = Rectangle
-REDLINEOBJECTPOLYGON    = Polygon
-REDLINEMODIFY           = Ubahsuai Redline
-REDLINESELECTOBJECT     = Pilih
-REDLINEDELETEOBJECT     = Padam
-REDLINEUPDATETEXT       = Update Teks
-REDLINEEDITCLOSE        = Tutup
+REDLINEEDITÂ  Â  Â  Â  Â  Â  Â = Edit Redline
+REDLINEEDITDEFAULTHELPÂ  =Â Untuk mula pilih jenis redline untuk mendigitalkan.
+REDLINEEDITPOINTHELPÂ  Â  =Â Klik peta untuk menentukan lokasi titik.
+REDLINEEDITLINEHELPÂ  Â  Â =Â Klik dan seret pada peta untuk menentukan titik mula dan akhir baris.
+REDLINEEDITLINESTRINGHELP =Â Klik peta untuk menentukan setiap titik garisan, Double Klik pada titik akhir hingga akhir.
+REDLINEEDITRECTANGLEHELP =Â Klik pada peta untuk menentukan sudut pertama dan seret tetikus untuk menentukan segi empat tepat.
+REDLINEEDITPOLYGONHELPÂ  =Â Klik peta untuk menentukan setiap titik poligon, Double Klik pada titik akhir hingga akhir.
+REDLINEPROMPTLABELÂ  Â  Â  =Â Masukkan label untuk item redline
+REDLINEADDÂ  Â  Â  Â  Â  Â  Â  =Â Tambah Redline
+REDLINEDIGITIZEÂ  Â  Â  Â  Â =Â Mendigitalkan Redline
+REDLINEOBJECTPOINTÂ  Â  Â  =Â Point
+REDLINEOBJECTLINEÂ  Â  Â  Â =Â Talian
+REDLINEOBJECTLINESTRING =Â Rentetan Talian
+REDLINEOBJECTRECTANGLEÂ  =Â Rectangle
+REDLINEOBJECTPOLYGONÂ  Â  =Â Polygon
+REDLINEMODIFYÂ  Â  Â  Â  Â  Â =Â Ubahsuai Redline
+REDLINESELECTOBJECTÂ  Â  Â =Â Pilih
+REDLINEDELETEOBJECTÂ  Â  Â =Â Padam
+REDLINEUPDATETEXTÂ  Â  Â  Â =Â Update Teks
+REDLINEEDITCLOSEÂ  Â  Â  Â  =Â Tutup
 
 # Redline Upload
-REDLINEUPLOAD           = Upload Redline
-REDLINEDATAFILE         = Redline Data File
-REDLINEUPLOADNOTE       = Nota: Data fail mestilah fail SDF dan anda hanya boleh memuat naik fail data yang telah sama ada asalnya dicipta oleh widget ini atau mempunyai skema ciri yang serupa.
-REDLINEUPLOADREQUIRED   = Redline File Data tidak dinyatakan
-REDLINEUPLOADTEXT       = Upload
-REDLINEUPLOADCLOSE      = Tutup
+REDLINEUPLOADÂ  Â  Â  Â  Â  Â = Upload Redline
+REDLINEDATAFILEÂ  Â  Â  Â  Â =Â Redline Data File
+REDLINEUPLOADNOTEÂ  Â  Â  Â =Â Nota: Data fail mestilah fail SDF dan anda hanya boleh memuat naik fail data yang telah sama ada asalnya dicipta oleh widget ini atau mempunyai skema ciri yang serupa.
+REDLINEUPLOADREQUIREDÂ  Â =Â Redline File Data tidak dinyatakan
+REDLINEUPLOADTEXTÂ  Â  Â  Â =Â Upload
+REDLINEUPLOADCLOSEÂ  Â  Â  =Â Tutup
 
 # HtmlViewerAbout
-HTMLABOUTTITLE          = Mengenai% s
-HTMLABOUTTITLEBAR       = MapGuide Viewer
-HTMLABOUTSERVERTITLE    = MapGuide Server
-HTMLABOUTVIEWERTITLE    = MapGuide Viewer
-HTMLABOUTSERVERVERSION  = %s (Versi %s)
-HTMLABOUTVIEWERVERSION  = %s (Versi %s)
-HTMLABOUTTEXT           =<br> produk ini dibuat tertakluk kepada terma-terma GNU Lesser General Public Lesen Versi 2.1 ("LGPL").Satu salinan LGPL, serta notis hakcipta tambahan dan terma lesen yang berkaitan dengan bahagian-bahagian produk ini ditetapkan dalam <a href="../localized/license_en.htm" target="blank"> lesen </ a> fail. <br><br> Semua cap dagang dan cap dagang berdaftar yang disebut di sini adalah harta pemilik masing-masing.<br><br>Copyright &copy; 2007 Autodesk, Inc.<br><br>
-HTMLABOUTLICENSE        = license file
-HTMLABOUTLICENSEFILE    = license_en.htm
+HTMLABOUTTITLEÂ  Â  Â  Â  Â  =Â Mengenai% s
+HTMLABOUTTITLEBARÂ  Â  Â  Â =Â MapGuide Viewer
+HTMLABOUTSERVERTITLEÂ  Â  =Â MapGuide Server
+HTMLABOUTVIEWERTITLEÂ  Â  =Â MapGuide Viewer
+HTMLABOUTSERVERVERSIONÂ  =Â %s (Versi %s)
+HTMLABOUTVIEWERVERSIONÂ  =Â %s (Versi %s)
+HTMLABOUTTEXTÂ  Â  Â  Â  Â  Â =<br> produk ini dibuat tertakluk kepada terma-terma GNU Lesser General Public Lesen Versi 2.1 ("LGPL").Satu salinan LGPL, serta notis hakcipta tambahan dan terma lesen yang berkaitan dengan bahagian-bahagian produk ini ditetapkan dalam <a href="../localized/license_en.htm" target="blank"> lesen </ a> fail. <br><br> Semua cap dagang dan cap dagang berdaftar yang disebut di sini adalah harta pemilik masing-masing.<br><br>Copyright &copy; 2007 Autodesk, Inc.<br><br>
+HTMLABOUTLICENSEÂ  Â  Â  Â  = license file
+HTMLABOUTLICENSEFILEÂ  Â  = license_en.htm
 
 # LegendUI
-LEGENDLISTSEPARATOR     = ,
+LEGENDLISTSEPARATORÂ  Â  Â = ,
 
 # PrintablePageUi
-PRINTTITLE              = Dapatkan Page Printable
-PRINTELEMENTS           = Pilih unsur-unsur untuk dimasukkan ke dalam susun atur cetak.
-PRINTPAGETITLE          = Tajuk Page:
-PRINTLEGEND             = Legend
-PRINTNORTHARROW         = Utara arrow
-PRINTCREATEPAGE         = Buat Halaman
+PRINTTITLEÂ  Â  Â  Â  Â  Â  Â  = Dapatkan Page Printable
+PRINTELEMENTSÂ  Â  Â  Â  Â  Â =Â Pilih unsur-unsur untuk dimasukkan ke dalam susun atur cetak.
+PRINTPAGETITLEÂ  Â  Â  Â  Â  =Â Tajuk Page:
+PRINTLEGENDÂ  Â  Â  Â  Â  Â  Â =Â Legend
+PRINTNORTHARROWÂ  Â  Â  Â  Â =Â Utara arrow
+PRINTCREATEPAGEÂ  Â  Â  Â  Â =Â Buat Halaman
 
 # PropertyCtrl
-PROPERTIESNONE          = Tiada Dipilih
-PROPERTIESNAME          = Nama
-PROPERTIESVALUE         = Nilai
-PROPERTIESITEMSEL       = Item yang dipilih: {0}
+PROPERTIESNONEÂ  Â  Â  Â  Â  = Tiada Dipilih
+PROPERTIESNAMEÂ  Â  Â  Â  Â  =Â Nama
+PROPERTIESVALUEÂ  Â  Â  Â  Â =Â Nilai
+PROPERTIESITEMSELÂ  Â  Â  Â =Â Item yang dipilih: {0}
 
 # Search
-SEARCHDLGTITLE          = Ciri carian
-SEARCHTITLE             = Search results
-SEARCHERROR             = Cari Kesilapan
-SEARCHREPORT            = laporan Search
-SEARCHLAYERNOTFOUND     = Lapisan {0} tidak dijumpai!
-SEARCHNOMULTIPROP       = Multi-hartanah identiti belum lagi disokong
-SEARCHTYYPENOTSUP       = Pengenalan jenis harta yang tidak disokong lagi ({0})
-SEARCHNOMATCHES         = Tiada padanan.
+SEARCHDLGTITLEÂ  Â  Â  Â  Â  = Ciri carian
+SEARCHTITLEÂ  Â  Â  Â  Â  Â  Â =Â Search results
+SEARCHERRORÂ  Â  Â  Â  Â  Â  Â =Â Cari Kesilapan
+SEARCHREPORTÂ  Â  Â  Â  Â  Â  =Â laporan Search
+SEARCHLAYERNOTFOUNDÂ  Â  Â =Â Lapisan {0} tidak dijumpai!
+SEARCHNOMULTIPROPÂ  Â  Â  Â =Â Multi-hartanah identiti belum lagi disokong
+SEARCHTYYPENOTSUPÂ  Â  Â  Â =Â Pengenalan jenis harta yang tidak disokong lagi ({0})
+SEARCHNOMATCHESÂ  Â  Â  Â  Â =Â Tiada padanan.
 
 # SearchPrompt
-SEARCHPROMPTFIND        =Cari
+SEARCHPROMPTFINDÂ  Â  Â  Â  =Cari
 
 # SelectWithinUi
-SELECTWITHINTITLE       = Pilih Dalam
-SELECTWITHINAREAS       = Pilih kawasan pada imej.
-SELECTWITHINRESTRICTION = Hadkan keputusan untuk lapisan dipilih:
-SELECTWITHINTEXT        =<li> Jika anda terus untuk memilih kawasan pada imej, klik &quot;Refresh&quot; untuk mengemaskini senarai lapisan. </ li> <li> Untuk selesai dan pilih semua ciri dalam kawasan yang diserlahkan, klik &quot;Selesai&quot;.</li><li>Untuk memulakan atas, klik &quot;Clear&quot;.</li>
+SELECTWITHINTITLEÂ  Â  Â  Â = Pilih Dalam
+SELECTWITHINAREASÂ  Â  Â  Â =Â Pilih kawasan pada imej.
+SELECTWITHINRESTRICTION =Â Hadkan keputusan untuk lapisan dipilih:
+SELECTWITHINTEXTÂ  Â  Â  Â  =<li> Jika anda terus untuk memilih kawasan pada imej, klik &quot;Refresh&quot; untuk mengemaskini senarai lapisan. </ li> <li> Untuk selesai dan pilih semua ciri dalam kawasan yang diserlahkan, klik &quot;Selesai&quot;.</li><li>Untuk memulakan atas, klik &quot;Clear&quot;.</li>
 
 # Error/Report
-REPORTTITLE             =Laporan
+REPORTTITLEÂ  Â  Â  Â  Â  Â  Â =Laporan
 
 # Legend UI
-REFRESH                 = Refresh
-EXPANDALL               = Kembangkan
-COLLAPSEALL             = Runtuhkan Semua
-DISPLAYALLINGROUP       = Paparkan Semua dalam Kumpulan
-HIDEALLINGROUP          = Sembunyikan Semua dalam Kumpulan
-SHOWLONGTHEME           = Papar Tema Long
+REFRESHÂ  Â  Â  Â  Â  Â  Â  Â  Â = Refresh
+EXPANDALLÂ  Â  Â  Â  Â  Â  Â  Â =Â Kembangkan
+COLLAPSEALLÂ  Â  Â  Â  Â  Â  Â =Â Runtuhkan Semua
+DISPLAYALLINGROUPÂ  Â  Â  Â =Â Paparkan Semua dalam Kumpulan
+HIDEALLINGROUPÂ  Â  Â  Â  Â  =Â Sembunyikan Semua dalam Kumpulan
+SHOWLONGTHEMEÂ  Â  Â  Â  Â  Â =Â Papar Tema Long
 
 # Task Bar
-TASKS                   =Tugas
+TASKSÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â =Tugas
 
 # Viewer Options
-OPTIONSTITLE            = Viewer Pilihan
-OPTIONSINFOTEXT         = Pilih melihat pilihan untuk bar status dan tips alat.
-OPTIONSDISTANCE         = Memaparkan jarak dalam
-OPTIONSMETRIC           = Metrik (Kilometer, Meter)
-OPTIONSUSENGLISH        = AS / Bahasa Inggeris (Batu, Kaki)
-OPTIONSPOSITION         = Paparkan kedudukan kursor dalam
-OPTIONSLATLON           = Latitud, Longitud (Darjah)
-OPTIONSMAPUNITS         = Peta Sistem Koordinat (X, Y)
+OPTIONSTITLEÂ  Â  Â  Â  Â  Â  = Viewer Pilihan
+OPTIONSINFOTEXTÂ  Â  Â  Â  Â =Â Pilih melihat pilihan untuk bar status dan tips alat.
+OPTIONSDISTANCEÂ  Â  Â  Â  Â =Â Memaparkan jarak dalam
+OPTIONSMETRICÂ  Â  Â  Â  Â  Â =Â Metrik (Kilometer, Meter)
+OPTIONSUSENGLISHÂ  Â  Â  Â  =Â AS / Bahasa Inggeris (Batu, Kaki)
+OPTIONSPOSITIONÂ  Â  Â  Â  Â =Â Paparkan kedudukan kursor dalam
+OPTIONSLATLONÂ  Â  Â  Â  Â  Â =Â Latitud, Longitud (Darjah)
+OPTIONSMAPUNITSÂ  Â  Â  Â  Â =Â Peta Sistem Koordinat (X, Y)
 
 # AJAX Viewer
-VIEWERLAYERS            = Lapisan
-VIEWERPROPS             = Hartanah
-VIEWERPANNORTH          = Pan Utara
-VIEWERPANWEST           = Pan West
-VIEWERPANSOUTH          = Pan Selatan
-VIEWERPANEAST           = Pan Timur
-VIEWERZOOMIN            = Zoom In
-VIEWERZOOMOUT           = Zum Keluar
-VIEWERMOVESLIDER        = Seret untuk gerakkan slider
-VIEWERDRAGZOOM          = Seret untuk zoom
-ENDSEL                  = CTRL + klik untuk menamatkan
-ENDSELSAFARI            = SHIFT + klik untuk menamatkan
-DECIMALSEPARATOR        = .
-THOUSANDSEPARATOR       = ,
+VIEWERLAYERSÂ  Â  Â  Â  Â  Â  = Lapisan
+VIEWERPROPSÂ  Â  Â  Â  Â  Â  Â =Â Hartanah
+VIEWERPANNORTHÂ  Â  Â  Â  Â  =Â Pan Utara
+VIEWERPANWESTÂ  Â  Â  Â  Â  Â =Â Pan West
+VIEWERPANSOUTHÂ  Â  Â  Â  Â  =Â Pan Selatan
+VIEWERPANEASTÂ  Â  Â  Â  Â  Â =Â Pan Timur
+VIEWERZOOMINÂ  Â  Â  Â  Â  Â  =Â Zoom In
+VIEWERZOOMOUTÂ  Â  Â  Â  Â  Â =Â Zum Keluar
+VIEWERMOVESLIDERÂ  Â  Â  Â  =Â Seret untuk gerakkan slider
+VIEWERDRAGZOOMÂ  Â  Â  Â  Â  =Â Seret untuk zoom
+ENDSELÂ  Â  Â  Â  Â  Â  Â  Â  Â  =Â CTRL + klik untuk menamatkan
+ENDSELSAFARIÂ  Â  Â  Â  Â  Â  =Â SHIFT + klik untuk menamatkan
+DECIMALSEPARATORÂ  Â  Â  Â  = .
+THOUSANDSEPARATORÂ  Â  Â  Â = ,
 
 # Main Frame
-NEEDLOGIN               = Anda mesti masukkan ID log masuk dan kata laluan  yang sah untuk mengakses laman ini
-ALREADYINMEASURE        = Hanya satu arahan langkah dibenarkan dalam susun atur web
-ACCESSDENIED            = Akses Ditolak
-LATLONCURPOS            = Lat: {0}, Lon: {1}
-MAPUNITSCURPOS          = X: {0}, Y: {1}
-FEATURESSELECTED        = {0} mempunyai dipilih
-FEATURESELECTED         = {0} ciri dipilih
-MI                      = mi
-FT                      = kaki
-IN                      = dalam
-KM                      = km
-MT                      = m
-CM                      = cm
-DIGALREADYRUNNING       = Tidak boleh melaksanakan langkah: Satu arahan pendigitalan adalah dalam kemajuan.
-MEASALREADYRUNNING      = Tidak boleh melaksanakan pendigitan: ukuran adalah dalam kemajuan.
+NEEDLOGINÂ  Â  Â  Â  Â  Â  Â  Â = Anda mesti masukkan ID log masuk dan kata laluan  yang sah untuk mengakses laman ini
+ALREADYINMEASUREÂ  Â  Â  Â  =Â Hanya satu arahan langkah dibenarkan dalam susun atur web
+ACCESSDENIEDÂ  Â  Â  Â  Â  Â  =Â Akses Ditolak
+LATLONCURPOSÂ  Â  Â  Â  Â  Â  =Â Lat: {0}, Lon: {1}
+MAPUNITSCURPOSÂ  Â  Â  Â  Â  =Â X: {0}, Y: {1}
+FEATURESSELECTEDÂ  Â  Â  Â  =Â {0} mempunyai dipilih
+FEATURESELECTEDÂ  Â  Â  Â  Â =Â {0} ciri dipilih
+MIÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  =Â mi
+FTÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  =Â kaki
+INÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  =Â dalam
+KMÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  =Â km
+MTÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  =Â m
+CMÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â  Â  =Â cm
+DIGALREADYRUNNINGÂ  Â  Â  Â =Â Tidak boleh melaksanakan langkah: Satu arahan pendigitalan adalah dalam kemajuan.
+MEASALREADYRUNNINGÂ  Â  Â  =Â Tidak boleh melaksanakan pendigitan: ukuran adalah dalam kemajuan.
 
 # Localized Icon Files
-POWEREDBYICON           = PoweredBy_en.gif
+POWEREDBYICONÂ  Â  Â  Â  Â  Â = PoweredBy_en.gif
 
 # Quick Plot UI
-QUICKPLOT_HEADER                = Plot Pantas
-QUICKPLOT_TITLE                 = Tajuk
-QUICKPLOT_SUBTITLE              = Tajuk sub
-QUICKPLOT_PAPER_SIZE            = Saiz kertas
-QUICKPLOT_SCALING               = Scaling
-QUICKPLOT_DPI                   = Cetak DPI
-QUICKPLOT_ORIENTATION           = Orientasi
-QUICKPLOT_ORIENTATION_P         = Orientasi potret
-QUICKPLOT_ORIENTATION_L         = Orientasi landskap
-QUICKPLOT_GENERATE              = Menjana
-QUICKPLOT_ADVANCED_OPTIONS      = Pilihan lanjutan
-QUICKPLOT_PREVIEW_ERROR         = Sumber permohonan yang diperlukan untuk menjana plot melebihi tetapan ditakrifkan oleh pentadbir
-QUICKPLOT_RESOLUTION_WARNING    = Tetapan semasa melebihi resolusi peta. Zum keluar atau meningkatkan mendaki akan membantu mewujudkan satu plot yang lebih mudah dibaca
-QUICKPLOT_SCALE_LABEL           = Skala
+QUICKPLOT_HEADERÂ  Â  Â  Â  Â  Â  Â  Â  = Plot Pantas
+QUICKPLOT_TITLEÂ  Â  Â  Â  Â  Â  Â  Â  Â =Â Tajuk
+QUICKPLOT_SUBTITLEÂ  Â  Â  Â  Â  Â  Â  =Â Tajuk sub
+QUICKPLOT_PAPER_SIZEÂ  Â  Â  Â  Â  Â  =Â Saiz kertas
+QUICKPLOT_SCALINGÂ  Â  Â  Â  Â  Â  Â  Â =Â Scaling
+QUICKPLOT_DPIÂ  Â  Â  Â  Â  Â  Â  Â  Â  Â =Â Cetak DPI
+QUICKPLOT_ORIENTATIONÂ  Â  Â  Â  Â  Â =Â Orientasi
+QUICKPLOT_ORIENTATION_PÂ  Â  Â  Â  Â =Â Orientasi potret
+QUICKPLOT_ORIENTATION_LÂ  Â  Â  Â  Â =Â Orientasi landskap
+QUICKPLOT_GENERATEÂ  Â  Â  Â  Â  Â  Â  =Â Menjana
+QUICKPLOT_ADVANCED_OPTIONSÂ  Â  Â  =Â Pilihan lanjutan
+QUICKPLOT_PREVIEW_ERRORÂ  Â  Â  Â  Â =Â Sumber permohonan yang diperlukan untuk menjana plot melebihi tetapan ditakrifkan oleh pentadbir
+QUICKPLOT_RESOLUTION_WARNINGÂ  Â  =Â Tetapan semasa melebihi resolusi peta. Zum keluar atau meningkatkan mendaki akan membantu mewujudkan satu plot yang lebih mudah dibaca
+QUICKPLOT_SCALE_LABELÂ  Â  Â  Â  Â  Â =Â Skala
