@@ -59,8 +59,11 @@ Fusion.Widget.Redline = OpenLayers.Class(Fusion.Widget, {
     
     getMapName: function() {
         var maps = this.mapWidget.getAllMaps();
-        //Last one is top-most
-        return maps[maps.length - 1].getMapName();
+        for (var i = maps.length - 1; i >= 0; i--) {
+            if (maps[i].arch == "MapGuide")
+                return maps[i].getMapName();
+        }
+        return "";
     },
     
     getSessionID: function() {
